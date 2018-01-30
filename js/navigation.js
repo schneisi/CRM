@@ -1,5 +1,4 @@
 'use strict';
-
 var sites = JSON.parse('{' + 
     '"pages": ['+
         '{' + 
@@ -33,6 +32,16 @@ document.addEventListener("DOMContentLoaded", function () {
     , 50);
 }); 
 
+window.addEventListener('popstate', function(e) {
+    let url = e.state;
+    if (url != null) {
+        navigateToUrl("TEST", url, null, false);
+    }
+});
+
+
+
+
 const defaultSite = './nestedViews/dashboard.html';
 
 function initialize() {
@@ -62,11 +71,8 @@ function createMenu() {
 
 
 //Internal
-async function navigateToUrl(aTitleString, anUrlString, aToggleBoolean) {
-    //mainIFrame.src = anUrlString;
-
+async function navigateToUrl(aTitleString, anUrlString, aToggleBoolean, aPushStateBoolean = true) {
     getAjaxContent(anUrlString, setContent);
-
     if (aToggleBoolean) {
         var layout = document.querySelector('.mdl-layout');
         layout.MaterialLayout.toggleDrawer();
@@ -75,6 +81,10 @@ async function navigateToUrl(aTitleString, anUrlString, aToggleBoolean) {
 
     sessionStorage.setItem('viewTitle', aTitleString);
     sessionStorage.setItem('view', anUrlString);
+    if (aPushStateBoolean) {
+        history.pushState(anUrlString, aTitleString, null);
+    }
+    
 }
 
 function setContent(aText) {
