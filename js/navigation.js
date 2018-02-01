@@ -33,16 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
 }); 
 
 window.addEventListener('popstate', function(e) {
-    let url = e.state;
-    if (url != null) {
-        navigateToUrl("TEST", url, null, false);
+    let theView = e.state;
+    if (theView != null) {
+        navigateToView(theView, null, false);
     }
 });
 
 
-
-
-const defaultSite = './nestedViews/dashboard.html';
+const defaultSite = sites.pages[0];
 
 function initialize() {
     const contentContainer = document.getElementById("contentContainer");
@@ -62,27 +60,41 @@ function createMenu() {
         theSpan.classList.add("mdl-navigation__link");
         theSpan.innerHTML = theSite.name;
         theSpan.addEventListener("click", function() {
-            navigateToUrl(theSite.name, theSite.url, true);
-        })
+            navigateToView(theSite, true);
+        });
         menu.appendChild(theSpan);
     }
 
 }
 
-
 //Internal
-async function navigateToUrl(aTitleString, anUrlString, aToggleBoolean, aPushStateBoolean = true) {
-    getAjaxContent(anUrlString, setContent);
+function viewForId(anIdString) {
+    for (var i = 0; i < sites.pages.length; i++) {
+        let theSite = sites.pages[i];
+        if (theSite.id == anIdString) {
+            return theSite;
+        } 
+    } 
+}
+
+async function navigateToSiteWithId(anId, aToggleBoolean){
+    let theSite = viewForId(anId);
+    navigateToView(theSite, aToggleBoolean)
+}
+
+async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
+    let theUrl = aView.url;
+    getAjaxContent(theUrl, setContent);
     if (aToggleBoolean) {
         var layout = document.querySelector('.mdl-layout');
         layout.MaterialLayout.toggleDrawer();
     }
-    titleSpan.innerHTML = aTitleString;
+    titleSpan.innerHTML = aView.name;
 
-    sessionStorage.setItem('viewTitle', aTitleString);
-    sessionStorage.setItem('view', anUrlString);
+    //sessionStorage.setItem('viewTitle', aTitleString);
+    sessionStorage.setItem('viewId', aView.id);
     if (aPushStateBoolean) {
-        history.pushState(anUrlString, aTitleString, null);
+        history.pushState(aView, aView.name, null);
     }
     
 }
@@ -93,16 +105,13 @@ function setContent(aText) {
 }
 
 function showStartPage() {
-    const theUrlString = sessionStorage.getItem('view');
-    let theUrl;
-    let theTitleString;
+    var theViewId = sessionStorage.getItem('viewId');
+    let theView;
 
-    if (theUrlString) {
-        theUrl = theUrlString;
-        theTitleString = sessionStorage.getItem('viewTitle');
+    if (theView) {
+        theView = viewForId(theViewId);
     } else {
-        theUrl = defaultSite;
-        theTitleString = "CRM";
+        theView = defaultSite;
     }
-    navigateToUrl(theTitleString, theUrl, false);
+    navigateToView(theView, false);
 }
