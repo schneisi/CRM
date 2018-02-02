@@ -9,7 +9,8 @@ var sites = JSON.parse('{' +
         '{' + 
             '"name": "Kunden",' + 
             '"id": "customerLink",' + 
-            '"url": "./nestedViews/customers.html"' +
+            '"url": "./nestedViews/customers.html",' +
+            '"js": "initializeCustomers();"' +
         '},' +
         '{' + 
             '"name": "Demo-Form",' + 
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         initialize();
     }
-    , 50);
+    , 10);
 }); 
 
 window.addEventListener('popstate', function(e) {
@@ -102,13 +103,17 @@ async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
 function setContent(aText) {
     contentContainer.innerHTML = aText;
     componentHandler.upgradeAllRegistered(contentContainer);
+    let theView = viewForId(sessionStorage.getItem("viewId"));
+    if (theView.js) {
+        eval(theView.js);
+    }
 }
 
 function showStartPage() {
     var theViewId = sessionStorage.getItem('viewId');
     let theView;
 
-    if (theView) {
+    if (theViewId) {
         theView = viewForId(theViewId);
     } else {
         theView = defaultSite;
