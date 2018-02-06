@@ -3,12 +3,12 @@ var sites = JSON.parse('{' +
     '"pages": ['+
         '{' + 
             '"name": "Dashboard",' + 
-            '"id": "dashboardLink",' + 
+            '"id": "dashboard",' + 
             '"url": "./nestedViews/dashboard.html"' +
         '},' +
         '{' + 
             '"name": "Kunden",' + 
-            '"id": "customerLink",' + 
+            '"id": "customer",' + 
             '"url": "./nestedViews/customers.html",' +
             '"js": "initializeCustomers();"' +
         '},' +
@@ -71,16 +71,16 @@ function createMenu() {
 //Internal
 function viewForId(anIdString) {
     for (var i = 0; i < sites.pages.length; i++) {
-        let theSite = sites.pages[i];
-        if (theSite.id == anIdString) {
-            return theSite;
+        let theView = sites.pages[i];
+        if (theView.id == anIdString) {
+            return theView;
         } 
     } 
 }
 
 async function navigateToSiteWithId(anId, aToggleBoolean){
-    let theSite = viewForId(anId);
-    navigateToView(theSite, aToggleBoolean)
+    let theView = viewForId(anId);
+    navigateToView(theView, aToggleBoolean)
 }
 
 async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
