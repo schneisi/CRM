@@ -7,5 +7,7 @@ function initializeCustomers() {
         return anObject.value;
     }))
     theList.objects.push(new ListGridHelper("Test", "Wert"));
-    contentDiv.innerHTML = theList.getHtml();
+    let theDiv = document.createElement("div");
+    theDiv.innerHTML = theList.getHtml();
+    contentDiv.appendChild(theDiv);
 }
