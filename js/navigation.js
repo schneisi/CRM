@@ -4,23 +4,33 @@ var sites = JSON.parse('{' +
         '{' + 
             '"name": "Dashboard",' + 
             '"id": "dashboard",' + 
-            '"url": "./nestedViews/dashboard.html"' +
+            '"url": "./nestedViews/dashboard.html",' +
+            '"shownInMenu": true' +
         '},' +
         '{' + 
             '"name": "Kunden",' + 
             '"id": "customer",' + 
             '"url": "./nestedViews/customers.html",' +
-            '"js": "initializeCustomers();"' +
+            '"js": "initializeCustomers();",' +
+            '"shownInMenu": true' +
         '},' +
         '{' + 
             '"name": "Demo-Form",' + 
             '"id": "exampleForm",' + 
-            '"url": "./nestedViews/demoForm.html"' +
+            '"url": "./nestedViews/demoForm.html",' +
+            '"shownInMenu": true' +
         '},' +
+        '{' +
+            '"name": "newCustomer",' +
+            '"id": "newCustomerForm",' +
+            '"url": "./nestedViews/newCustomer.html",' +
+            '"shownInMenu": false' +
+         '},' +
         '{' + 
             '"name": "Demo-Table",' + 
             '"id": "exampleTable",' + 
-            '"url": "./nestedViews/demoTable.html"' +
+            '"url": "./nestedViews/demoTable.html",' +
+            '"shownInMenu": true' +
         '}' +
     ']}');
 
@@ -55,15 +65,18 @@ function initialize() {
 
 function createMenu() {
     for (var i = 0; i < sites.pages.length; i++) {
-        let theSpan = document.createElement('span');
         let theSite = sites.pages[i];
-        theSpan.setAttribute("id", theSite.id);
-        theSpan.classList.add("mdl-navigation__link");
-        theSpan.innerHTML = theSite.name;
-        theSpan.addEventListener("click", function() {
-            navigateToView(theSite, true);
-        });
-        menu.appendChild(theSpan);
+        if (theSite.shownInMenu){
+            let theSpan = document.createElement('span');
+
+            theSpan.setAttribute("id", theSite.id);
+            theSpan.classList.add("mdl-navigation__link");
+            theSpan.innerHTML = theSite.name;
+            theSpan.addEventListener("click", function () {
+                navigateToView(theSite, true);
+            });
+            menu.appendChild(theSpan); 
+        }
     }
 
 }
