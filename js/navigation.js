@@ -104,7 +104,7 @@ function setContent(aText) {
     contentContainer.innerHTML = aText;
     componentHandler.upgradeAllRegistered(contentContainer);
     let theView = viewForId(sessionStorage.getItem("viewId"));
-    if (theView.js) {
+    if (theView && theView.js) {
         eval(theView.js);
     }
 }
