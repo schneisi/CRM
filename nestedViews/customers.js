@@ -11,3 +11,7 @@ function initializeCustomers() {
     theDiv.innerHTML = theList.getHtml();
     contentDiv.appendChild(theDiv);
 }
+
+function addNewCustomerClicked(){
+    navigateToSiteWithId("newCustomerForm", false);
+}

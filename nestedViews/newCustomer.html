@@ -1,67 +1,31 @@
-<html>
-<body>
+<div id="content">
     <form>
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="sample1">
-            <label class="mdl-textfield__label" for="sample1">Text...</label>
+            <input class="mdl-textfield__input" type="text" id="name">
+            <label class="mdl-textfield__label" for="name">Name:</label>
         </div>
-    <table border="0" cellspacing="0" cellpadding="2">
-        <tbody>
-            <tr>
-                <td>Abteilung:</td>
-                <td>
-                    <select name="Abteilung">
-                        <option value="Verkauf">Verkauf</option>
-                        <option value="Einkauf">Einkauf</option>
-                        <option value="Service">Service</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Anrede:</td>
-                <td>
-                    <input checked="checked" name="Anrede" type="radio" value="Herr" /> Herr
-                    <input name="Anrede" type="radio" value="Frau" /> Frau
-                </td>
-            </tr>
-            <tr>
-                <td>Vorname:</td>
-                <td>
-                    <input maxlength="50" name="Vorname" size="45" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Nachname:</td>
-                <td>
-                    <input name="Nachname" size="45" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td>
-                    <input name="Email" size="45" type="text" />
-                </td>
-            </tr>
-            <tr>
-                <td>Betreff:</td>
-                <td>
-                    <input name="Betreff" size="45" type="text" />
-                </td>
-            </tr>
-           
-            <tr>
-                <td>Mitteilung:</td>
-                <td><textarea cols="30" rows="5" name="Mitteilung">Ihre Mitteilung</textarea></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" value="Abschicken" />
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="vorname">
+            <label class="mdl-textfield__label" for="vorname">Vorname:</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+                <span class="mdl-radio__label">Männlich</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                <span class="mdl-radio__label">Weiblich</span>
+                </label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <span>Geburtstag</span>     
+            <input type="date" id="birthday" class="" name="birthday">   
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="vorname">
+            <label class="mdl-textfield__label" for="vorname">Strasse:</label>
+        </div>
+    
     </form>
-</body>
-
-</html>
+</div>
