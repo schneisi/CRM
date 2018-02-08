@@ -9,7 +9,7 @@ var sites = JSON.parse('{' +
         '},' +
         '{' + 
             '"name": "Kunden",' + 
-            '"id": "customer",' + 
+            '"id": "customers",' + 
             '"url": "./nestedViews/customers.html",' +
             '"js": "initializeCustomers();",' +
             '"shownInMenu": true' +
@@ -21,7 +21,7 @@ var sites = JSON.parse('{' +
             '"shownInMenu": true' +
         '},' +
         '{' +
-            '"name": "newCustomer",' +
+            '"name": "Kunde anlegen",' +
             '"id": "newCustomerForm",' +
             '"url": "./nestedViews/newCustomer.html",' +
             '"shownInMenu": false' +
@@ -58,7 +58,7 @@ function initialize() {
     const titleSpan = document.getElementById("titleSpan");
     const menu = document.getElementById("menu");
     
-    console.log(sites);
+    logString(sites);
     createMenu();
     showStartPage();
 }
@@ -91,7 +91,7 @@ function viewForId(anIdString) {
     } 
 }
 
-async function navigateToSiteWithId(anId, aToggleBoolean){
+async function navigateToViewWithId(anId, aToggleBoolean){
     let theView = viewForId(anId);
     navigateToView(theView, aToggleBoolean)
 }
@@ -118,7 +118,7 @@ function setContent(aText) {
     componentHandler.upgradeAllRegistered(contentContainer);
     let theView = viewForId(sessionStorage.getItem("viewId"));
     if (theView && theView.js) {
-        eval(theView.js);
+        eval(theView.js); //Needs to be tested
     }
 }
 

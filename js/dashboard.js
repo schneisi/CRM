@@ -1,6 +1,6 @@
 function buttonClicked() {
     showModal("Titel", "Test");
 }
-function changeViewButton() {
-    navigateToSiteWithId("customer", false);
+function navigateToCustomersClicked() {
+    navigateToViewWithId("customers", false);
 }

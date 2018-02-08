@@ -5,7 +5,7 @@ function initializeCustomers() {
     let theList = new ListGrid();
     theList.addListGridField(new ListGridField("Titel", function(anObject) {
         return anObject.value;
-    }))
+    }));
     theList.objects.push(new ListGridHelper("Test", "Wert"));
     let theDiv = document.createElement("div");
     theDiv.innerHTML = theList.getHtml();
@@ -13,5 +13,5 @@ function initializeCustomers() {
 }
 
 function addNewCustomerClicked(){
-    navigateToSiteWithId("newCustomerForm", false);
+    navigateToViewWithId("newCustomerForm", false);
 }
