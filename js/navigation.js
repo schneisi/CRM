@@ -99,7 +99,7 @@ async function navigateToViewWithId(anId, aToggleBoolean){
 async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     let theUrl = aView.url;
     getAjaxContent(theUrl, setContent);
-    if (aToggleBoolean) {
+    if (aToggleBoolean && isDrawerExpanded()) {
         var layout = document.querySelector('.mdl-layout');
         layout.MaterialLayout.toggleDrawer();
     }
@@ -132,4 +132,15 @@ function showStartPage() {
         theView = defaultSite;
     }
     navigateToView(theView, false);
+}
+
+function isDrawerExpanded() {
+    let theDrawer = document.getElementsByClassName("mdl-layout__drawer-button")[0];
+    var eachIndex;
+    for (eachIndex = 0; eachIndex < theDrawer.attributes.length; eachIndex++) {
+        let eachAttribute = theDrawer.attributes[eachIndex];
+        if (eachAttribute.name == "aria-expanded") {
+            return eachAttribute.value == "true";
+        }
+    }
 }
