@@ -1,17 +1,17 @@
-function initializeCustomers() {
+function initializeAppointments() {
     //TODO: Not Correct. Has to be the content-div, not the container
     const contentDiv = document.getElementById("contentContainer");
 
     let theList = new ListGrid();
-    theList.addListGridField(new ListGridField("Titel", function(anObject) {
+    theList.addListGridField(new ListGridField("Termine", function(anObject) {
         return anObject.value;
     }));
-    theList.objects.push(new ListGridHelper("Test", "Wert"));
+    theList.objects.push(new ListGridHelper("Test", "Beispieltermin"));
     let theDiv = document.createElement("div");
     theDiv.innerHTML = theList.getHtml();
     contentDiv.appendChild(theDiv);
 }
 
-function addNewCustomerClicked(){
-    navigateToViewWithId("newCustomerForm", false);
+function addNewAppointmentClicked(){
+    navigateToViewWithId("newAppointment", false);
 }

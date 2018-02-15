@@ -39,6 +39,19 @@
             "shownInMenu": false
         },
         {
+            "name": "Termine",
+            "id": "appointments",
+            "url": "./nestedViews/appointments.html",
+            "js":  "initializeAppointments();",
+            "shownInMenu": true
+        },
+        {
+            "name": "Neuer Termin",
+            "id": "newAppointment",
+            "url": "./nestedViews/newAppointment.html",
+            "shownInMenu": false
+        },
+        {
             "name": "Demo-Table",
             "id": "exampleTable",
             "url": "./nestedViews/demoTable.html",
