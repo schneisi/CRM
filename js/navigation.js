@@ -1,37 +1,44 @@
 'use strict';
-var sites = JSON.parse('{' + 
-    '"pages": ['+
-        '{' + 
-            '"name": "Dashboard",' + 
-            '"id": "dashboard",' + 
-            '"url": "./nestedViews/dashboard.html",' +
-            '"shownInMenu": true' +
-        '},' +
-        '{' + 
-            '"name": "Kunden",' + 
-            '"id": "customers",' + 
-            '"url": "./nestedViews/customers.html",' +
-            '"js": "initializeCustomers();",' +
-            '"shownInMenu": true' +
-        '},' +
-        '{' + 
-            '"name": "Demo-Form",' + 
-            '"id": "exampleForm",' + 
-            '"url": "./nestedViews/demoForm.html",' +
-            '"shownInMenu": true' +
-        '},' +
-        '{' +
-            '"name": "Kunde anlegen",' +
-            '"id": "newCustomerForm",' +
-            '"url": "./nestedViews/newCustomer.html",' +
-            '"shownInMenu": false' +
-         '},' +
-        '{' + 
-            '"name": "Demo-Table",' + 
-            '"id": "exampleTable",' + 
-            '"url": "./nestedViews/demoTable.html",' +
-            '"shownInMenu": true' +
-        '}' +
+var sites = JSON.parse('{' +
+    '"pages": [' +
+    '{' +
+    '"name": "Dashboard",' +
+    '"id": "dashboard",' +
+    '"url": "./nestedViews/dashboard.html",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Kunden",' +
+    '"id": "customers",' +
+    '"url": "./nestedViews/customers.html",' +
+    '"js": "initializeCustomers();",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Demo-Form",' +
+    '"id": "exampleForm",' +
+    '"url": "./nestedViews/demoForm.html",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Versicherungen",' +
+    '"id": "insurances",' +
+    '"url": "./nestedViews/insurances.html",' +
+    '"js": "initializeInsurances();",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Kunde anlegen",' +
+    '"id": "newCustomerForm",' +
+    '"url": "./nestedViews/newCustomer.html",' +
+    '"shownInMenu": false' +
+    '},' +
+    '{' +
+    '"name": "Demo-Table",' +
+    '"id": "exampleTable",' +
+    '"url": "./nestedViews/demoTable.html",' +
+    '"shownInMenu": true' +
+    '}' +
     ']}');
 
 //Initialize
@@ -40,10 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         initialize();
     }
-    , 10);
-}); 
+        , 10);
+});
 
-window.addEventListener('popstate', function(e) {
+window.addEventListener('popstate', function (e) {
     let theView = e.state;
     if (theView != null) {
         navigateToView(theView, null, false);
@@ -57,7 +64,7 @@ function initialize() {
     const contentContainer = document.getElementById("contentContainer");
     const titleSpan = document.getElementById("titleSpan");
     const menu = document.getElementById("menu");
-    
+
     logString(sites);
     createMenu();
     showStartPage();
@@ -66,7 +73,7 @@ function initialize() {
 function createMenu() {
     for (var i = 0; i < sites.pages.length; i++) {
         let theSite = sites.pages[i];
-        if (theSite.shownInMenu){
+        if (theSite.shownInMenu) {
             let theSpan = document.createElement('span');
 
             theSpan.setAttribute("id", theSite.id);
@@ -75,7 +82,7 @@ function createMenu() {
             theSpan.addEventListener("click", function () {
                 navigateToView(theSite, true);
             });
-            menu.appendChild(theSpan); 
+            menu.appendChild(theSpan);
         }
     }
 
@@ -87,11 +94,11 @@ function viewForId(anIdString) {
         let theView = sites.pages[i];
         if (theView.id == anIdString) {
             return theView;
-        } 
-    } 
+        }
+    }
 }
 
-async function navigateToViewWithId(anId, aToggleBoolean){
+async function navigateToViewWithId(anId, aToggleBoolean) {
     let theView = viewForId(anId);
     navigateToView(theView, aToggleBoolean)
 }
@@ -110,7 +117,7 @@ async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     if (aPushStateBoolean) {
         history.pushState(aView, aView.name, null);
     }
-    
+
 }
 
 function setContent(aText) {
