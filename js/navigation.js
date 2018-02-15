@@ -31,6 +31,12 @@ var sites = JSON.parse('{' +
             '"id": "exampleTable",' + 
             '"url": "./nestedViews/demoTable.html",' +
             '"shownInMenu": true' +
+        '},' +
+        '{' + 
+            '"name": "insurance",' + 
+            '"id": "insurance",' + 
+            '"url": "./nestedViews/insurance.html",' +
+            '"shownInMenu": false' +
         '}' +
     ']}');
 

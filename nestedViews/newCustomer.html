@@ -29,6 +29,8 @@
         <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="plz">
             <label class="mdl-textfield__label" for="plz">Postleitzahl:</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">    
             <input class="mdl-textfield__input" type="text" id="ort">
             <label class="mdl-textfield__label" for="ort">Ort:</label>
         </div>
@@ -41,26 +43,22 @@
             <label class="mdl-textfield__label" for="email">Emailadresse:</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="termin" disabled>
-            <label class="mdl-textfield__label" for="termin">Letzter Kundentermin:</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="notizen">
             <label class="mdl-textfield__label" for="notizen">Allgemeine Notizen:</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="versicherung" disabled>
-            <label class="mdl-textfield__label" for="versicherung">Abgeschlossene Versicherungen:</label>
+            <input class="mdl-textfield__input" type="text" id="termin" disabled>
+            <label class="mdl-textfield__label" for="termin">Abgeschlossene Verträge:</label>
         </div>
         <!-- Expandable Textfield -->
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-grid">
             <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
-                <i class="material-icons">KV suchen:</i>
+                <i class="material-icons">search</i>
             </label>
-        <div class="mdl-textfield__expandable-holder">
-            <input class="mdl-textfield__input" type="text" id="kvSuche">
-            <label class="mdl-textfield__label" for="kvSuche">Search</label>
-        </div>
+            <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input mdl-cell mdl-cell--12-col" type="text" id="sample6">
+                <label class="mdl-textfield__label" for="sample-expandable"></label>
+            </div>
         </div>
     
     </form>
