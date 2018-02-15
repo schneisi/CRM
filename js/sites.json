@@ -1,0 +1,48 @@
+{
+    "pages": [
+        {
+            "name": "Dashboard",
+            "id": "dashboard",
+            "url": "./nestedViews/dashboard.html",
+            "shownInMenu": true
+        },
+        {
+            "name": "Kunden",
+            "id": "customers",
+            "url": "./nestedViews/customers.html",
+            "js": "initializeCustomers();",
+            "shownInMenu": true
+        },
+        {
+            "name": "Demo-Form",
+            "id": "exampleForm",
+            "url": "./nestedViews/demoForm.html",
+            "shownInMenu": true
+        },
+        {
+            "name": "Versicherungen",
+            "id": "insurances",
+            "url": "./nestedViews/insurances.html",
+            "js": "initializeInsurances();",
+            "shownInMenu": true
+        },
+        {
+            "name": "Kunde anlegen",
+            "id": "newCustomerForm",
+            "url": "./nestedViews/newCustomer.html",
+            "shownInMenu": false
+        },
+        {
+            "name": "Versicherung",
+            "id": "insurance",
+            "url": "./nestedViews/insurance.html",
+            "shownInMenu": false
+        },
+        {
+            "name": "Demo-Table",
+            "id": "exampleTable",
+            "url": "./nestedViews/demoTable.html",
+            "shownInMenu": true
+        }
+    ]
+}

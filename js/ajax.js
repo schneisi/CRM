@@ -16,7 +16,7 @@ function postAjaxContent(aRequestUrl, aCallback, aContentString) {
 function createRequestWithCallback(aCallback) {
     var theRequest = new XMLHttpRequest();
     theRequest.onreadystatechange = function() {
-        if (theRequest.readyState = XMLHttpRequest.DONE) {
+        if (theRequest.readyState == XMLHttpRequest.DONE && theRequest.status == 200) {
             aCallback(theRequest.responseText);
         }
     }
