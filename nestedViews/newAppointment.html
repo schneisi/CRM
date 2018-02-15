@@ -1,0 +1,44 @@
+<div id="content">
+    <form>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="appointmentTitle">
+            <label class="mdl-textfield__label" for="name">Titel:</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="location">
+            <label class="mdl-textfield__label" for="vorname">Ort:</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="street">
+            <label class="mdl-textfield__label" for="vorname">Straße:</label>
+        </div>
+        <!-- Todo Modify JS: expand newCustomer textfield or customer search-->
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                <input type="radio" id="option-1" class="mdl-radio__button" name="isNewCustomerRadio" onclick="handleClick(this);" value="1">
+                <span class="mdl-radio__label">Neuer Kunde</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                <input type="radio" id="option-2" class="mdl-radio__button" name="isNewCustomerRadio" onclick="handleClick(this);" value="0" checked>
+                <span class="mdl-radio__label">Bestandskunde</span>
+                </label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <span>Datum</span>     
+            <input type="date" id="appointmentDate" class="" name="appointmentDate">   
+        </div>
+
+        <!-- Expandable Textfield -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-grid">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="customerSearch">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input mdl-cell mdl-cell--12-col" type="text" id="customerSearch">
+                <label class="mdl-textfield__label" for="sample-expandable"></label>
+            </div>
+        </div>
+       
+    
+    </form>
+</div>
