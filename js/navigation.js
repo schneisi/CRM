@@ -1,60 +1,21 @@
 'use strict';
-var sites = JSON.parse('{' +
-    '"pages": [' +
-    '{' +
-    '"name": "Dashboard",' +
-    '"id": "dashboard",' +
-    '"url": "./nestedViews/dashboard.html",' +
-    '"shownInMenu": true' +
-    '},' +
-    '{' +
-    '"name": "Kunden",' +
-    '"id": "customers",' +
-    '"url": "./nestedViews/customers.html",' +
-    '"js": "initializeCustomers();",' +
-    '"shownInMenu": true' +
-    '},' +
-    '{' +
-    '"name": "Demo-Form",' +
-    '"id": "exampleForm",' +
-    '"url": "./nestedViews/demoForm.html",' +
-    '"shownInMenu": true' +
-    '},' +
-    '{' +
-    '"name": "Versicherungen",' +
-    '"id": "insurances",' +
-    '"url": "./nestedViews/insurances.html",' +
-    '"js": "initializeInsurances();",' +
-    '"shownInMenu": true' +
-    '},' +
-    '{' +
-    '"name": "Kunde anlegen",' +
-    '"id": "newCustomerForm",' +
-    '"url": "./nestedViews/newCustomer.html",' +
-    '"shownInMenu": false' +
-    '},' +
-    '{' +
-    '"name": "Versicherung",' +
-    '"id": "insurance",' +
-    '"url": "./nestedViews/insurance.html",' +
-    '"shownInMenu": false' +
-    '},' +
-    '{' +
-    '"name": "Demo-Table",' +
-    '"id": "exampleTable",' +
-    '"url": "./nestedViews/demoTable.html",' +
-    '"shownInMenu": true' +
-    '}' +
-    ']}');
+
+var sites;
+var defaultSite;
 
 //Initialize
 document.addEventListener("DOMContentLoaded", function () {
     //Wait until MDL is initialized
     setTimeout(function () {
-        initialize();
-    }
-        , 10);
+        getAjaxContent("js/sites.json", initializeSites);
+    } , 10);
 });
+
+function initializeSites(aJsonString) {
+    sites = JSON.parse(aJsonString);
+    defaultSite = sites.pages[0];
+    initializeBody();
+}
 
 window.addEventListener('popstate', function (e) {
     let theView = e.state;
@@ -63,10 +24,7 @@ window.addEventListener('popstate', function (e) {
     }
 });
 
-
-const defaultSite = sites.pages[0];
-
-function initialize() {
+function initializeBody() {
     const contentContainer = document.getElementById("contentContainer");
     const titleSpan = document.getElementById("titleSpan");
     const menu = document.getElementById("menu");
@@ -91,7 +49,6 @@ function createMenu() {
             menu.appendChild(theSpan);
         }
     }
-
 }
 
 //Internal
