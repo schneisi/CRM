@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 let theList;
-=======
-let theList
->>>>>>> 16742d29b5a4671323ce0cc67570acc41a78b1e7
 
 function initializeInsurances() {
     //TODO: Not Correct. Has to be the content-div, not the container
@@ -22,13 +18,6 @@ function initializeInsurances() {
 }
 
 function insuranceClicked(anIndex) {
-<<<<<<< HEAD
     let theHelper = theList.objects[anIndex];
     console.log(theHelper.value)
 }
-=======
-    let theInsurance = theList.objects[anIndex];
-}
-
-
->>>>>>> 16742d29b5a4671323ce0cc67570acc41a78b1e7
