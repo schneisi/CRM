@@ -1,43 +1,50 @@
 'use strict';
-var sites = JSON.parse('{' + 
-    '"pages": ['+
-        '{' + 
-            '"name": "Dashboard",' + 
-            '"id": "dashboard",' + 
-            '"url": "./nestedViews/dashboard.html",' +
-            '"shownInMenu": true' +
-        '},' +
-        '{' + 
-            '"name": "Kunden",' + 
-            '"id": "customers",' + 
-            '"url": "./nestedViews/customers.html",' +
-            '"js": "initializeCustomers();",' +
-            '"shownInMenu": true' +
-        '},' +
-        '{' + 
-            '"name": "Demo-Form",' + 
-            '"id": "exampleForm",' + 
-            '"url": "./nestedViews/demoForm.html",' +
-            '"shownInMenu": true' +
-        '},' +
-        '{' +
-            '"name": "Kunde anlegen",' +
-            '"id": "newCustomerForm",' +
-            '"url": "./nestedViews/newCustomer.html",' +
-            '"shownInMenu": false' +
-         '},' +
-        '{' + 
-            '"name": "Demo-Table",' + 
-            '"id": "exampleTable",' + 
-            '"url": "./nestedViews/demoTable.html",' +
-            '"shownInMenu": true' +
-        '},' +
-        '{' + 
-            '"name": "insurance",' + 
-            '"id": "insurance",' + 
-            '"url": "./nestedViews/insurance.html",' +
-            '"shownInMenu": false' +
-        '}' +
+var sites = JSON.parse('{' +
+    '"pages": [' +
+    '{' +
+    '"name": "Dashboard",' +
+    '"id": "dashboard",' +
+    '"url": "./nestedViews/dashboard.html",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Kunden",' +
+    '"id": "customers",' +
+    '"url": "./nestedViews/customers.html",' +
+    '"js": "initializeCustomers();",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Demo-Form",' +
+    '"id": "exampleForm",' +
+    '"url": "./nestedViews/demoForm.html",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Versicherungen",' +
+    '"id": "insurances",' +
+    '"url": "./nestedViews/insurances.html",' +
+    '"js": "initializeInsurances();",' +
+    '"shownInMenu": true' +
+    '},' +
+    '{' +
+    '"name": "Kunde anlegen",' +
+    '"id": "newCustomerForm",' +
+    '"url": "./nestedViews/newCustomer.html",' +
+    '"shownInMenu": false' +
+    '},' +
+    '{' +
+    '"name": "Versicherung",' +
+    '"id": "insurance",' +
+    '"url": "./nestedViews/insurance.html",' +
+    '"shownInMenu": false' +
+    '},' +
+    '{' +
+    '"name": "Demo-Table",' +
+    '"id": "exampleTable",' +
+    '"url": "./nestedViews/demoTable.html",' +
+    '"shownInMenu": true' +
+    '}' +
     ']}');
 
 //Initialize
@@ -46,10 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         initialize();
     }
-    , 10);
-}); 
+        , 10);
+});
 
-window.addEventListener('popstate', function(e) {
+window.addEventListener('popstate', function (e) {
     let theView = e.state;
     if (theView != null) {
         navigateToView(theView, null, false);
@@ -63,7 +70,7 @@ function initialize() {
     const contentContainer = document.getElementById("contentContainer");
     const titleSpan = document.getElementById("titleSpan");
     const menu = document.getElementById("menu");
-    
+
     logString(sites);
     createMenu();
     showStartPage();
@@ -72,7 +79,7 @@ function initialize() {
 function createMenu() {
     for (var i = 0; i < sites.pages.length; i++) {
         let theSite = sites.pages[i];
-        if (theSite.shownInMenu){
+        if (theSite.shownInMenu) {
             let theSpan = document.createElement('span');
 
             theSpan.setAttribute("id", theSite.id);
@@ -81,7 +88,7 @@ function createMenu() {
             theSpan.addEventListener("click", function () {
                 navigateToView(theSite, true);
             });
-            menu.appendChild(theSpan); 
+            menu.appendChild(theSpan);
         }
     }
 
@@ -93,11 +100,11 @@ function viewForId(anIdString) {
         let theView = sites.pages[i];
         if (theView.id == anIdString) {
             return theView;
-        } 
-    } 
+        }
+    }
 }
 
-async function navigateToViewWithId(anId, aToggleBoolean){
+async function navigateToViewWithId(anId, aToggleBoolean) {
     let theView = viewForId(anId);
     navigateToView(theView, aToggleBoolean)
 }
@@ -105,7 +112,7 @@ async function navigateToViewWithId(anId, aToggleBoolean){
 async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     let theUrl = aView.url;
     getAjaxContent(theUrl, setContent);
-    if (aToggleBoolean) {
+    if (aToggleBoolean && isDrawerExpanded()) {
         var layout = document.querySelector('.mdl-layout');
         layout.MaterialLayout.toggleDrawer();
     }
@@ -116,7 +123,7 @@ async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     if (aPushStateBoolean) {
         history.pushState(aView, aView.name, null);
     }
-    
+
 }
 
 function setContent(aText) {
@@ -138,4 +145,15 @@ function showStartPage() {
         theView = defaultSite;
     }
     navigateToView(theView, false);
+}
+
+function isDrawerExpanded() {
+    let theDrawer = document.getElementsByClassName("mdl-layout__drawer-button")[0];
+    var eachIndex;
+    for (eachIndex = 0; eachIndex < theDrawer.attributes.length; eachIndex++) {
+        let eachAttribute = theDrawer.attributes[eachIndex];
+        if (eachAttribute.name == "aria-expanded") {
+            return eachAttribute.value == "true";
+        }
+    }
 }
