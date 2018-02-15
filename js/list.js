@@ -3,6 +3,7 @@ class ListGrid {
     constructor () {
         this.fields = [];
         this.objects = [];
+        this.clickEventSelector = null;
     }
     
     addListGridField(aField) {
@@ -21,13 +22,18 @@ class ListGrid {
         theResultString += "</tr>";
 
         //Building Table content
-        for (var i = 0; i < this.objects.length; i++) {
-            let eachObject = this.objects[i];
-            theResultString += "<tr>";
-            for (var i = 0; i < this.fields.length; i++) {
-                let eachField = this.fields[i];
+        for (var eachRowIndex = 0; eachRowIndex < this.objects.length; eachRowIndex++) {
+            let eachObject = this.objects[eachRowIndex];
+            if (this.clickEventSelector != null) {
+                theResultString += '<tr onclick="' + this.clickEventSelector.name + '(' + eachRowIndex + ');">';
+            } else {
+                theResultString += "<tr>";
+            }
+            for (var eachFieldIndex = 0; eachFieldIndex < this.fields.length; eachFieldIndex++) {
+                let eachField = this.fields[eachFieldIndex];
                 let eachContentString = eachField.readSelector(eachObject);
-                theResultString += '<td>' + eachContentString + '</td>';
+                theResultString += '<td>' + eachContentString + '</td>'
+                
             }
             theResultString += "</tr>";
         }
