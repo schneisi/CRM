@@ -14,12 +14,6 @@
             "shownInMenu": true
         },
         {
-            "name": "Demo-Form",
-            "id": "exampleForm",
-            "url": "./nestedViews/demoForm.html",
-            "shownInMenu": true
-        },
-        {
             "name": "Versicherungen",
             "id": "insurances",
             "url": "./nestedViews/insurances.html",
@@ -50,12 +44,6 @@
             "id": "newAppointment",
             "url": "./nestedViews/newAppointment.html",
             "shownInMenu": false
-        },
-        {
-            "name": "Demo-Table",
-            "id": "exampleTable",
-            "url": "./nestedViews/demoTable.html",
-            "shownInMenu": true
         }
     ]
 }
