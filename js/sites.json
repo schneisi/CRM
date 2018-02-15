@@ -42,13 +42,19 @@
             "name": "Termine",
             "id": "appointments",
             "url": "./nestedViews/appointments.html",
-            "js":  "initializeAppointments();",
+            "js": "initializeAppointments();",
             "shownInMenu": true
         },
         {
             "name": "Neuer Termin",
             "id": "newAppointment",
             "url": "./nestedViews/newAppointment.html",
+            "shownInMenu": false
+        },
+        {
+            "name": "Termin",
+            "id": "appointment",
+            "url": "./nestedViews/appointment.html",
             "shownInMenu": false
         },
         {
