@@ -7,7 +7,6 @@ const staticAssets = [
     './css/appShell.css',
     './css/dashboard.css',
     './js/ajax.js',
-    './app.js',
     './js/navigation.js',
     './js/login.js',
     './js/dashboard.js',
