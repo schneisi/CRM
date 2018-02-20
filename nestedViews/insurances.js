@@ -1,4 +1,4 @@
-let theList
+let theList;
 
 function initializeInsurances() {
     //TODO: Not Correct. Has to be the content-div, not the container
@@ -9,6 +9,8 @@ function initializeInsurances() {
         return anObject.value;
     }));
     theList.objects.push(new ListGridHelper("Test", "Krankenversicherung ..."));
+    theList.objects.push(new ListGridHelper("Test", "Lebensversucherung ..."));
+    theList.clickEventSelector = insuranceClicked;
     let theDiv = document.createElement("div");
  
     theDiv.innerHTML = theList.getHtml();
@@ -16,7 +18,6 @@ function initializeInsurances() {
 }
 
 function insuranceClicked(anIndex) {
-    let theInsurance = theList.objects[anIndex];
+    let theHelper = theList.objects[anIndex];
+    console.log(theHelper.value)
 }
-
-

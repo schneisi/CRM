@@ -80,15 +80,20 @@ async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     if (aPushStateBoolean) {
         history.pushState(aView, aView.name, null);
     }
-
 }
 
 function setContent(aText) {
     contentContainer.innerHTML = aText;
     componentHandler.upgradeAllRegistered(contentContainer);
     let theView = viewForId(sessionStorage.getItem("viewId"));
+    var theScriptElements = contentContainer.getElementsByTagName("script"); 
+    
     if (theView && theView.js) {
-        eval(theView.js); //Needs to be tested
+        eval(theView.js);
+    }
+    for (var i = 0; i < theScriptElements.length; i++)
+    {
+        eval(theScriptElements[i].text);
     }
 }
 
