@@ -49,6 +49,7 @@
             "name": "Neuer Termin",
             "id": "newAppointment",
             "url": "./nestedViews/newAppointment.html",
+            "js" : "initializeNewAppointment()",
             "shownInMenu": false
         },
         {

@@ -55,3 +55,18 @@ function showModal(aTitleString, aMessageString) {
     contentContainer.appendChild(theDialog);
     theDialog.showModal();
 }
+
+
+function saveButton() {
+    return document.getElementById("saveButton")
+}
+
+function showSaveButton(aCallback) {
+    let theButton = saveButton();
+    theButton.onclick = aCallback;
+    theButton.style.display = "block";
+}
+
+function hideSaveButton() {
+    saveButton().style.display = "none";
+}
