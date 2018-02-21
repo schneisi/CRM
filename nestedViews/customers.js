@@ -15,3 +15,4 @@ function initializeCustomers() {
 function addNewCustomerClicked(){
     navigateToViewWithId("newCustomerForm", false);
 }
+

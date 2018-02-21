@@ -7,6 +7,12 @@
             "shownInMenu": true
         },
         {
+            "name": "mapsTest",
+            "id": "mapsTest",
+            "url": "./nestedViews/mapsTest.html",
+            "shownInMenu": true
+        },
+        {
             "name": "Kunden",
             "id": "customers",
             "url": "./nestedViews/customers.html",
@@ -49,7 +55,7 @@
             "name": "Neuer Termin",
             "id": "newAppointment",
             "url": "./nestedViews/newAppointment.html",
-            "js" : "initializeNewAppointment()",
+            "js": "initializeNewAppointment()",
             "shownInMenu": false
         },
         {
