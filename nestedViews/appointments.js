@@ -4,6 +4,7 @@ function initializeAppointments() {
 
     let theList = new ListGrid();
     theList.addListGridField(new ListGridField("Termine", anObject => anObject.value));
+    theList.clickEventSelector = appointmentClicked;
     theList.objects.push(new ListGridHelper("Test", "Beispieltermin"));
     let theDiv = document.createElement("div");
     theDiv.innerHTML = theList.getHtml();
@@ -12,4 +13,8 @@ function initializeAppointments() {
 
 function addNewAppointmentClicked(){
     navigateToViewWithId("newAppointment", false);
+}
+
+function appointmentClicked(){
+    navigateToViewWithId("appointment", false);
 }

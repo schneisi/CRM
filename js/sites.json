@@ -16,8 +16,7 @@
         {
             "name": "Kunde",
             "id": "customer",
-            "url": "./nestedViews/customers.html",
-            "js": "initializeCustomers();",
+            "url": "./nestedViews/customer.html",
             "shownInMenu": false
         },
         {
