@@ -119,3 +119,11 @@ function isDrawerExpanded() {
         }
     }
 }
+
+function getActionId() {
+    return sessionStorage.getItem('actionId');
+}
+
+function setActionId(aString) {
+    sessionStorage.setItem('actionId', aString);
+}
