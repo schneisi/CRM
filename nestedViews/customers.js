@@ -1,6 +1,5 @@
 function initializeCustomers() {
-    //TODO: Not Correct. Has to be the content-div, not the container
-    const contentDiv = document.getElementById("contentContainer");
+    const contentDiv = document.getElementById("content");
 
     let theList = new ListGrid();
     theList.addListGridField(new ListGridField("Titel", anObject => anObject.value));

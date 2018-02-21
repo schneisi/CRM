@@ -23,7 +23,6 @@
             "name": "Versicherungen",
             "id": "insurances",
             "url": "./nestedViews/insurances.html",
-            "js": "initializeInsurances();",
             "shownInMenu": true
         },
         {
