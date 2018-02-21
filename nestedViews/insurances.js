@@ -5,9 +5,7 @@ function initializeInsurances() {
     const contentDiv = document.getElementById("contentContainer");
 
     theList = new ListGrid();
-    theList.addListGridField(new ListGridField("Versicherungen", function (anObject) {
-        return anObject.value;
-    }));
+    theList.addListGridField(new ListGridField("Versicherungen", anObject => anObject.value));
     theList.objects.push(new ListGridHelper("Test", "Krankenversicherung ..."));
     theList.objects.push(new ListGridHelper("Test", "Lebensversucherung ..."));
     theList.clickEventSelector = insuranceClicked;

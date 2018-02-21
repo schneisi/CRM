@@ -3,9 +3,7 @@ function initializeCustomers() {
     const contentDiv = document.getElementById("contentContainer");
 
     let theList = new ListGrid();
-    theList.addListGridField(new ListGridField("Titel", function(anObject) {
-        return anObject.value;
-    }));
+    theList.addListGridField(new ListGridField("Titel", anObject => anObject.value));
     theList.objects.push(new ListGridHelper("Test", "Wert"));
     let theDiv = document.createElement("div");
     theDiv.innerHTML = theList.getHtml();
