@@ -7,16 +7,9 @@
             "shownInMenu": true
         },
         {
-            "name": "mapsTest",
-            "id": "mapsTest",
-            "url": "./nestedViews/mapsTest.html",
-            "shownInMenu": true
-        },
-        {
             "name": "Kunden",
             "id": "customers",
             "url": "./nestedViews/customers.html",
-            "js": "initializeCustomers();",
             "shownInMenu": true
         },
         {
@@ -29,7 +22,6 @@
             "name": "Versicherungen",
             "id": "insurances",
             "url": "./nestedViews/insurances.html",
-            "js": "initializeInsurances();",
             "shownInMenu": true
         },
         {
@@ -48,14 +40,12 @@
             "name": "Termine",
             "id": "appointments",
             "url": "./nestedViews/appointments.html",
-            "js": "initializeAppointments();",
             "shownInMenu": true
         },
         {
             "name": "Neuer Termin",
             "id": "newAppointment",
             "url": "./nestedViews/newAppointment.html",
-            "js": "initializeNewAppointment()",
             "shownInMenu": false
         },
         {
