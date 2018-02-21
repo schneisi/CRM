@@ -1,9 +1,10 @@
 function callGoogleMaps(origin, destination) {
-    var destUrl = encodeURI(destination)
+    var destUrl = encodeURI(destination);
     var mapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + destUrl;
-    window.location = mapsUrl;
+    var mapsWindow = window.open(mapsUrl, "_blank");
+    mapsWindow.focus();
 }
-function buttonClicked() {
+//Todo get customer destination string
+function mapsButtonClicked() {
     callGoogleMaps("Konrad Adenauer Straﬂe 34 79540", "Karlsruhe");
-    /*window.location = "http://www.google.de/";*/
 }

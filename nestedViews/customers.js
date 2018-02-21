@@ -20,3 +20,4 @@ function customerClicked(anId){
     navigateToViewWithId("customer", false);
 }
 
+
