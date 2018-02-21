@@ -70,3 +70,9 @@ function showSaveButton(aCallback) {
 function hideSaveButton() {
     saveButton().style.display = "none";
 }
+function callGoogleMaps(origin, destination) {
+    var destUrl = encodeURI(destination);
+    var mapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + destUrl;
+    var mapsWindow = window.open(mapsUrl, "_blank");
+    mapsWindow.focus();
+}
