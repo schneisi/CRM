@@ -76,3 +76,7 @@ function callGoogleMaps(origin, destination) {
     var mapsWindow = window.open(mapsUrl, "_blank");
     mapsWindow.focus();
 }
+
+function isOnline(){
+    return navigator.onLine;
+}
