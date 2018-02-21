@@ -87,7 +87,7 @@ function setContent(aText) {
     componentHandler.upgradeAllRegistered(contentContainer);
     let theView = viewForId(sessionStorage.getItem("viewId"));
     var theScriptElements = contentContainer.getElementsByTagName("script"); 
-    
+    hideSaveButton();
     if (theView && theView.js) {
         eval(theView.js);
     }
