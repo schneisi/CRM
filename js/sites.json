@@ -20,10 +20,10 @@
             "shownInMenu": true
         },
         {
-            "name": "Demo-Form",
-            "id": "exampleForm",
-            "url": "./nestedViews/demoForm.html",
-            "shownInMenu": true
+            "name": "Kunde",
+            "id": "customer",
+            "url": "./nestedViews/customer.html",
+            "shownInMenu": false
         },
         {
             "name": "Versicherungen",
@@ -63,12 +63,6 @@
             "id": "appointment",
             "url": "./nestedViews/appointment.html",
             "shownInMenu": false
-        },
-        {
-            "name": "Demo-Table",
-            "id": "exampleTable",
-            "url": "./nestedViews/demoTable.html",
-            "shownInMenu": true
         }
     ]
 }
