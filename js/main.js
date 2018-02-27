@@ -7,17 +7,18 @@ function logString(aString) {
     }
 }
 
-
-
-if ('serviceWorker' in navigator) {
-    try {
-        navigator.serviceWorker.register('serviceWorker.js')
-        logString("SW registered");
-    } catch (error) {
-        logString("SW registration failed");
+initializeApp();
+function initializeApp(){
+    if ('serviceWorker' in navigator) {
+        try {
+            navigator.serviceWorker.register('serviceWorker.js')
+            logString("SW registered");
+        } catch (error) {
+            logString("SW registration failed");
+        }
     }
+    initializeFirebase();
 }
-
 
 function logout() {
     sessionStorage.clear();
