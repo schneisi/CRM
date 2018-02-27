@@ -70,11 +70,12 @@ function showSaveButton(aCallback) {
 function hideSaveButton() {
     saveButton().style.display = "none";
 }
-function callGoogleMaps(origin, destination) {
-    var destUrl = encodeURI(destination);
-    var mapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + destUrl;
-    var mapsWindow = window.open(mapsUrl, "_blank");
-    mapsWindow.focus();
+
+function callGoogleMaps(destination) {
+    var theDestUrl = encodeURI(destination);
+    var theMapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + theDestUrl;
+    var theMapsWindow = window.open(theMapsUrl, "_blank");
+    theMapsWindow.focus();
 }
 
 function isOnline(){
