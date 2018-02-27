@@ -37,9 +37,5 @@ function initializeReadOnlyCustomer() {
 
 //Todo get customer destination string
 function mapsButtonClicked() {
-<<<<<<< HEAD
-    callGoogleMaps("Straﬂburg");
-=======
-    callGoogleMaps("Konrad Adenauer StraÔøΩe 34 79540", "Karlsruhe");
->>>>>>> 418c8383b0608635579c6109f63ce354eac367fa
+    callGoogleMaps("Stra√üburg");
 }
