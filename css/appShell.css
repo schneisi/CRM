@@ -31,3 +31,9 @@ body {
 .listTable tr td {
     padding: 10px;
 }
+
+.floatingButton{
+    position:fixed;
+    right:30px;
+    bottom:30px;
+}
