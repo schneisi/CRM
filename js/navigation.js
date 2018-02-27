@@ -3,6 +3,10 @@
 var sites;
 var defaultSite;
 
+let contentContainer;
+let theTitleSpan;
+let theMenu;
+
 //Initialize
 document.addEventListener("DOMContentLoaded", function () {
     //Wait until MDL is initialized
@@ -25,9 +29,9 @@ window.addEventListener('popstate', function (e) {
 });
 
 function initializeBody() {
-    const contentContainer = document.getElementById("contentContainer");
-    const titleSpan = document.getElementById("titleSpan");
-    const menu = document.getElementById("menu");
+    contentContainer = document.getElementById("contentContainer");
+    theTitleSpan = document.getElementById("titleSpan");
+    theMenu = document.getElementById("menu");
 
     logString(sites);
     createMenu();
@@ -46,7 +50,7 @@ function createMenu() {
             theSpan.addEventListener("click", function () {
                 navigateToView(theSite, true);
             });
-            menu.appendChild(theSpan);
+            theMenu.appendChild(theSpan);
         }
     }
 }
@@ -70,10 +74,10 @@ async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     let theUrl = aView.url;
     getAjaxContent(theUrl, setContent);
     if (aToggleBoolean && isDrawerExpanded()) {
-        var layout = document.querySelector('.mdl-layout');
-        layout.MaterialLayout.toggleDrawer();
+        var theLayout = document.querySelector('.mdl-layout');
+        theLayout.MaterialLayout.toggleDrawer();
     }
-    titleSpan.innerHTML = aView.name;
+    theTitleSpan.innerHTML = aView.name;
 
     //sessionStorage.setItem('viewTitle', aTitleString);
     sessionStorage.setItem('viewId', aView.id);
