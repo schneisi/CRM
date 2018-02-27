@@ -1,6 +1,5 @@
 
 function initializeReadOnlyCustomer() {
-    console.log("test");
     const theContentDiv = document.getElementById("content");
     let theTable = new StaticList(["30%", "70%"]);
     
