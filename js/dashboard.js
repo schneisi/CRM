@@ -11,3 +11,7 @@ function buttonClicked() {
 function navigateToCustomersClicked() {
     navigateToViewWithId("customers", false);
 }
+
+function navigateToAppointmentsClicked(){
+    navigateToViewWithId("appointments", false);
+}
