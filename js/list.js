@@ -52,8 +52,8 @@ class ListGridField {
 
 
 class ListGridHelper {
-    constructor(aTitleString, aValue) {
-        this.title = aTitleString;
+    constructor(anObject, aValue) {
+        this.object = anObject;
         this.value = aValue;
     }
 }
