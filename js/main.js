@@ -72,6 +72,14 @@ function hideSaveButton() {
     saveButton().style.display = "none";
 }
 
+function showSpinner() {
+    document.getElementById("spinner").style.display = "block";
+}
+
+function hideSpinner() {
+    document.getElementById("spinner").style.display = "none";
+}
+
 function callGoogleMaps(destination) {
     var theDestUrl = encodeURI(destination);
     var theMapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + theDestUrl;
