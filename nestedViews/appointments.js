@@ -1,14 +1,25 @@
 function initializeAppointments() {
-    //TODO: Not Correct. Has to be the content-div, not the container
-    const contentDiv = document.getElementById("contentContainer");
+    const contentDiv = document.getElementById("content");
 
     let theList = new ListGrid();
-    theList.addListGridField(new ListGridField("Termine", anObject => anObject.value));
+    theList.addListGridField(new ListGridField("Datum", function (anObject){
+        let theNewDate = new Date(anObject.dateString);
+        return theNewDate.toLocaleString("de-DE");
+    }));
+    theList.addListGridField(new ListGridField("Titel", anObject => anObject.nameString));
+
+
     theList.clickEventSelector = appointmentClicked;
-    theList.objects.push(new ListGridHelper("Test", "Beispieltermin"));
-    let theDiv = document.createElement("div");
-    theDiv.innerHTML = theList.getHtml();
-    contentDiv.appendChild(theDiv);
+
+    getDatabaseSnapshot("appointments", function(aSnapshot) {
+        aSnapshot.forEach(function (aChildSnapshot) {
+            theList.objects.push(new ListGridAppointmentHelper(aChildSnapshot.key, aChildSnapshot.child("date").val(), aChildSnapshot.child("title").val()));
+        });
+        let theDiv = document.createElement("div");
+        theDiv.innerHTML = theList.getHtml();
+        contentDiv.appendChild(theDiv);
+        hideSpinner();
+    });
 }
 
 function addNewAppointmentClicked(){
@@ -17,4 +28,14 @@ function addNewAppointmentClicked(){
 
 function appointmentClicked(){
     navigateToViewWithId("appointment", false);
+}
+
+class ListGridAppointmentHelper{
+
+    constructor(anAppointmentId, aDateString, aNameString){
+        this.appointmentId = anAppointmentId;
+        this.dateString = aDateString;
+        this.nameString = aNameString;
+    }
+
 }
