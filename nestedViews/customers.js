@@ -2,6 +2,7 @@ function initializeCustomers() {
     const contentDiv = document.getElementById("content");
 
     let theList = new ListGrid();
+    theList.showTitle = false;
     theList.addListGridField(new ListGridField("Titel", anObject => anObject.value));
     theList.clickEventSelector = customerClicked;
 

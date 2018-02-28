@@ -1,12 +1,10 @@
 let theList;
 
 function initializeInsurances() {
-    //TODO: Not Correct. Has to be the content-div, not the container
-    
-
-    const contentDiv = document.getElementById("contentContainer");
+    const contentDiv = document.getElementById("content");
 
     theList = new ListGrid();
+    theList.showTitle = false;
     theList.addListGridField(new ListGridField("Versicherungen", aListGridHelper => aListGridHelper.value));
     theList.clickEventSelector = customerClicked;
     theList.clickEventSelector = insuranceClicked;
