@@ -17,7 +17,6 @@ function initializeReadOnlyInsurance(){
             })
             thePrividerListString = thePrividerListString + "</ul>";
             theTable.addRow(["Mögliche Anbieter: ", thePrividerListString]);
-            console.log("durch");
             let theTableDiv = document.createElement("div");
             theTableDiv.innerHTML = theTable.getHtml();
             theContentDiv.appendChild(theTableDiv);
