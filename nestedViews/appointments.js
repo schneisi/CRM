@@ -1,22 +1,24 @@
+let theAppointmentList;
+
 function initializeAppointments() {
     const contentDiv = document.getElementById("content");
 
-    let theList = new ListGrid();
-    theList.addListGridField(new ListGridField("Datum", function (anObject){
+    theAppointmentList = new ListGrid();
+    theAppointmentList.addListGridField(new ListGridField("Datum", function (anObject){
         let theNewDate = new Date(anObject.dateString);
         return theNewDate.toLocaleString("de-DE");
     }));
-    theList.addListGridField(new ListGridField("Titel", anObject => anObject.nameString));
+    theAppointmentList.addListGridField(new ListGridField("Titel", anObject => anObject.nameString));
 
 
-    theList.clickEventSelector = appointmentClicked;
+    theAppointmentList.clickEventSelector = appointmentClicked;
 
     getDatabaseSnapshot("appointments", function(aSnapshot) {
         aSnapshot.forEach(function (aChildSnapshot) {
-            theList.objects.push(new ListGridAppointmentHelper(aChildSnapshot.key, aChildSnapshot.child("date").val(), aChildSnapshot.child("title").val()));
+            theAppointmentList.objects.push(new ListGridAppointmentHelper(aChildSnapshot.key, aChildSnapshot.child("date").val(), aChildSnapshot.child("title").val()));
         });
         let theDiv = document.createElement("div");
-        theDiv.innerHTML = theList.getHtml();
+        theDiv.innerHTML = theAppointmentList.getHtml();
         contentDiv.appendChild(theDiv);
         hideSpinner();
     });
@@ -26,7 +28,9 @@ function addNewAppointmentClicked(){
     navigateToViewWithId("newAppointment", false);
 }
 
-function appointmentClicked(){
+function appointmentClicked(anIndex){
+    let theHelper = theAppointmentList.objects[anIndex];
+    setActionId(theHelper.appointmentId);
     navigateToViewWithId("appointment", false);
 }
 

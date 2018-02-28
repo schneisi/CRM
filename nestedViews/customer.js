@@ -18,7 +18,7 @@ function initializeReadOnlyCustomer() {
             .addRow(["Straße", customerStreet])
             .addRow(["PLZ", customerZip])
             .addRow(["Ort", customerPlace])
-            .addRow(["Bemerkung", aSnapshot.child("remark").val()])
+            .addRow(["Bemerkung", aSnapshot.child("remark").val()]);
         let theTableDiv = document.createElement("div");
         theTableDiv.innerHTML = theTable.getHtml();
         theContentDiv.appendChild(theTableDiv);
