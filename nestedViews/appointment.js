@@ -3,7 +3,7 @@ let appointmentStreet;
 let appointmentPlace;
 
 function initializeReadOnlyAppointment(){
-    getDatabaseSnapshot("/appointments/" + getActionId(), function(aSnapshot) {
+    FbDatabase.getDatabaseSnapshot("/appointments/" + getActionId(), function(aSnapshot) {
         const theContentDiv = document.getElementById("content");
         let theTable = new StaticList(["30%", "70%"]);
         appointmentPlace = aSnapshot.child("address/place").val();

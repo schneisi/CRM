@@ -1,22 +1,26 @@
-let theList;
+include('model/Customer.js');
+let theCustomersList;
 
 function initializeCustomers() {
     const contentDiv = document.getElementById("content");
 
-    theList = new ListGrid();
-    theList.showTitle = false;
-    theList.addListGridField(new ListGridField("Titel", anObject => anObject.value));
-    theList.clickEventSelector = customerClicked;
+    theCustomersList = new ListGrid();
+    theCustomersList.showTitle = false;
+    theCustomersList.addListGridField(new ListGridField("Titel", anObject => anObject.value));
+    theCustomersList.clickEventSelector = customerClicked;
 
-    getDatabaseSnapshot("customers", function(aSnapshot) {
-        aSnapshot.forEach(function (aChildSnapshot) {
-            theList.objects.push(new ListGridHelper(aChildSnapshot.key, aChildSnapshot.child("lastname").val()));
+    let theCallback = function(aSnapshot) {
+        BaseDatabaseObject.createObjectsFromSnapshot(aSnapshot, Customer, function(aList) {
+            aList.forEach(function (eachCustomer) {
+                theCustomersList.objects.push(new ListGridHelper(eachCustomer.key(), eachCustomer.fullName()));
+            });
+            let theDiv = document.createElement("div");
+            theDiv.innerHTML = theCustomersList.getHtml();
+            contentDiv.appendChild(theDiv);
+            hideSpinner();
         });
-        let theDiv = document.createElement("div");
-        theDiv.innerHTML = theList.getHtml();
-        contentDiv.appendChild(theDiv);
-        hideSpinner();
-    });
+    };
+    FbDatabase.getDatabaseSnapshot("customers", theCallback, "lastname", null, null);
 }
 
 function addNewCustomerClicked(){
@@ -24,7 +28,7 @@ function addNewCustomerClicked(){
 }
 
 function customerClicked(anIndex){
-    let theKey = theList.objects[anIndex].object;
+    let theKey = theCustomersList.objects[anIndex].object;
     setActionId(theKey);
     navigateToViewWithId("customer", false);
 }

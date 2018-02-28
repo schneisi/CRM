@@ -35,7 +35,7 @@ function initializeBody() {
 
     logString(sites);
     createMenu();
-    showStartPage();
+    setTimeout(showStartPage, 250); //Make sure all JS-Files are loaded. Crashes otherwise
 }
 
 function createMenu() {

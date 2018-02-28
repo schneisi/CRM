@@ -4,7 +4,7 @@ let theCustomer;
 
 
 function initializeReadOnlyCustomer() {
-    getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
+    FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
         theCustomer = new Customer(aSnapshot);
         const theContentDiv = document.getElementById("content");
         let theTable = new StaticList(["30%", "70%"]);
