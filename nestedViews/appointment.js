@@ -7,13 +7,15 @@ function initializeReadOnlyAppointment(){
     let theCustomer = "Niklas Huber";
     let theDay = "28.02.2018";
     let theTime = "09:30";
+    let theNotes = "Ist ein Depp."
 
     theTable
-        .addRow(["Titel", theTitle])
-        .addRow(["Adresse", theAdress])
-        .addRow(["Kunde", theCustomer])
-        .addRow(["Datum", theDay])
-        .addRow(["Uhrzeit", theTime]);
+        .addRow(["Titel:", theTitle])
+        .addRow(["Adresse:", theAdress])
+        .addRow(["Kunde:", theCustomer])
+        .addRow(["Datum:", theDay])
+        .addRow(["Uhrzeit:", theTime])
+        .addRow(["Notizen:", theNotes])
 
     let theTableDiv = document.createElement("div");
     theTableDiv.innerHTML = theTable.getHtml();
