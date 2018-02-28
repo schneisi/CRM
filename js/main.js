@@ -1,5 +1,6 @@
 let isDebugging = false;
 let isAlwaysOnline = true;
+let jsFiles = [];
 
 function logString(aString) {
     if (isDebugging) {
@@ -18,6 +19,7 @@ function initializeApp(){
         }
     }
     initializeFirebase();
+    include("model/BaseDatabaseObject.js");
 }
 
 function logout() {
@@ -89,4 +91,15 @@ function callGoogleMaps(destination) {
 
 function isOnline(){
     return navigator.onLine;
+}
+
+function include(aString) {
+    if (!jsFiles.includes(aString)) {
+        var theScriptElement = document.createElement('script');
+        theScriptElement.src = aString;
+        theScriptElement.type = 'text/javascript';
+        theScriptElement.defer = true;
+        document.getElementsByTagName('head').item(0).appendChild(theScriptElement);
+        jsFiles.push(aString);
+    }  
 }

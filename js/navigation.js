@@ -52,6 +52,9 @@ function createMenu() {
             });
             theMenu.appendChild(theSpan);
         }
+        if (theSite.js) {
+            include(theSite.js);
+        }
     }
 }
 
@@ -92,9 +95,6 @@ function setContent(aText) {
     let theView = viewForId(sessionStorage.getItem("viewId"));
     var theScriptElements = contentContainer.getElementsByTagName("script"); 
     hideSaveButton();
-    if (theView && theView.js) {
-        eval(theView.js);
-    }
     for (var i = 0; i < theScriptElements.length; i++)
     {
         eval(theScriptElements[i].text);

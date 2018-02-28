@@ -4,54 +4,63 @@
             "name": "Dashboard",
             "id": "dashboard",
             "url": "./nestedViews/dashboard.html",
+            "js": "./js/dashboard.js",
             "shownInMenu": true
         },
         {
             "name": "Kunden",
             "id": "customers",
             "url": "./nestedViews/customers.html",
+            "js": "./nestedViews/customers.js",
             "shownInMenu": true
         },
         {
             "name": "Kunde",
             "id": "customer",
             "url": "./nestedViews/customer.html",
+            "js": "./nestedViews/customer.js",
             "shownInMenu": false
         },
         {
             "name": "Versicherungen",
             "id": "insurances",
             "url": "./nestedViews/insurances.html",
+            "js": "./nestedViews/insurances.js",
             "shownInMenu": true
         },
         {
             "name": "Kunde anlegen",
             "id": "newCustomerForm",
             "url": "./nestedViews/newCustomer.html",
+            "js": "./nestedViews/newCustomer.js",
             "shownInMenu": false
         },
         {
             "name": "Versicherung",
             "id": "insurance",
             "url": "./nestedViews/insurance.html",
+            "js": "./nestedViews/insurance.js",
             "shownInMenu": false
         },
         {
             "name": "Termine",
             "id": "appointments",
             "url": "./nestedViews/appointments.html",
+            "js": "./nestedViews/appointments.js",
             "shownInMenu": true
         },
         {
             "name": "Neuer Termin",
             "id": "newAppointment",
             "url": "./nestedViews/newAppointment.html",
+            "js": "./nestedViews/newAppointment.js",
             "shownInMenu": false
         },
         {
             "name": "Termin",
             "id": "appointment",
             "url": "./nestedViews/appointment.html",
+            "js": "./nestedViews/appointment.js",
             "shownInMenu": false
         }
     ]
