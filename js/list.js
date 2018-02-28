@@ -4,6 +4,7 @@ class ListGrid {
         this.fields = [];
         this.objects = [];
         this.clickEventSelector = null;
+        this.showTitle = true;
     }
     
     addListGridField(aField) {
@@ -13,13 +14,16 @@ class ListGrid {
     getHtml() {
         let theResultString = "<table class='listTable'>";
         
+
         //Builing Table Header
-        theResultString += "<tr>";
-        for (var i = 0; i < this.fields.length; i++) {
-            let eachField = this.fields[i];
-            theResultString += '<th>'+eachField.title + '</th>';
+        if (this.showTitle) {
+            theResultString += "<tr>";
+            for (var i = 0; i < this.fields.length; i++) {
+                let eachField = this.fields[i];
+                theResultString += '<th>'+eachField.title + '</th>';
+            }
+            theResultString += "</tr>";
         }
-        theResultString += "</tr>";
 
         //Building Table content
         for (var eachRowIndex = 0; eachRowIndex < this.objects.length; eachRowIndex++) {
