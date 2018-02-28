@@ -1,7 +1,9 @@
+let theList;
+
 function initializeCustomers() {
     const contentDiv = document.getElementById("content");
 
-    let theList = new ListGrid();
+    theList = new ListGrid();
     theList.showTitle = false;
     theList.addListGridField(new ListGridField("Titel", anObject => anObject.value));
     theList.clickEventSelector = customerClicked;
@@ -22,6 +24,7 @@ function addNewCustomerClicked(){
 }
 
 function customerClicked(anIndex){
-    setActionId(anIndex);
+    let theKey = theList.objects[anIndex].object;
+    setActionId(theKey);
     navigateToViewWithId("customer", false);
 }

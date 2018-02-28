@@ -1,40 +1,32 @@
+let customerZip;
+let customerStreet;
+let customerPlace;
+
 
 function initializeReadOnlyCustomer() {
-    const theContentDiv = document.getElementById("content");
-    let theTable = new StaticList(["30%", "70%"]);
-    
-    let theFirstName = "Amy";
-    let theLastName = "Adams";
-    let theGender = "weiblich";
-    let theBirthday = "01.2.1997";
-    let theStreet = "Doheny Rd. 1";
-    let theZip = "72313";
-    let thePlace = "Beverly Hills";
-    let thePhoneNumber = "012345678910";
-    let theMail = "amy@adams.com";
-    let theLastAppointment = "05.01.2018";
-    let theNotes = "Bekannte Schauspielerin";
-
-    theTable
-        .addRow(["Name", theLastName])
-        .addRow(["Vorname", theFirstName])
-        .addRow(["Geschlecht", theGender])
-        .addRow(["Geburtstag", theBirthday])
-        .addRow(["Straße", theStreet])
-        .addRow(["PLZ", theZip])
-        .addRow(["Ort", thePlace])
-        .addRow(["Telefon", thePhoneNumber])
-        .addRow(["E-Mail", theMail])
-        .addRow(["Letzter Termin", theLastAppointment])
-        .addRow(["Abgeschlossene Versicherungen", "<ul id='customerContractsList'><li>Berufsunfähigkeitsversicherung</li><li>KFZ Versicherung</li></ul>"]);
-
-    let theTableDiv = document.createElement("div");
-    theTableDiv.innerHTML = theTable.getHtml();
-    theContentDiv.appendChild(theTableDiv);
+    getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
+        const theContentDiv = document.getElementById("content");
+        let theTable = new StaticList(["30%", "70%"]);
+        customerPlace = aSnapshot.child("address/place").val();
+        customerStreet = aSnapshot.child("address/street").val();
+        customerZip = aSnapshot.child("address/zip").val();
+        theTable
+            .addRow(["Name", aSnapshot.child("firstname").val()])
+            .addRow(["Vorname", aSnapshot.child("lastname").val()])
+            .addRow(["E-Mail", aSnapshot.child("mail").val()])
+            .addRow(["Telefon", aSnapshot.child("phone").val()])
+            .addRow(["Straße", customerStreet])
+            .addRow(["PLZ", customerZip])
+            .addRow(["Ort", customerPlace])
+            .addRow(["Bemerkung", aSnapshot.child("remark").val()])
+        let theTableDiv = document.createElement("div");
+        theTableDiv.innerHTML = theTable.getHtml();
+        theContentDiv.appendChild(theTableDiv);
+    });
 }
 
 
 //Todo get customer destination string
 function mapsButtonClicked() {
-    callGoogleMaps("Straßburg");
+    callGoogleMaps(customerStreet + " " + customerZip + " " +  customerPlace);
 }
