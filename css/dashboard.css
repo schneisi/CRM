@@ -1,3 +1,9 @@
 #content {
     padding: 5px;
 }
+
+
+li.dashboard {
+    list-style-type: none;
+    font-size: medium;
+}
