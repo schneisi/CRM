@@ -6,10 +6,10 @@ class Appointment extends BaseDatabaseObject {
         return FbDatabase.dateForValue(this.getValueOfChild("date"));
     }
     dateString() {
-        return this.date().toString();
+        return this.date().toLocaleString("de-DE");
     }
     dashboardRepresentation() {
-        return this.date().toLocaleString("de-DE") + " " + this.title();
+        return this.dateString() + " " + this.title();
     }
     street() {
         return this.getValueOfChild("address/street");
