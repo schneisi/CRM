@@ -82,6 +82,26 @@ function hideSpinner() {
     document.getElementById("spinner").style.display = "none";
 }
 
+function hideMenu() {
+    document.getElementById("menuDiv").style.display = "none";
+    let theMenuList = document.getElementById("menuList");
+    theMenuList.innerHTML = "";
+}
+
+function showMenu(anArray) {
+    document.getElementById("menuDiv").style.display = "block";
+    let theMenuList = document.getElementById("menuList");
+
+    anArray.forEach(function (eachArray) {
+        let theLi = document.createElement("li");
+        theLi.classList.add("mdl-menu__item");
+        theLi.innerHTML = eachArray[0];
+        componentHandler.upgradeElement(theLi);
+        theMenuList.appendChild(theLi);
+    });
+}
+
+
 function callGoogleMaps(destination) {
     var theDestUrl = encodeURI(destination);
     var theMapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + theDestUrl;
