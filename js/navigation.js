@@ -128,6 +128,10 @@ function hasActionId(){
     return sessionStorage.getItem('actionId') != null;
 }
 
+function resetActionId() {
+    sessionStorage.removeItem('actionId');
+}
+
 function getActionId() {
     let theActionId = sessionStorage.getItem('actionId');
 //    setActionId(null);

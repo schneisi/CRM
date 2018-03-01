@@ -24,3 +24,36 @@ class Appointment extends BaseDatabaseObject {
         return this.getValueOfChild("notes");
     }
 }
+
+
+
+class AppointmentBuilder extends BaseBuilder {
+    constructor(anObject) {
+        super (anObject);
+        this.title = null;
+        this.date = null;
+        this.path = "appointments";
+        this.place = null;
+        this.zip = null;
+        this.street = null;
+        this.notes = null;
+    }
+
+    dateValue() {
+        return FbDatabase.valueForDate(this.date);
+    }
+
+    getJson() {
+        let theJsonObject = {
+            title: this.title,
+            date: this.dateValue(),
+            notes: this.notes,
+            address: {
+                place: this.place,
+                zip: this.zip,
+                street: this.street,
+            }
+        }
+        return theJsonObject;
+    }
+}
