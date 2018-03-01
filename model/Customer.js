@@ -33,6 +33,9 @@ class Customer extends BaseDatabaseObject {
     fullName() {
         return this.firstname() + " " + this.lastname();
     }
+    tableName() {
+        return this.lastname() + ", " + this.firstname();
+    }
     addressString() {
         return this.street() + " " + this.zipCode() + " " + this.place();
     }

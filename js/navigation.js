@@ -134,7 +134,7 @@ function resetActionId() {
 
 function getActionId() {
     let theActionId = sessionStorage.getItem('actionId');
-//    setActionId(null);
+    resetActionId();
     return theActionId;
 }
 

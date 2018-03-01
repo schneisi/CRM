@@ -6,14 +6,12 @@ function initializeCustomers() {
 
     theCustomersList = new ListGrid();
     theCustomersList.showTitle = false;
-    theCustomersList.addListGridField(new ListGridField("Titel", anObject => anObject.value));
+    theCustomersList.addListGridField(new ListGridField("Name", anObject => anObject.tableName()));
     theCustomersList.clickEventSelector = customerClicked;
 
     let theCallback = function(aSnapshot) {
         let theCustomers = BaseDatabaseObject.createObjectsFromSnapshot(aSnapshot, Customer);
-        theCustomers.forEach(function (eachCustomer) {
-            theCustomersList.objects.push(new ListGridHelper(eachCustomer.key(), eachCustomer.fullName()));
-        });
+        theCustomersList.objects = theCustomers;
         let theDiv = document.createElement("div");
         theDiv.innerHTML = theCustomersList.getHtml();
         contentDiv.appendChild(theDiv);
