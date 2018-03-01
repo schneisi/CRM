@@ -4,18 +4,15 @@ function initializeAppointments() {
     const contentDiv = document.getElementById("content");
 
     theAppointmentList = new ListGrid();
-    theAppointmentList.addListGridField(new ListGridField("Datum", function (anObject){
-        let theNewDate = new Date(anObject.dateString);
-        return theNewDate.toLocaleString("de-DE");
-    }));
-    theAppointmentList.addListGridField(new ListGridField("Titel", anObject => anObject.nameString));
-
+    theAppointmentList.addListGridField(new ListGridField("Datum", anAppointment => anAppointment.dateString()));
+    theAppointmentList.addListGridField(new ListGridField("Titel", anAppointment => anAppointment.title()));
 
     theAppointmentList.clickEventSelector = appointmentClicked;
 
     FbDatabase.getDatabaseSnapshot("appointments", function(aSnapshot) {
-        aSnapshot.forEach(function (aChildSnapshot) {
-            theAppointmentList.objects.push(new ListGridAppointmentHelper(aChildSnapshot.key, aChildSnapshot.child("date").val(), aChildSnapshot.child("title").val()));
+
+        Appointment.createObjectsFromSnapshot(aSnapshot, Appointment, function (anAppointmentsList) {
+            theAppointmentList.objects = anAppointmentsList;
         });
         let theDiv = document.createElement("div");
         theDiv.innerHTML = theAppointmentList.getHtml();
@@ -29,17 +26,7 @@ function addNewAppointmentClicked(){
 }
 
 function appointmentClicked(anIndex){
-    let theHelper = theAppointmentList.objects[anIndex];
-    setActionId(theHelper.appointmentId);
+    let theAppointment = theAppointmentList.objects[anIndex];
+    setActionId(theAppointment.key());
     navigateToViewWithId("appointment", false);
-}
-
-class ListGridAppointmentHelper{
-
-    constructor(anAppointmentId, aDateString, aNameString){
-        this.appointmentId = anAppointmentId;
-        this.dateString = aDateString;
-        this.nameString = aNameString;
-    }
-
 }
