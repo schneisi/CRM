@@ -9,6 +9,7 @@ class BaseDatabaseObject {
             theObjectList.push(new aClass(aChildSnapshot));
         });
         aCallback(theObjectList);
+        return theObjectList
     }
 
     key() {
