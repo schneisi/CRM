@@ -124,8 +124,14 @@ function isDrawerExpanded() {
     }
 }
 
+function hasActionId(){
+    return sessionStorage.getItem('actionId') != null;
+}
+
 function getActionId() {
-    return sessionStorage.getItem('actionId');
+    let theActionId = sessionStorage.getItem('actionId');
+//    setActionId(null);
+    return theActionId;
 }
 
 function setActionId(aString) {
