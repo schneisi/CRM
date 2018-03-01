@@ -1,27 +1,22 @@
-function initializeReadOnlyInsurance(){
-    const theContentDiv = document.getElementById("content");
-    let theTable = new StaticList(["30%", "70%"]);
- 
-    FbDatabase.getDatabaseSnapshot("/products/" + getActionId(), function (aSnapshot) {
-        let theName = aSnapshot.child("name").val();
-        let theDescription = aSnapshot.child("description").val();
-        let theProviders = aSnapshot.child("/providers/");
-        theTable
-            .addRow(["Versicherung: ", theName])
-            .addRow(["Beschreibung: ", theDescription]);
+include("model/Insurance.js");
+let theInsurance;
 
-        FbDatabase.getDatabaseSnapshot("/products/" + getActionId() + "/providers", function (aSnapshot) {
-            let thePrividerListString = "<ul id='customerContractsList'>"
-            aSnapshot.forEach(function (aChildSnapshot) {
-                thePrividerListString = thePrividerListString + "<li>" + (aChildSnapshot.child("name").val()) + "</li>";
-            })
-            thePrividerListString = thePrividerListString + "</ul>";
-            theTable.addRow(["Mögliche Anbieter: ", thePrividerListString]);
-            let theTableDiv = document.createElement("div");
-            theTableDiv.innerHTML = theTable.getHtml();
-            theContentDiv.appendChild(theTableDiv);
-            hideSpinner();
-        })
+function initializeReadOnlyInsurance() {
+    FbDatabase.getDatabaseSnapshot("/products/" + getActionId(), function (aSnapshot) {
+        theInsurance = new Insurance(aSnapshot);
+        const theContentDiv = document.getElementById("content");
+        let theTable = new StaticList(["30%", "70%"]);
+
+        let theName = theInsurance.name();
+        let theDescription = theInsurance.description();
+        theTable
+            .addRow(["Versicherung: ", theInsurance.name()])
+            .addRow(["Beschreibung: ", theInsurance.description()])
+            .addRow(["Mögliche Anbieter: ", theInsurance.providersAsHtmlList()]);
+        let theTableDiv = document.createElement("div");
+        theTableDiv.innerHTML = theTable.getHtml();
+        theContentDiv.appendChild(theTableDiv);
+        hideSpinner();
     })
     
     
