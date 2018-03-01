@@ -33,16 +33,26 @@ class AppointmentBuilder extends BaseBuilder {
         this.title = null;
         this.date = null;
         this.path = "appointments";
+        this.place = null;
+        this.zip = null;
+        this.street = null;
+        this.notes = null;
     }
 
     dateValue() {
-        FbDatabase.valueForDate(this.date);
+        return FbDatabase.valueForDate(this.date);
     }
 
     getJson() {
         let theJsonObject = {
             title: this.title,
             date: this.dateValue(),
+            notes: this.notes,
+            address: {
+                place: this.place,
+                zip: this.zip,
+                street: this.street,
+            }
         }
         return theJsonObject;
     }
