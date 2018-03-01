@@ -10,15 +10,14 @@ function initializeCustomers() {
     theCustomersList.clickEventSelector = customerClicked;
 
     let theCallback = function(aSnapshot) {
-        BaseDatabaseObject.createObjectsFromSnapshot(aSnapshot, Customer, function(aList) {
-            aList.forEach(function (eachCustomer) {
-                theCustomersList.objects.push(new ListGridHelper(eachCustomer.key(), eachCustomer.fullName()));
-            });
-            let theDiv = document.createElement("div");
-            theDiv.innerHTML = theCustomersList.getHtml();
-            contentDiv.appendChild(theDiv);
-            hideSpinner();
+        let theCustomers = BaseDatabaseObject.createObjectsFromSnapshot(aSnapshot, Customer);
+        theCustomers.forEach(function (eachCustomer) {
+            theCustomersList.objects.push(new ListGridHelper(eachCustomer.key(), eachCustomer.fullName()));
         });
+        let theDiv = document.createElement("div");
+        theDiv.innerHTML = theCustomersList.getHtml();
+        contentDiv.appendChild(theDiv);
+        hideSpinner();
     };
     FbDatabase.getDatabaseSnapshot("customers", theCallback, "lastname", null, null);
 }

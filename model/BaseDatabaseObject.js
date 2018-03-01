@@ -3,12 +3,11 @@ class BaseDatabaseObject {
         this.snapshot = aSnapshot;
     }
 
-    static createObjectsFromSnapshot(aSnapshot, aClass, aCallback) {
+    static createObjectsFromSnapshot(aSnapshot, aClass) {
         let theObjectList = [];
         aSnapshot.forEach(function (aChildSnapshot) {
             theObjectList.push(new aClass(aChildSnapshot));
         });
-        aCallback(theObjectList);
         return theObjectList
     }
 

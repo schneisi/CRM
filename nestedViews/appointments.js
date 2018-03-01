@@ -10,10 +10,7 @@ function initializeAppointments() {
     theAppointmentList.clickEventSelector = appointmentClicked;
 
     FbDatabase.getDatabaseSnapshot("appointments", function(aSnapshot) {
-
-        Appointment.createObjectsFromSnapshot(aSnapshot, Appointment, function (anAppointmentsList) {
-            theAppointmentList.objects = anAppointmentsList;
-        });
+        theAppointmentList.objects = Appointment.createObjectsFromSnapshot(aSnapshot, Appointment);
         let theDiv = document.createElement("div");
         theDiv.innerHTML = theAppointmentList.getHtml();
         contentDiv.appendChild(theDiv);

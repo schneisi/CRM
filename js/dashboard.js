@@ -20,12 +20,11 @@ function navigateToAppointmentsClicked(){
 
 function showNextAppointments() {
     let theCallback = function (aSnapshot) {
-        Appointment.createObjectsFromSnapshot(aSnapshot, Appointment, function (anAppointmentsList) {
-            anAppointmentsList.forEach( function (eachAppointment) {
-                let eachLi = document.createElement("li");
-                eachLi.innerHTML = eachAppointment.dashboardRepresentation();
-                document.getElementById("appointmentList").appendChild(eachLi);
-            });
+        let theAppointmentsList = Appointment.createObjectsFromSnapshot(aSnapshot, Appointment);
+        theAppointmentsList.forEach(function (eachAppointment) {
+            let eachLi = document.createElement("li");
+            eachLi.innerHTML = eachAppointment.dashboardRepresentation();
+            document.getElementById("appointmentList").appendChild(eachLi);
         });
     };
     FbDatabase.getDatabaseSnapshot("appointments", theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
