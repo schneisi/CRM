@@ -13,7 +13,7 @@ function initializeAppointments() {
 
     theAppointmentList.clickEventSelector = appointmentClicked;
 
-    getDatabaseSnapshot("appointments", function(aSnapshot) {
+    FbDatabase.getDatabaseSnapshot("appointments", function(aSnapshot) {
         aSnapshot.forEach(function (aChildSnapshot) {
             theAppointmentList.objects.push(new ListGridAppointmentHelper(aChildSnapshot.key, aChildSnapshot.child("date").val(), aChildSnapshot.child("title").val()));
         });

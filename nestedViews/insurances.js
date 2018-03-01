@@ -7,7 +7,7 @@ function initializeInsurances() {
     theInsuranceList.showTitle = false;
     theInsuranceList.addListGridField(new ListGridField("Versicherungen", aListGridHelper => aListGridHelper.value));
     theInsuranceList.clickEventSelector = insuranceClicked;
-    getDatabaseSnapshot("products", function (aSnapshot) {
+    FbDatabase.getDatabaseSnapshot("products", function (aSnapshot) {
         aSnapshot.forEach(function (aChildSnapshot) {
             theInsuranceList.objects.push(new ListGridHelper(aChildSnapshot.key, aChildSnapshot.child("name").val()));
         });

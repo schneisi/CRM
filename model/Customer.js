@@ -1,4 +1,6 @@
 class Customer extends BaseDatabaseObject {
+
+    //Attributes
     firstname() {
         return this.getValueOfChild("firstname");
     }
@@ -27,6 +29,10 @@ class Customer extends BaseDatabaseObject {
         return this.getValueOfChild("address/place");
     }
 
+    //API
+    fullName() {
+        return this.firstname() + " " + this.lastname();
+    }
     addressString() {
         return this.street() + " " + this.zipCode() + " " + this.place();
     }
