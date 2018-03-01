@@ -24,6 +24,7 @@ function showNextAppointments() {
         theAppointmentsList.forEach(function (eachAppointment) {
             let eachLi = document.createElement("li");
             eachLi.innerHTML = eachAppointment.dashboardRepresentation();
+            eachLi.className= "dashboard"
             document.getElementById("appointmentList").appendChild(eachLi);
         });
     };
