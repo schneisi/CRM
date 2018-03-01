@@ -1,10 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\css",
+    "\\database",
     "\\js",
-    "\\nestedViews"
+    "\\model"
   ],
-  "SelectedNode": "\\nestedViews\\insurance.html",
+  "SelectedNode": "\\model",
   "PreviewInSolutionExplorer": false
 }

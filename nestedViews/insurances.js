@@ -22,6 +22,4 @@ function insuranceClicked(anIndex) {
     let theHelper = theInsuranceList.objects[anIndex];
     setActionId(theHelper.object);
     navigateToViewWithId("insurance", false);
-    //let theHelper = theInsuranceList.objects[anIndex];
-    //console.log(theHelper.value)
 }
