@@ -85,20 +85,22 @@ function hideSpinner() {
 function hideMenu() {
     document.getElementById("menuDiv").style.display = "none";
     let theMenuList = document.getElementById("menuList");
-    theMenuList.innerHTML = "";
+    Array.from(theMenuList.children).forEach(function (eachElement) {
+        eachElement.style.display = "none";
+    });
 }
 
 function showMenu(anArray) {
     document.getElementById("menuDiv").style.display = "block";
-    let theMenuList = document.getElementById("menuList");
+}
 
-    anArray.forEach(function (eachArray) {
-        let theLi = document.createElement("li");
-        theLi.classList.add("mdl-menu__item");
-        theLi.innerHTML = eachArray[0];
-        componentHandler.upgradeElement(theLi);
-        theMenuList.appendChild(theLi);
-    });
+function showEditMenuButton() {
+    showMenu();
+    document.getElementById("editMenuButton").style.display = "block";
+}
+function showDeleteMenuButton() {
+    showMenu();
+    document.getElementById("deleteMenuButton").style.display = "block";
 }
 
 

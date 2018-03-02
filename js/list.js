@@ -29,7 +29,7 @@ class ListGrid {
         for (var eachRowIndex = 0; eachRowIndex < this.objects.length; eachRowIndex++) {
             let eachObject = this.objects[eachRowIndex];
             if (this.clickEventSelector != null) {
-                theResultString += '<tr onclick="' + this.clickEventSelector.name + '(' + eachRowIndex + ');">';
+                theResultString += '<tr onclick="currentView.' + this.clickEventSelector.name + '(' + eachRowIndex + ');">';
             } else {
                 theResultString += "<tr>";
             }

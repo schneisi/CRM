@@ -1,5 +1,4 @@
 let userId = sessionStorage.getItem('userId');
-//console.log("UserID:" + userId);
 if (userId != null) {
     redirect();
 }

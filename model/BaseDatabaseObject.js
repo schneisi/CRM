@@ -15,6 +15,10 @@ class BaseDatabaseObject {
         return this.snapshot.key;
     }
 
+    aboutToDelete() {
+        this.snapshot.getRef().remove();
+    }
+
     getValueOfChild(aString) {
         return this.snapshot.child(aString).val();
     }

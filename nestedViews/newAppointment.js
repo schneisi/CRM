@@ -1,46 +1,45 @@
 include("model/Appointment.js");
 
-
-function initializeNewAppointment() {
-    showSaveButton(saveNewAppointment);
-
-    if (hasActionId()){
-        FbDatabase.getDatabaseSnapshot("/appointments/" + getActionId(), function(aSnapshot) {
-            theAppointment = new Appointment(aSnapshot);
-            let theTitleField = document.getElementById("appointmentTitle");
-            theTitleField.value = theAppointment.title();
-            theTitleField.parentElement.classList.add("is-dirty");
-            let theZipField = document.getElementById("zip");
-            theZipField.value = theAppointment.zip();
-            theZipField.parentElement.classList.add("is-dirty");
-            let thePlaceField = document.getElementById("location");
-            theZipField.value = theAppointment.place();
-            thePlaceField.parentElement.classList.add("is-dirty");
-            let theStreetField = document.getElementById("street");
-            theStreetField.value = theAppointment.street();
-            theStreetField.parentElement.classList.add("is-dirty");
-            let theNoteField = document.getElementById("notes");
-            theNoteField.value = theAppointment.notes();
-            theNoteField.parentElement.classList.add("is-dirty");
-        });
+class NewAppointmentView extends BaseView {
+    initializeView() {
+        showSaveButton(this.saveNewAppointment);
+        this.setComponents();
+        if (hasActionId()){
+            FbDatabase.getDatabaseSnapshot("/appointments/" + getActionId(), function(aSnapshot) {
+                let theAppointment = new Appointment(aSnapshot);
+                currentView.appointment = theAppointment;
+                currentView.titleField.value = theAppointment.title();
+                currentView.titleField.parentElement.classList.add("is-dirty");
+                currentView.zipField.value = theAppointment.zip();
+                currentView.zipField.parentElement.classList.add("is-dirty");
+                currentView.placeField.value = theAppointment.place();
+                currentView.placeField.parentElement.classList.add("is-dirty");
+                currentView.streetField.value = theAppointment.street();
+                currentView.streetField.parentElement.classList.add("is-dirty");
+                currentView.noteField.value = theAppointment.notes();
+                currentView.noteField.parentElement.classList.add("is-dirty");
+            });
+        }
     }
-}
 
-function handleClick(isNewCustomerRadio) {
-    if (isNewCustomerRadio.value == 1){
-        
+    setComponents() {
+        this.titleField = document.getElementById("appointmentTitle");
+        this.zipField = document.getElementById("zip");
+        this.placeField = document.getElementById("location");
+        this.streetField = document.getElementById("street");
+        this.noteField = document.getElementById("notes");
     }
-}
-
-
-function saveNewAppointment() {
-    let theBuilder = new AppointmentBuilder();
-    theBuilder.title = document.getElementById("appointmentTitle").value;
-    theBuilder.date = new Date();
-    theBuilder.place = document.getElementById("location").value;
-    theBuilder.street = document.getElementById("street").value;
-    theBuilder.zip = document.getElementById("zip").value;
-    theBuilder.notes = document.getElementById("notes").value;
-    theBuilder.create();
-    navigateToViewWithId("appointments");
+    
+    
+    saveNewAppointment() {
+        let theBuilder = new AppointmentBuilder(this.appointment);
+        theBuilder.title = document.getElementById("appointmentTitle").value;
+        theBuilder.date = new Date();
+        theBuilder.place = document.getElementById("location").value;
+        theBuilder.street = document.getElementById("street").value;
+        theBuilder.zip = document.getElementById("zip").value;
+        theBuilder.notes = document.getElementById("notes").value;
+        theBuilder.create();
+        navigateToViewWithId("appointments");
+    }
 }

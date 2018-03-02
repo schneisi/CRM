@@ -5,6 +5,7 @@
             "id": "dashboard",
             "url": "./nestedViews/dashboard.html",
             "js": "./js/dashboard.js",
+            "viewClass": "DashboardView",
             "shownInMenu": true
         },
         {
@@ -12,6 +13,7 @@
             "id": "customers",
             "url": "./nestedViews/customers.html",
             "js": "./nestedViews/customers.js",
+            "viewClass": "CustomersView",
             "shownInMenu": true
         },
         {
@@ -19,6 +21,7 @@
             "id": "customer",
             "url": "./nestedViews/customer.html",
             "js": "./nestedViews/customer.js",
+            "viewClass": "CustomerView",
             "shownInMenu": false
         },
         {
@@ -26,6 +29,7 @@
             "id": "insurances",
             "url": "./nestedViews/insurances.html",
             "js": "./nestedViews/insurances.js",
+            "viewClass": "InsurancesView",
             "shownInMenu": true
         },
         {
@@ -33,6 +37,7 @@
             "id": "newCustomerForm",
             "url": "./nestedViews/newCustomer.html",
             "js": "./nestedViews/newCustomer.js",
+            "viewClass": "NewCustomerView",
             "shownInMenu": false
         },
         {
@@ -40,6 +45,7 @@
             "id": "insurance",
             "url": "./nestedViews/insurance.html",
             "js": "./nestedViews/insurance.js",
+            "viewClass": "InsuranceView",
             "shownInMenu": false
         },
         {
@@ -47,6 +53,7 @@
             "id": "appointments",
             "url": "./nestedViews/appointments.html",
             "js": "./nestedViews/appointments.js",
+            "viewClass": "AppointmentsView",
             "shownInMenu": true
         },
         {
@@ -54,6 +61,7 @@
             "id": "newAppointment",
             "url": "./nestedViews/newAppointment.html",
             "js": "./nestedViews/newAppointment.js",
+            "viewClass": "NewAppointmentView",
             "shownInMenu": false
         },
         {
@@ -61,6 +69,7 @@
             "id": "appointment",
             "url": "./nestedViews/appointment.html",
             "js": "./nestedViews/appointment.js",
+            "viewClass": "AppointmentView",
             "shownInMenu": false
         }
     ]

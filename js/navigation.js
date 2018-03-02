@@ -2,6 +2,7 @@
 
 var sites;
 var defaultSite;
+var currentView;
 
 let contentContainer;
 let theTitleSpan;
@@ -10,6 +11,7 @@ let theMenu;
 //Initialize
 document.addEventListener("DOMContentLoaded", function () {
     //Wait until MDL is initialized
+    include("js/View.js");
     setTimeout(function () {
         getAjaxContent("js/sites.json", initializeSites);
     } , 10);
@@ -75,6 +77,7 @@ async function navigateToViewWithId(anId, aToggleBoolean) {
 
 async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     let theUrl = aView.url;
+    hideMenu();
     getAjaxContent(theUrl, setContent);
     if (aToggleBoolean && isDrawerExpanded()) {
         var theLayout = document.querySelector('.mdl-layout');
@@ -95,6 +98,8 @@ function setContent(aText) {
     let theView = viewForId(sessionStorage.getItem("viewId"));
     var theScriptElements = contentContainer.getElementsByTagName("script"); 
     hideSaveButton();
+    currentView = eval("new " + theView.viewClass + "()");
+    currentView.initializeView();
     for (var i = 0; i < theScriptElements.length; i++)
     {
         eval(theScriptElements[i].text);

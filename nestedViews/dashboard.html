@@ -8,7 +8,7 @@
                 <ul id="appointmentList" class="ul-none"></ul>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <button onclick="navigateToAppointmentsClicked()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                <button onclick="currentView.navigateToAppointmentsClicked()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     Termine anzeigen
                 </button>
             </div>
@@ -21,7 +21,7 @@
                 Hier stehen die Geburtstage der Kunden
             </div>
             <div class="mdl-card__actions mdl-card--border">
-                <button onclick="navigateToCustomersClicked()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                <button onclick="currentView.navigateToCustomersClicked()" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     Zu Kundenansicht
                 </button>
             </div>
@@ -40,5 +40,4 @@
              </div>
         </div>
     </div>
-    <script>initializeDashboard();</script>
 </div>
