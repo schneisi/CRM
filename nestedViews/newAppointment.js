@@ -18,6 +18,8 @@ class NewAppointmentView extends BaseView {
                 currentView.streetField.parentElement.classList.add("is-dirty");
                 currentView.noteField.value = theAppointment.notes();
                 currentView.noteField.parentElement.classList.add("is-dirty");
+                currentView.dateField.value = theAppointment.isoDateOnlyString();
+                currentView.timeField.value = theAppointment.timeOnlyString();
             });
         }
     }
@@ -28,10 +30,13 @@ class NewAppointmentView extends BaseView {
         this.placeField = document.getElementById("location");
         this.streetField = document.getElementById("street");
         this.noteField = document.getElementById("notes");
+        this.dateField = document.getElementById("appointmentDate");
+        this.timeField = document.getElementById("appointmentTime");
     }
     
     
     saveNewAppointment() {
+        console.log(this);
         let theBuilder = new AppointmentBuilder(this.appointment);
         theBuilder.title = document.getElementById("appointmentTitle").value;
         theBuilder.date = new Date();
@@ -39,6 +44,7 @@ class NewAppointmentView extends BaseView {
         theBuilder.street = document.getElementById("street").value;
         theBuilder.zip = document.getElementById("zip").value;
         theBuilder.notes = document.getElementById("notes").value;
+        theBuilder.date = new Date(this.dateField.value + " " + this.timeField.value);
         theBuilder.create();
         navigateToViewWithId("appointments");
     }

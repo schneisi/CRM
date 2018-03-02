@@ -45,7 +45,7 @@ class BaseBuilder {
         if (this.isNew()) {
             theKey = null;
         } else {
-            theKey = this.object.key;
+            theKey = this.object.key();
         }
         FbDatabase.writeInDatabase(this.path, theKey, this.getJson());
     }

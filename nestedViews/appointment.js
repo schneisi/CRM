@@ -2,6 +2,7 @@ include("model/Appointment.js");
 
 class AppointmentView extends BaseView {
     initializeView(){
+        showEditMenuButton();
         showDeleteMenuButton();
         FbDatabase.getDatabaseSnapshot("/appointments/" + getActionId(), function(aSnapshot) {
             let theAppointment = new Appointment(aSnapshot);
@@ -21,6 +22,10 @@ class AppointmentView extends BaseView {
             theContentDiv.appendChild(theTableDiv);
             currentView.appointment = theAppointment;
         });
+    }
+
+    editMenuButtonClicked() {
+        navigateToViewWithId("newAppointment");
     }
 
     deleteMenuButtonClicked() {

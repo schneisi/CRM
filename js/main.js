@@ -66,7 +66,7 @@ function saveButton() {
 
 function showSaveButton(aCallback) {
     let theButton = saveButton();
-    theButton.onclick = aCallback;
+    theButton.onclick = aCallback.bind(currentView);
     theButton.style.display = "block";
 }
 

@@ -78,6 +78,7 @@ async function navigateToViewWithId(anId, aToggleBoolean) {
 async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     let theUrl = aView.url;
     hideMenu();
+    hideSaveButton();
     getAjaxContent(theUrl, setContent);
     if (aToggleBoolean && isDrawerExpanded()) {
         var theLayout = document.querySelector('.mdl-layout');
@@ -97,7 +98,6 @@ function setContent(aText) {
     componentHandler.upgradeAllRegistered(contentContainer);
     let theView = viewForId(sessionStorage.getItem("viewId"));
     var theScriptElements = contentContainer.getElementsByTagName("script"); 
-    hideSaveButton();
     currentView = eval("new " + theView.viewClass + "()");
     currentView.initializeView();
     for (var i = 0; i < theScriptElements.length; i++)
@@ -139,7 +139,7 @@ function resetActionId() {
 
 function getActionId() {
     let theActionId = sessionStorage.getItem('actionId');
-    resetActionId();
+    //resetActionId();
     return theActionId;
 }
 

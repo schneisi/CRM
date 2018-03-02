@@ -1,4 +1,5 @@
 class Appointment extends BaseDatabaseObject {
+    //Attributes
     title() {
         return this.getValueOfChild("title");
     }
@@ -7,9 +8,6 @@ class Appointment extends BaseDatabaseObject {
     }
     dateString() {
         return this.date().toLocaleString("de-DE");
-    }
-    dashboardRepresentation() {
-        return this.dateString() + " " + this.title();
     }
     street() {
         return this.getValueOfChild("address/street");
@@ -22,6 +20,24 @@ class Appointment extends BaseDatabaseObject {
     }
     notes() {
         return this.getValueOfChild("notes");
+    }
+
+    //API
+    isoDateOnlyString() {
+        function getFullStringForNumber(aNumber) {
+            if (aNumber < 10) {
+                return "0" + aNumber;
+            }
+            return aNumber.toString();
+        }
+        let theDateMonth = this.date().getMonth() + 1;
+        return this.date().getFullYear() + "-" + getFullStringForNumber(theDateMonth) + "-" + getFullStringForNumber(this.date().getDate());
+    }
+    timeOnlyString() {
+        return this.date().getHours() + ":" + this.date().getMinutes();
+    }
+    dashboardRepresentation() {
+        return this.dateString() + " " + this.title();
     }
 }
 
