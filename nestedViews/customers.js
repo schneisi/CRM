@@ -1,6 +1,6 @@
 include('model/Customer.js');
 
-class CustomersView {
+class CustomersView extends BaseView {
     initializeView() {
         const contentDiv = document.getElementById("content");
     

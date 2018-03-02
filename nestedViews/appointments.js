@@ -1,4 +1,4 @@
-class AppointmentsView {
+class AppointmentsView extends BaseView {
     
     initializeView() {
         resetActionId();

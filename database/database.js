@@ -26,6 +26,11 @@ class FbDatabase {
         }
     }
 
+    static startRealTimeQuery(aPath, aCallback) {
+        let theReference = fbDatabase.ref(aPath);
+        theReference.on("value", aCallback);
+    }
+
     static valueForDate(aDate) {
         return aDate.getTime();
     }

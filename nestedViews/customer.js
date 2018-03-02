@@ -2,7 +2,7 @@ include("model/Customer.js");
 
 let theCustomer;
 
-class CustomerView {
+class CustomerView extends BaseView {
     initializeView() {
         showDeleteMenuButton();
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {

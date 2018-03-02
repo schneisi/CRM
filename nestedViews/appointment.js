@@ -4,24 +4,30 @@ class AppointmentView extends BaseView {
     initializeView(){
         showEditMenuButton();
         showDeleteMenuButton();
-        FbDatabase.getDatabaseSnapshot("/appointments/" + getActionId(), function(aSnapshot) {
-            let theAppointment = new Appointment(aSnapshot);
-            const theContentDiv = document.getElementById("content");
-            let theTable = new StaticList(["30%", "70%"]);
 
-            theTable
-                .addRow(["Titel:", theAppointment.title()])
-                .addRow(["Datum:", theAppointment.dateString()])
-                .addRow(["Strasse:", theAppointment.street()])
-                .addRow(["PLZ:", theAppointment.zip()])
-                .addRow(["Ort:", theAppointment.place()])
-                .addRow(["Notizen:", theAppointment.notes()]);
-
-            let theTableDiv = document.createElement("div");
-            theTableDiv.innerHTML = theTable.getHtml();
-            theContentDiv.appendChild(theTableDiv);
-            currentView.appointment = theAppointment;
+        Appointment.createFromPathWithRealtimeQuery(Appointment, "/appointments/" + getActionId(), function (anAppointment) {
+            currentView.appointment = anAppointment;
+            currentView.showAppointment();
         });
+    }
+
+    showAppointment() {
+        const theContentDiv = document.getElementById("content");
+        let theTable = new StaticList(["30%", "70%"]);
+        let theAppointment = this.appointment;
+        theTable
+            .addRow(["Titel:", theAppointment.title()])
+            .addRow(["Datum:", theAppointment.dateString()])
+            .addRow(["Strasse:", theAppointment.street()])
+            .addRow(["PLZ:", theAppointment.zip()])
+            .addRow(["Ort:", theAppointment.place()])
+            .addRow(["Notizen:", theAppointment.notes()]);
+
+        let theTableDiv = document.createElement("div");
+        theTableDiv.innerHTML = theTable.getHtml();
+        theContentDiv.innerHTML = "";
+        theContentDiv.appendChild(theTableDiv);
+        currentView.appointment = theAppointment;
     }
 
     editMenuButtonClicked() {
@@ -31,5 +37,9 @@ class AppointmentView extends BaseView {
     deleteMenuButtonClicked() {
         this.appointment.aboutToDelete();
         navigateToViewWithId("appointments");
+    }
+
+    unload() {
+        this.appointment.stopListening();
     }
 }

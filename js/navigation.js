@@ -77,6 +77,10 @@ async function navigateToViewWithId(anId, aToggleBoolean) {
 
 async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
     let theUrl = aView.url;
+    if (currentView) {
+        currentView.unload();
+    }
+    
     hideMenu();
     hideSaveButton();
     getAjaxContent(theUrl, setContent);

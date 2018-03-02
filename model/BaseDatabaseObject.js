@@ -3,6 +3,13 @@ class BaseDatabaseObject {
         this.snapshot = aSnapshot;
     }
 
+    static createFromPathWithRealtimeQuery(aClass, aPath, aCallback) {
+        FbDatabase.startRealTimeQuery(aPath, function (aSnapshot) {
+            let theDatabaseObject = new aClass (aSnapshot);
+            aCallback(theDatabaseObject);
+        });
+    }
+
     static createObjectsFromSnapshot(aSnapshot, aClass) {
         let theObjectList = [];
         aSnapshot.forEach(function (aChildSnapshot) {
@@ -15,12 +22,29 @@ class BaseDatabaseObject {
         return this.snapshot.key;
     }
 
+    reference() {
+        return this.snapshot.getRef();
+    }
+
     aboutToDelete() {
-        this.snapshot.getRef().remove();
+        this.reference().remove();
     }
 
     getValueOfChild(aString) {
         return this.snapshot.child(aString).val();
+    }
+
+    startListening(aCallback) {
+        this.listeningCallback = aCallback;
+        let theReceiver = this;
+        this.reference().on('value', function (aSnapshot) {
+            theReceiver.snapshot = aSnapshot;
+            aCallback();
+        }, function () {}, this);
+    }
+
+    stopListening() {
+        this.reference().off('value', this.listeningCallback);
     }
 }
 

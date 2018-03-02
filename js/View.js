@@ -6,4 +6,8 @@ class BaseView {
     initializeView() {
         
     }
+
+    unload() {
+        
+    }
 }
