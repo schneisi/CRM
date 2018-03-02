@@ -24,20 +24,23 @@ class Appointment extends BaseDatabaseObject {
 
     //API
     isoDateOnlyString() {
-        function getFullStringForNumber(aNumber) {
-            if (aNumber < 10) {
-                return "0" + aNumber;
-            }
-            return aNumber.toString();
-        }
         let theDateMonth = this.date().getMonth() + 1;
-        return this.date().getFullYear() + "-" + getFullStringForNumber(theDateMonth) + "-" + getFullStringForNumber(this.date().getDate());
+        return this.date().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.date().getDate());
     }
     timeOnlyString() {
-        return this.date().getHours() + ":" + this.date().getMinutes();
+        return this.getFullStringForNumber(this.date().getHours()) + ":" + this.getFullStringForNumber(this.date().getMinutes());
     }
     dashboardRepresentation() {
         return this.dateString() + " " + this.title();
+    }
+
+
+    //Internal
+    getFullStringForNumber(aNumber) {
+        if (aNumber < 10) {
+            return "0" + aNumber;
+        }
+        return aNumber.toString();
     }
 }
 
