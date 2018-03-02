@@ -1,4 +1,4 @@
-let isDebugging = false;
+let isDebugging = true;
 let isAlwaysOnline = true;
 let jsFiles = [];
 
@@ -20,11 +20,6 @@ function initializeApp(){
     }
     initializeFirebase();
     include("model/BaseDatabaseObject.js");
-}
-
-function logout() {
-    sessionStorage.clear();
-    redirectToUrl('/index.html');
 }
 
 function redirectToUrl(aString) {

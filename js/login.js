@@ -11,3 +11,10 @@ function login() {
 function redirect() {
     redirectToUrl('/crm.html');
 }
+
+
+firebase.auth().onAuthStateChanged(aFirebaseUser => {
+        if (aFirebaseUser) {
+            redirect();
+        }
+    })
