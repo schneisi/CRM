@@ -33,6 +33,9 @@ class Appointment extends BaseDatabaseObject {
     dashboardRepresentation() {
         return this.dateString() + " " + this.title();
     }
+    addressString() {
+        return this.street() + " " + this.zip() + " " + this.place();
+    }
 
 
     //Internal

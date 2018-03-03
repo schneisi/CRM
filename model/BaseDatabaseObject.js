@@ -1,6 +1,20 @@
 class BaseDatabaseObject {
     constructor(aSnapshot) {
         this.snapshot = aSnapshot;
+        this.promises = [];
+    }
+
+    populateChildren(aSnapshot, anArray, aPath, aClass) {
+        let thePromise = new Promise(function (resolve, reject) {
+            FbDatabase.getDatabaseSnapshot(aPath, anObjectsSnapshot => {
+                aSnapshot.forEach(aChildSnapshot => {
+                    let theId = aChildSnapshot.child("id").val();
+                    anArray.push(new aClass(anObjectsSnapshot.child(theId)));
+                });
+                resolve();
+            });
+        });
+        this.promises.push(thePromise);
     }
 
     static createFromPathWithRealtimeQuery(aClass, aPath, aCallback) {

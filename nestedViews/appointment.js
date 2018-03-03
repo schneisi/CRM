@@ -12,7 +12,7 @@ class AppointmentView extends BaseView {
     }
 
     showAppointment() {
-        const theContentDiv = document.getElementById("content");
+        const theContentDiv = document.getElementById("tableDiv");
         let theTable = new StaticList(["30%", "70%"]);
         let theAppointment = this.appointment;
         theTable
@@ -37,6 +37,10 @@ class AppointmentView extends BaseView {
     deleteMenuButtonClicked() {
         this.appointment.aboutToDelete();
         navigateToViewWithId("appointments");
+    }
+
+    mapsButtonClicked() {
+        callGoogleMaps(this.appointment.addressString());
     }
 
     unload() {

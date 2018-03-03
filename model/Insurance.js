@@ -3,14 +3,19 @@ class Insurance extends BaseDatabaseObject {
 
     constructor(aSnapshot) {
         super(aSnapshot);
-        this.providers = Insurance.createObjectsFromSnapshot(this.snapshot.child("providers"), Provider);
+        this.providers = [];
     }
+
     name() {
         return this.getValueOfChild("name");
     }
 
     description() {
         return this.getValueOfChild("description");
+    }
+
+    loadProviders() {
+        this.populateChildren(this.snapshot.child("providers"), this.providers, "providers", Provider);
     }
 
     providersAsHtmlList() {
