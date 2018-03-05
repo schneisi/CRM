@@ -56,6 +56,7 @@ class DashboardView extends BaseView{
             let theBirthdayGrid = new ListGrid;
             this.birthdayListGrid = theBirthdayGrid;
             theBirthdayGrid.showTitle = false;
+            theBirthdayGrid.clickEventSelector = this.birthdayClicked;
             theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.birthday()));
             theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.fullName()))
             theBirthdayGrid.objects = Customer.upcomingBirthdays;
@@ -70,5 +71,11 @@ class DashboardView extends BaseView{
         let theAppointment = this.appointmentListGrid.objects[anIndex];
         setActionId(theAppointment.key());
         navigateToViewWithId("appointment");
+    }
+
+    birthdayClicked(anIndex) {
+        let theCustomer = this.birthdayListGrid.objects[anIndex];
+        setActionId(theCustomer.key());
+        navigateToViewWithId("customer");
     }
 }
