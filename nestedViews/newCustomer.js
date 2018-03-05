@@ -1,4 +1,4 @@
-class NewCustomerView {
+class NewCustomerView extends BaseView {
     initializeView(){
         showSaveButton(this.saveNewCustomer);
     
