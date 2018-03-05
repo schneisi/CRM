@@ -6,6 +6,22 @@ class DashboardView extends BaseView{
             document.getElementById("rssWidget").style.display = "none";
         }
         this.showNextAppointments();
+        let theTaskName = "BirthdayTask"
+        if (Scheduler.instance.hasTaskWithName("BirthdayTask")) {
+            this.showUpcomingBirthdays();
+        } else {
+            let theBirthdayTask = new ScheduledTask(theTaskName, function () {
+                let theBirthdayCallback = aSnapshot => {
+                    Customer.upcomingBirthdays = Customer.createObjectsFromSnapshot(aSnapshot, Customer);
+                    if (currentView instanceof DashboardView) {
+                        currentView.showUpcomingBirthdays();
+                    }
+                }
+                FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, "birthday", FbDatabase.birthdayStringForDate(new Date), null, 3);
+            }, 60);
+            Scheduler.instance.addTask(theBirthdayTask);
+        }
+        
     }
     
     navigateToCustomersClicked() {
@@ -32,6 +48,22 @@ class DashboardView extends BaseView{
             document.getElementById("appointmentsDiv").innerHTML = theListGrid.getHtml();
         };
         FbDatabase.getDatabaseSnapshot("appointments", theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
+    }
+
+    showUpcomingBirthdays() {
+        let theDiv = document.getElementById("birthdayDiv");
+        if (Customer.upcomingBirthdays.length > 0) {
+            let theBirthdayGrid = new ListGrid;
+            this.birthdayListGrid = theBirthdayGrid;
+            theBirthdayGrid.showTitle = false;
+            theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.birthday()));
+            theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.fullName()))
+            theBirthdayGrid.objects = Customer.upcomingBirthdays;
+            theDiv.innerHTML = theBirthdayGrid.getHtml();
+        } else {
+            theDiv.innerHTML = "Keine Anstehende Geburtstage";
+        }
+       
     }
 
     appointmentClicked(anIndex) {

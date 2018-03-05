@@ -28,6 +28,9 @@ class Customer extends BaseDatabaseObject {
     place() {
         return this.getValueOfChild("address/place");
     }
+    birthday() {
+        return this.getValueOfChild("birthday");
+    }
 
     //API
     fullName() {
