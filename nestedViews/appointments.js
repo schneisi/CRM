@@ -17,7 +17,8 @@ class AppointmentsView extends BaseView {
         }, "date");
     }
     
-    addNewAppointmentClicked(){
+    addNewAppointmentClicked() {
+        resetActionId();
         navigateToViewWithId("newAppointment", false);
     }
     
