@@ -4,9 +4,11 @@ let theCustomer;
 
 class CustomerView extends BaseView {
     initializeView() {
+        showEditMenuButton();
         showDeleteMenuButton();
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
             theCustomer = new Customer(aSnapshot);
+            currentView.customer = theCustomer;
             const theContentDiv = document.getElementById("content");
             currentView.table = new StaticList(["30%", "70%"]);
             currentView.table
@@ -25,9 +27,14 @@ class CustomerView extends BaseView {
     }
     
     deleteMenuButtonClicked() {
-        console.log("delete");
+        this.customer.aboutToDelete();
+        navigateToViewWithId("customers");
     }
-    //Todo get customer destination string
+
+    editMenuButtonClicked() {
+        navigateToViewWithId("newCustomerForm");
+    }
+
     mapsButtonClicked() {
         callGoogleMaps(theCustomer.addressString());
     }

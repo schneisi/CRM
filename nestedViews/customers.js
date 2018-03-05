@@ -20,7 +20,8 @@ class CustomersView extends BaseView {
         FbDatabase.getDatabaseSnapshot("customers", theCallback, "lastname", null, null);
     }
     
-    addNewCustomerClicked(){
+    addNewCustomerClicked() {
+        resetActionId();
         navigateToViewWithId("newCustomerForm", false);
     }
     

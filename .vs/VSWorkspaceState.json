@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\css",
     "\\database",
     "\\js",
-    "\\model"
+    "\\model",
+    "\\nestedViews"
   ],
-  "SelectedNode": "\\model",
+  "SelectedNode": "\\database\\database.js",
   "PreviewInSolutionExplorer": false
 }
