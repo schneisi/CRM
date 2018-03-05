@@ -50,7 +50,7 @@ function showModal(aTitleString, aMessageString) {
     theDialog.appendChild(theContent);
     theDialog.appendChild(theActionGroup);
 
-    contentContainer.appendChild(theDialog);
+    document.body.appendChild(theDialog);
     theDialog.showModal();
 }
 

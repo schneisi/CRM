@@ -76,7 +76,28 @@
                 const auth = firebase.auth();
 
                 const promise = auth.signInWithEmailAndPassword(email, password);
-                promise.catch(e => console.log(e.code));
+                promise.catch(e => {
+                    let theMessage;
+
+                    switch(e.code){
+                        case "auth/invalid-email":
+                            theMessage = "Ungültige Email Adresse";
+                            break;
+                        case "auth/wrong-password":
+                            theMessage = "Ungültiges Passwort";
+                            break;
+                        case "auth/user-disabled":
+                            theMessage = "Der User wurde deaktiviert, wenden Sie sich an Ihre Administratoren";
+                            break;
+                        case "auth/user-not-found":
+                            theMessage = "Der User ist leider nicht vorhanden";
+                            break;
+                        default: 
+                            theMessage = "Unbekannter Fehler";
+                            
+                    }       
+                    showModal("Login fehlgeschlagen", theMessage);          
+                });
             })
         </script>
     </body>
