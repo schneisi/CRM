@@ -54,7 +54,7 @@
                             </div>
                             <div class="mdl-textfield mdl-js-textfield">
                                 <input class="mdl-textfield__input" type="password" id="password" />
-                                <label class="mdl-textfield__label" for="userpass">Password</label>
+                                <label class="mdl-textfield__label" for="userpass" onkeydown = "if (event.keyCode == 13) {login();};">Password</label>
                             </div>
                         </form>
                     </div>
@@ -70,16 +70,16 @@
             const passwordField = document.getElementById("password");
             const signInButton = document.getElementById("signInButton");
 
-            signInButton.addEventListener("click", e => {
+            signInButton.addEventListener("click", login);
+            function login() {
                 const email = mailField.value;
                 const password = passwordField.value;
                 const auth = firebase.auth();
 
                 const promise = auth.signInWithEmailAndPassword(email, password);
-                promise.catch(e => {
+                promise.catch(anError => {
                     let theMessage;
-
-                    switch(e.code){
+                    switch(anError.code){
                         case "auth/invalid-email":
                             theMessage = "Ungültige Email Adresse";
                             break;
@@ -98,7 +98,7 @@
                     }       
                     showModal("Login fehlgeschlagen", theMessage);          
                 });
-            })
+            }
         </script>
     </body>
 </html>
