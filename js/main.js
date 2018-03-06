@@ -20,6 +20,9 @@ function initializeApp(){
     }
     initializeFirebase();
     include("model/BaseDatabaseObject.js");
+    if (Notification && Notification.permission !== "granted") {
+        Notification.requestPermission();
+    }
 }
 
 function redirectToUrl(aString) {
@@ -119,4 +122,21 @@ function include(aString) {
         document.getElementsByTagName('head').item(0).appendChild(theScriptElement);
         jsFiles.push(aString);
     }  
+}
+
+function showNotification(aTitle, aMessage, aCallback) {
+    if (Notification) {
+        if (Notification.permission == "granted") {
+            let theNotification = new Notification(aTitle, {
+              body: aMessage  
+            });
+            theNotification.onclick = aCallback;
+        } else {
+            Notification.requestPermission(aValue => {
+                if (aValue == "granted") {
+                    showNotification(aTitle, aMessage, aCallback);
+                }
+            });
+        }
+    }
 }
