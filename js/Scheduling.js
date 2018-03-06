@@ -7,7 +7,7 @@ class Scheduler {
         } else {
             this.tasks = [];
             this.isActive = true;
-            this.seconds = 1;
+            this.seconds = 0;
             this.interval = setInterval(function (){scheduler.loop();}, 1000);
         }
     }
@@ -44,7 +44,7 @@ class Scheduler {
     loop() {
         if (this.isActive) {
             this.tasks.forEach(eachTask => {
-                if (eachTask.isActive && eachTask.totalSeconds() % this.seconds == 0) {
+                if (eachTask.isActive && (eachTask.counterOffset + this.seconds) % eachTask.interval == 0) {
                     if ('requestIdleCallback' in window && !eachTask.isHighPriority) {
                         requestIdleCallback(eachTask.execute.bind(eachTask), {timeout: eachTask.deadline});
                     }
@@ -69,7 +69,7 @@ class ScheduledTask {
         this.name = aNameString;
         this.callback = aCallback;
         this.counter = 0;
-        this.interval = aIntervalNumber * 1000;
+        this.interval = aIntervalNumber;
         this.isActive = aBoolean;
         this.counterOffset = 0;
         this.isHighPriority = false;

@@ -45,7 +45,7 @@ class NewAppointmentView extends BaseView {
         theBuilder.zip = document.getElementById("zip").value;
         theBuilder.notes = document.getElementById("notes").value;
         theBuilder.date = new Date(this.dateField.value + " " + this.timeField.value);
-        theBuilder.create();
+        theBuilder.save();
         navigateToViewWithId("appointments");
     }
 }

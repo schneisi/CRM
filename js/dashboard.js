@@ -6,12 +6,15 @@ class DashboardView extends BaseView{
         if(!isOnline()){
             document.getElementById("rssWidget").style.display = "none";
         }
+        
         this.showNextAppointments();
-        let theTaskName = "BirthdayTask"
-        if (Scheduler.instance.hasTaskWithName("BirthdayTask")) {
+
+        //BirthdayTask
+        let theBirthdayTaskName = "BirthdayTask"
+        if (Scheduler.instance.hasTaskWithName(theBirthdayTaskName)) {
             this.showUpcomingBirthdays();
         } else {
-            let theBirthdayTask = new ScheduledTask(theTaskName, function () {
+            let theBirthdayTask = new ScheduledTask(theBirthdayTaskName, function () {
                 let theBirthdayCallback = aSnapshot => {
                     Customer.upcomingBirthdays = Customer.createObjectsFromSnapshot(aSnapshot, Customer);
                     if (currentView instanceof DashboardView) {
@@ -34,21 +37,15 @@ class DashboardView extends BaseView{
     }
     
     showNextAppointments() {
-        let theCallback = function (aSnapshot) {
-            let theListGrid = new ListGrid();
-            currentView.appointmentListGrid = theListGrid; 
-            theListGrid.showTitle = false;
-            theListGrid.clickEventSelector = currentView.appointmentClicked;
-            theListGrid.addListGridField(new ListGridField("", anAppointment => anAppointment.dateString()));
-            theListGrid.addListGridField(new ListGridField("", anAppointment => anAppointment.title()));
+        let theListGrid = new ListGrid();
+        currentView.appointmentListGrid = theListGrid; 
+        theListGrid.showTitle = false;
+        theListGrid.clickEventSelector = currentView.appointmentClicked;
+        theListGrid.addListGridField(new ListGridField("", anAppointment => anAppointment.dateString()));
+        theListGrid.addListGridField(new ListGridField("", anAppointment => anAppointment.title()));
 
-            let theAppointmentsList = Appointment.createObjectsFromSnapshot(aSnapshot, Appointment);
-            theAppointmentsList.forEach(function (eachAppointment) {
-                theListGrid.objects.push(eachAppointment);
-            });
-            document.getElementById("appointmentsDiv").innerHTML = theListGrid.getHtml();
-        };
-        FbDatabase.getDatabaseSnapshot("appointments", theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
+        theListGrid.objects = Appointment.upcomingAppointments;
+        document.getElementById("appointmentsDiv").innerHTML = theListGrid.getHtml();
     }
 
     showUpcomingBirthdays() {

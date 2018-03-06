@@ -1,3 +1,23 @@
+    //AppointmentTask
+    let theAppointmentTaskName = "AppointmentTask";
+    if (Scheduler.instance.hasTaskWithName(theAppointmentTaskName)) {
+        this.showNextAppointments();
+    } else {
+        let theTask = new ScheduledTask(theAppointmentTaskName, function() {
+            let theCallback = aSnapshot => {
+                Appointment.setUpcomingAppointments(Appointment.createObjectsFromSnapshot(aSnapshot, Appointment));
+                if (currentView instanceof DashboardView) {
+                    currentView.showNextAppointments();
+                }
+            };
+            FbDatabase.getDatabaseSnapshot("appointments", theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
+
+        }, 10);
+        Scheduler.instance.addTask(theTask);
+    }
+
+
+
 class Appointment extends BaseDatabaseObject {
     //Attributes
     title() {
@@ -21,8 +41,30 @@ class Appointment extends BaseDatabaseObject {
     notes() {
         return this.getValueOfChild("notes");
     }
+    reminded() {
+        return this.getValueOfChild("reminded");
+    }
 
     //API
+    static setUpcomingAppointments (anArry) {
+        this.upcomingAppointments = anArry;
+        let theCurrentDate = new Date();
+        anArry.forEach(eachAppointment => {
+            if (!eachAppointment.reminded()) {
+                let theDifference = eachAppointment.date().getTime() - theCurrentDate.getTime();
+                theDifference = theDifference / (1000 * 60);
+                if (theDifference < 10) {
+                    showNotification("Bevorstehender Termin", eachAppointment.title(), function() {
+                        setActionId(eachAppointment.key());
+                        navigateToViewWithId("appointment");
+                    });
+                    let theBuilder = new AppointmentBuilder(eachAppointment);
+                    theBuilder.reminded = true;
+                    theBuilder.save();
+                }
+            }
+        });
+    }
     isoDateOnlyString() {
         let theDateMonth = this.date().getMonth() + 1;
         return this.date().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.date().getDate());
@@ -43,13 +85,18 @@ class Appointment extends BaseDatabaseObject {
 class AppointmentBuilder extends BaseBuilder {
     constructor(anObject) {
         super (anObject);
-        this.title = null;
-        this.date = null;
         this.path = "appointments";
-        this.place = null;
-        this.zip = null;
-        this.street = null;
-        this.notes = null;
+        if (anObject) {
+            this.title = anObject.title();
+            this.date = anObject.date();
+            this.place = anObject.place();
+            this.zip = anObject.zip();
+            this.street = anObject.street();
+            this.notes = anObject.notes();
+            this.reminded = this.object.reminded();
+        } else {
+            this.reminded = false;
+        }
     }
 
     dateValue() {
@@ -57,16 +104,18 @@ class AppointmentBuilder extends BaseBuilder {
     }
 
     getJson() {
-        let theJsonObject = {
-            title: this.title,
-            date: this.dateValue(),
-            notes: this.notes,
-            address: {
-                place: this.place,
-                zip: this.zip,
-                street: this.street,
-            }
+        let theJsonObject = {};
+        theJsonObject.address = {};
+        if (this.title) theJsonObject.title = this.title;
+        if (this.date) theJsonObject.date = this.dateValue();
+        if (this.notes) theJsonObject.notes = this.notes;
+        if (this.place) theJsonObject.address.place = this.place;
+        if (this.zip) theJsonObject.address.zip = this.zip;
+        if (this.street) theJsonObject.address.street = this.street;
+        if (Object.keys(theJsonObject.address).length == 0) {
+            delete theJsonObject["address"];
         }
+        theJsonObject.reminded = this.reminded;
         return theJsonObject;
     }
 }
