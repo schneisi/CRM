@@ -1,7 +1,6 @@
 class AppointmentsView extends BaseView {
     
     initializeView() {
-        resetActionId();
         this.appointmentList = new ListGrid();
         let theAppointmentList = this.appointmentList;
         theAppointmentList.addListGridField(new ListGridField("Datum", anAppointment => anAppointment.dateString()));

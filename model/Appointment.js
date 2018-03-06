@@ -1,24 +1,5 @@
-    //AppointmentTask
-    let theAppointmentTaskName = "AppointmentTask";
-    if (Scheduler.instance.hasTaskWithName(theAppointmentTaskName)) {
-        this.showNextAppointments();
-    } else {
-        let theTask = new ScheduledTask(theAppointmentTaskName, function() {
-            let theCallback = aSnapshot => {
-                Appointment.setUpcomingAppointments(Appointment.createObjectsFromSnapshot(aSnapshot, Appointment));
-                if (currentView instanceof DashboardView) {
-                    currentView.showNextAppointments();
-                }
-            };
-            FbDatabase.getDatabaseSnapshot("appointments", theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
-
-        }, 10);
-        Scheduler.instance.addTask(theTask);
-    }
-
-
-
 class Appointment extends BaseDatabaseObject {
+
     //Attributes
     title() {
         return this.getValueOfChild("title");
@@ -65,6 +46,24 @@ class Appointment extends BaseDatabaseObject {
             }
         });
     }
+
+    static createTask() {
+        //AppointmentTask
+        let theAppointmentTaskName = "AppointmentTask";
+        if (!Scheduler.instance.hasTaskWithName(theAppointmentTaskName)){
+            let theTask = new ScheduledTask(theAppointmentTaskName, function() {
+                let theCallback = aSnapshot => {
+                    Appointment.setUpcomingAppointments(Appointment.createObjectsFromSnapshot(aSnapshot, Appointment));
+                    if (currentView instanceof DashboardView) {
+                        currentView.showNextAppointments();
+                    }
+                };
+                FbDatabase.getDatabaseSnapshot("appointments", theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
+
+            }, 10);
+            Scheduler.instance.addTask(theTask);
+        }
+    }
     isoDateOnlyString() {
         let theDateMonth = this.date().getMonth() + 1;
         return this.date().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.date().getDate());
@@ -79,6 +78,8 @@ class Appointment extends BaseDatabaseObject {
         return this.street() + " " + this.zip() + " " + this.place();
     }
 }
+Appointment.createTask();
+Appointment.upcomingAppointments = [];
 
 
 

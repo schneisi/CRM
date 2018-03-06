@@ -8,24 +8,7 @@ class DashboardView extends BaseView{
         }
         
         this.showNextAppointments();
-
-        //BirthdayTask
-        let theBirthdayTaskName = "BirthdayTask"
-        if (Scheduler.instance.hasTaskWithName(theBirthdayTaskName)) {
-            this.showUpcomingBirthdays();
-        } else {
-            let theBirthdayTask = new ScheduledTask(theBirthdayTaskName, function () {
-                let theBirthdayCallback = aSnapshot => {
-                    Customer.upcomingBirthdays = Customer.createObjectsFromSnapshot(aSnapshot, Customer);
-                    if (currentView instanceof DashboardView) {
-                        currentView.showUpcomingBirthdays();
-                    }
-                }
-                FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, "birthday", FbDatabase.birthdayStringForDate(new Date), null, 3);
-            }, 60);
-            Scheduler.instance.addTask(theBirthdayTask);
-        }
-        
+        this.showUpcomingBirthdays();
     }
     
     navigateToCustomersClicked() {
