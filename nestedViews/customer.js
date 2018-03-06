@@ -21,6 +21,7 @@ class CustomerView extends BaseView {
                 .addRow(["PLZ", theCustomer.zipCode()])
                 .addRow(["Ort", theCustomer.place()])
                 .addRow(["Bemerkung", aSnapshot.child("remark").val()]);
+            currentView.updateName(theCustomer.lastname());
             let theTableDiv = document.createElement("div");
             theTableDiv.innerHTML = currentView.table.getHtml();
             theContentDiv.appendChild(theTableDiv);

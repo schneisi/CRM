@@ -20,6 +20,6 @@ class InsurancesView extends BaseView {
     insuranceClicked(anIndex) {
         let theHelper = this.insuranceList.objects[anIndex];
         setActionId(theHelper.object);
-        navigateToViewWithId("insurance", false);
+        navigateToViewWithId("insurance");
     }
 }

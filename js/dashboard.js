@@ -2,6 +2,7 @@ include("model/Appointment.js");
 
 class DashboardView extends BaseView{
     initializeView(){
+        this.name = "Dashboard";
         if(!isOnline()){
             document.getElementById("rssWidget").style.display = "none";
         }
@@ -25,11 +26,11 @@ class DashboardView extends BaseView{
     }
     
     navigateToCustomersClicked() {
-        navigateToViewWithId("customers", false);
+        navigateToViewWithId("customers");
     }
     
     navigateToAppointmentsClicked(){
-        navigateToViewWithId("appointments", false);
+        navigateToViewWithId("appointments");
     }
     
     showNextAppointments() {

@@ -19,12 +19,12 @@ class AppointmentsView extends BaseView {
     
     addNewAppointmentClicked() {
         resetActionId();
-        navigateToViewWithId("newAppointment", false);
+        navigateToViewWithId("newAppointment");
     }
     
     appointmentClicked(anIndex){
         let theAppointment = this.appointmentList.objects[anIndex];
         setActionId(theAppointment.key());
-        navigateToViewWithId("appointment", false);
+        navigateToViewWithId("appointment");
     }
 }

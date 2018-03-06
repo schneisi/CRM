@@ -10,4 +10,9 @@ class BaseView {
     unload() {
         
     }
+
+    updateName(aString) {
+        this.name = aString;
+        titleSpan.innerHTML = aString;
+    }
 }

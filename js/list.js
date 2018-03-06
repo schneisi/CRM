@@ -125,5 +125,3 @@ class StaticListCell {
         return theString + this.text + "</td>";
     }
 }
-
-

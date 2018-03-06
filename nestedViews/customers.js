@@ -22,12 +22,12 @@ class CustomersView extends BaseView {
     
     addNewCustomerClicked() {
         resetActionId();
-        navigateToViewWithId("newCustomerForm", false);
+        navigateToViewWithId("newCustomerForm");
     }
     
     customerClicked(anIndex){
         let theCustomer = this.customerList.objects[anIndex];
         setActionId(theCustomer.key());
-        navigateToViewWithId("customer", false);
+        navigateToViewWithId("customer");
     }
 }

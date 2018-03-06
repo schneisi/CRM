@@ -5,7 +5,7 @@ var defaultSite;
 var currentView;
 
 let contentContainer;
-let theTitleSpan;
+let titleSpan;
 let theMenu;
 
 //Initialize
@@ -26,13 +26,13 @@ function initializeSites(aJsonString) {
 window.addEventListener('popstate', function (e) {
     let theView = e.state;
     if (theView != null) {
-        navigateToView(theView, null, false);
+        navigateToView(theView, null);
     }
 });
 
 function initializeBody() {
     contentContainer = document.getElementById("contentContainer");
-    theTitleSpan = document.getElementById("titleSpan");
+    titleSpan = document.getElementById("titleSpan");
     theMenu = document.getElementById("menu");
 
     logString(sites);
@@ -50,7 +50,7 @@ function createMenu() {
             theSpan.classList.add("mdl-navigation__link");
             theSpan.innerHTML = theSite.name;
             theSpan.addEventListener("click", function () {
-                navigateToView(theSite, true);
+                navigateToView(theSite);
             });
             theMenu.appendChild(theSpan);
         }
@@ -70,30 +70,29 @@ function viewForId(anIdString) {
     }
 }
 
-async function navigateToViewWithId(anId, aToggleBoolean) {
+async function navigateToViewWithId(anId) {
     let theView = viewForId(anId);
-    navigateToView(theView, aToggleBoolean)
+    navigateToView(theView)
 }
 
-async function navigateToView(aView, aToggleBoolean, aPushStateBoolean = true) {
-    let theUrl = aView.url;
+async function navigateToView(aJsonView, aPushStateBoolean = true) {
+    let theUrl = aJsonView.url;
     if (currentView) {
         currentView.unload();
     }
-    
+    titleSpan.innerHTML = aJsonView.name;
     hideMenu();
     hideSaveButton();
     getAjaxContent(theUrl, setContent);
-    if (aToggleBoolean && isDrawerExpanded()) {
+    if (isDrawerExpanded()) {
         var theLayout = document.querySelector('.mdl-layout');
         theLayout.MaterialLayout.toggleDrawer();
     }
-    theTitleSpan.innerHTML = aView.name;
 
     //sessionStorage.setItem('viewTitle', aTitleString);
-    sessionStorage.setItem('viewId', aView.id);
+    sessionStorage.setItem('viewId', aJsonView.id);
     if (aPushStateBoolean) {
-        history.pushState(aView, aView.name, null);
+        history.pushState(aJsonView, aJsonView.name, null);
     }
 }
 
@@ -104,6 +103,9 @@ function setContent(aText) {
     var theScriptElements = contentContainer.getElementsByTagName("script"); 
     currentView = eval("new " + theView.viewClass + "()");
     currentView.initializeView();
+    if (currentView.name) {
+        titleSpan.innerHTML = currentView.name;
+    }
     for (var i = 0; i < theScriptElements.length; i++)
     {
         eval(theScriptElements[i].text);
@@ -119,7 +121,7 @@ function showStartPage() {
     } else {
         theView = defaultSite;
     }
-    navigateToView(theView, false);
+    navigateToView(theView);
 }
 
 function isDrawerExpanded() {
