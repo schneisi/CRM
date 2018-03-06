@@ -7,7 +7,7 @@ class Appointment extends BaseDatabaseObject {
         return FbDatabase.dateForValue(this.getValueOfChild("date"));
     }
     dateString() {
-        return this.date().toLocaleString("de-DE");
+        return this.dateOnlyString() + " " + this.timeOnlyString();
     }
     street() {
         return this.getValueOfChild("address/street");
@@ -27,11 +27,11 @@ class Appointment extends BaseDatabaseObject {
         let theDateMonth = this.date().getMonth() + 1;
         return this.date().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.date().getDate());
     }
+    dateOnlyString() {
+        return this.getFullStringForNumber(this.date().getDate()) + "." + this.getFullStringForNumber(this.date().getMonth() + 1) + "." + this.date().getFullYear();
+    }
     timeOnlyString() {
         return this.getFullStringForNumber(this.date().getHours()) + ":" + this.getFullStringForNumber(this.date().getMinutes());
-    }
-    dashboardRepresentation() {
-        return this.dateString() + " " + this.title();
     }
     addressString() {
         return this.street() + " " + this.zip() + " " + this.place();
