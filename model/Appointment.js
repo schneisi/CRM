@@ -36,15 +36,6 @@ class Appointment extends BaseDatabaseObject {
     addressString() {
         return this.street() + " " + this.zip() + " " + this.place();
     }
-
-
-    //Internal
-    getFullStringForNumber(aNumber) {
-        if (aNumber < 10) {
-            return "0" + aNumber;
-        }
-        return aNumber.toString();
-    }
 }
 
 
