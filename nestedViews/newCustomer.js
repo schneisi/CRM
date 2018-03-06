@@ -37,7 +37,7 @@ class NewCustomerView extends BaseView {
     // set components
     saveNewCustomer() {
         console.log(this);
-        let theBuilder = new CustomerBuilder(this.appointment);
+        let theBuilder = new CustomerBuilder(this.customer);
         theBuilder.firstname = document.getElementById("firstname").value;
         theBuilder.lastname = document.getElementById("lastname").value;
         theBuilder.birthday = document.getElementById("birthday").value;
@@ -47,7 +47,7 @@ class NewCustomerView extends BaseView {
         theBuilder.notes = document.getElementById("notes").value;
         theBuilder.mail = document.getElementById("mail").value;
         theBuilder.phone = document.getElementById("phone").value;
-        theBuilder.create();
+        theBuilder.save();
         navigateToViewWithId("customers");
     }
 }
