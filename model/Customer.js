@@ -29,7 +29,7 @@ class Customer extends BaseDatabaseObject {
         return this.getValueOfChild("address/place");
     }
     birthday() {
-        return this.getValueOfChild("birthday");
+        return new Date(this.getValueOfChild("birthday"));
     }
 
     //API
@@ -42,4 +42,8 @@ class Customer extends BaseDatabaseObject {
     addressString() {
         return this.street() + " " + this.zipCode() + " " + this.place();
     }
+    birthdayString() {
+        return this.stringForDate(this.birthday());
+    }
+   
 }

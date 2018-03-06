@@ -57,7 +57,7 @@ class DashboardView extends BaseView{
             this.birthdayListGrid = theBirthdayGrid;
             theBirthdayGrid.showTitle = false;
             theBirthdayGrid.clickEventSelector = this.birthdayClicked;
-            theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.birthday()));
+            theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.birthdayString()));
             theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.fullName()))
             theBirthdayGrid.objects = Customer.upcomingBirthdays;
             theDiv.innerHTML = theBirthdayGrid.getHtml();
