@@ -44,8 +44,10 @@ class NewAppointmentView extends BaseView {
         theBuilder.street = document.getElementById("street").value;
         theBuilder.zip = document.getElementById("zip").value;
         theBuilder.notes = document.getElementById("notes").value;
-        theBuilder.date = new Date(this.dateField.value + " " + this.timeField.value);
-        theBuilder.create();
+        theBuilder.date = new Date(this.dateField.value);
+        theBuilder.date.setHours(this.timeField.value.split(":")[0]);
+        theBuilder.date.setMinutes(this.timeField.value.split(":")[1]);
+        theBuilder.save();
         navigateToViewWithId("appointments");
     }
 }

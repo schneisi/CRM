@@ -48,8 +48,31 @@ class Customer extends BaseDatabaseObject {
     birthdayString() {
         return this.stringForDate(this.birthday());
     }
+    static createTask() {
+        //BirthdayTask
+        let theBirthdayTaskName = "BirthdayTask"
+        if (Scheduler.instance.hasTaskWithName(theBirthdayTaskName)) {
+            this.showUpcomingBirthdays();
+        } else {
+            let theBirthdayTask = new ScheduledTask(theBirthdayTaskName, function () {
+                let theBirthdayCallback = aSnapshot => {
+                    Customer.upcomingBirthdays = Customer.createObjectsFromSnapshot(aSnapshot, Customer);
+                    if (currentView instanceof DashboardView) {
+                        currentView.showUpcomingBirthdays();
+                    }
+                }
+                FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, "birthday", FbDatabase.birthdayStringForDate(new Date()), null, 3);
+            }, 60);
+            Scheduler.instance.addTask(theBirthdayTask);
+        }
+    }
 }
-  
+
+Customer.upcomingBirthdays = [];
+Customer.createTask();
+
+
+
 class CustomerBuilder extends BaseBuilder {
     constructor(anObject) {
         super(anObject);
@@ -81,3 +104,4 @@ class CustomerBuilder extends BaseBuilder {
         return theJsonObject;
     }
 }
+

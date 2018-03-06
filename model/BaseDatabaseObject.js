@@ -89,7 +89,7 @@ class BaseBuilder {
         throw "Needs to be defined in subclass";
     }
 
-    create() {
+    save() {
         let theKey;
         if (this.isNew()) {
             theKey = null;
