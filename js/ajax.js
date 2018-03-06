@@ -1,5 +1,5 @@
 
-function getAjaxContent(aRequestUrl, aCallback) {
+async function getAjaxContent(aRequestUrl, aCallback) {
     var theRequest = createRequestWithCallback(aCallback)
     theRequest.open("GET", completeUrlForString(aRequestUrl), true);
     theRequest.setRequestHeader('Access-Control-Allow-Origin', '*');
