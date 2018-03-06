@@ -31,6 +31,9 @@ class Customer extends BaseDatabaseObject {
     birthday() {
         return new Date(this.getValueOfChild("birthday"));
     }
+    notes() {
+        return this.getValueOfChild("notes");
+    }
 
     //API
     fullName() {
@@ -45,5 +48,36 @@ class Customer extends BaseDatabaseObject {
     birthdayString() {
         return this.stringForDate(this.birthday());
     }
-   
+}
+  
+class CustomerBuilder extends BaseBuilder {
+    constructor(anObject) {
+        super(anObject);
+        this.firstname = null;
+        this.lastname = null;
+        this.path = "customers";
+        this.birthday = null;
+        this.phone = null;
+        this.mail = null;
+        this.zip = null;
+        this.place = null;
+        this.street = null;
+        this.notes = null;
+    }
+    getJson() {
+        let theJsonObject = {
+            lastname: this.lastname,
+            firstname: this.firstname,
+            mail: this.mail,
+            birthday: this.birthday,
+            phone: this.phone,
+            remark: this.notes,
+            address: {
+                place: this.place,
+                street: this.street,
+                zip: this.zip,
+            }
+        }
+        return theJsonObject;
+    }
 }

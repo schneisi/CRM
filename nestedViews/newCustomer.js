@@ -26,13 +26,28 @@ class NewCustomerView extends BaseView {
                 let theMailField = document.getElementById("mail");
                 theMailField.value = theCustomer.mail();
                 theMailField.parentElement.classList.add("is-dirty");
+                let theNotesField = document.getElementById("notes");
+                theNotesField.value = theCustomer.notes();
+                theNotesField.parentElement.classList.add("is-dirty");
                 
                 currentView.customer = theCustomer;
             });
         }
     }
-    
-    saveNewCustomer(){
-        console.log("Customer Saved")
+    // set components
+    saveNewCustomer() {
+        console.log(this);
+        let theBuilder = new CustomerBuilder(this.appointment);
+        theBuilder.firstname = document.getElementById("firstname").value;
+        theBuilder.lastname = document.getElementById("lastname").value;
+        theBuilder.birthday = document.getElementById("birthday").value;
+        theBuilder.street = document.getElementById("street").value;
+        theBuilder.zip = document.getElementById("zipCode").value;
+        theBuilder.place = document.getElementById("place").value;
+        theBuilder.notes = document.getElementById("notes").value;
+        theBuilder.mail = document.getElementById("mail").value;
+        theBuilder.phone = document.getElementById("phone").value;
+        theBuilder.create();
+        navigateToViewWithId("customers");
     }
 }
