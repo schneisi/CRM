@@ -13,7 +13,7 @@ class Contract extends BaseDatabaseObject{
     }
 
     date(){
-        return fbDatabase.dateForValue(this.getValueOfChild("date"));
+        return FbDatabase.dateForValue(this.getValueOfChild("date"));
     }
 
 }

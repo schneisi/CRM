@@ -62,12 +62,13 @@ class Customer extends BaseDatabaseObject {
         return this.birthday().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.birthday().getDate());
     }
 
-    loadContracts(){
+    loadContracts(aCallback){
         let theReceiver = this;
         let thePromise = this.populateChildren(this.snapshot.child("contracts"), this.contracts, "contracts", Contract);
         thePromise.then(function () {
             theReceiver.contracts.forEach(eachContract => {
             eachContract.customer = theReceiver;
+            aCallback();
         })});
     }
 

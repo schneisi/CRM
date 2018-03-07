@@ -7,9 +7,12 @@ class CustomerView extends BaseView {
     initializeView() {
         showEditMenuButton();
         showDeleteMenuButton();
+        this.showCustomerData();
+    }
+    showCustomerData(){
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
             theCustomer = new Customer(aSnapshot);
-            theCustomer.loadContracts();
+            theCustomer.loadContracts(currentView.showContracts);
             currentView.customer = theCustomer;
             const theContentDiv = document.getElementById("content");
             currentView.table = new StaticList(["30%", "70%"]);
@@ -25,12 +28,18 @@ class CustomerView extends BaseView {
                 .addRow(["Ort", theCustomer.place()])
                 .addRow(["Bemerkung", aSnapshot.child("notes").val()]);
             currentView.updateName(theCustomer.lastname());
-            let theTableDiv = document.createElement("div");
-            theTableDiv.innerHTML = currentView.table.getHtml();
-            theContentDiv.appendChild(theTableDiv);
+            document.getElementById("customerDataDiv").innerHTML = currentView.table.getHtml();
         });
     }
-    
+    showContracts() {
+        currentView.contractList = new ListGrid();
+        currentView.contractList.addListGridField(new ListGridField("", aContract => aContract.date()));
+        currentView.contractList.addListGridField(new ListGridField("", aContract => aContract.productId()));
+        currentView.contractList.objects = currentView.customer.contracts;
+        document.getElementById("contractListDiv").innerHTML = currentView.contractList.getHtml();
+
+    }
+
     deleteMenuButtonClicked() {
         this.customer.aboutToDelete();
         navigateToViewWithId("customers");
