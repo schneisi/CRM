@@ -31,9 +31,6 @@ class NewCustomerView extends BaseView {
     }
 
     setRadioButtonByValue(radioButtonGroup, value) {
-        console.log("setRadio");
-        console.log(radioButtonGroup);
-        console.log(value);
         for (let radioButtonCounter = 0; radioButtonCounter < radioButtonGroup.length; radioButtonCounter++) {
             if (radioButtonGroup[radioButtonCounter].value == value) {
                 radioButtonGroup[radioButtonCounter].parentNode.MaterialRadio.check();
