@@ -67,7 +67,7 @@ class NewCustomerView extends BaseView {
         theBuilder.firstname = this.firstNameField.value;
         theBuilder.lastname = this.lastNameField.value;
         theBuilder.street = this.streetField.value;
-        theBuilder.zip = this.streetField.value;
+        theBuilder.zip = this.zipField.value;
         theBuilder.place = this.placeField.value;
         theBuilder.notes = this.noteField.value;
         theBuilder.mail = this.mailField.value;
