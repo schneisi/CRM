@@ -30,3 +30,10 @@ class BaseView {
         });
     }
 }
+
+class HistoryObject {
+    constructor(aJsonView, anActionId) {
+        this.jsonView = aJsonView;
+        this.actionId = anActionId;
+    }
+}

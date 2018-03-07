@@ -1,4 +1,5 @@
 'use strict';
+include("js/View.js");
 
 var sites;
 var defaultSite;
@@ -24,9 +25,12 @@ function initializeSites(aJsonString) {
 }
 
 window.addEventListener('popstate', function (e) {
-    let theView = e.state;
-    if (theView != null) {
-        navigateToView(theView, null);
+    let theHistoryView = e.state;
+    if (theHistoryView != null) {
+        if (theHistoryView.actionId) {
+            setActionId(theHistoryView.actionId);
+        }
+        navigateToView(theHistoryView.jsonView, null);
     }
 });
 
@@ -92,7 +96,7 @@ async function navigateToView(aJsonView, aPushStateBoolean = true) {
     //sessionStorage.setItem('viewTitle', aTitleString);
     sessionStorage.setItem('viewId', aJsonView.id);
     if (aPushStateBoolean) {
-        history.pushState(aJsonView, aJsonView.name, null);
+        history.pushState(new HistoryObject(aJsonView, getActionId()), aJsonView.name, null);
     }
 }
 
