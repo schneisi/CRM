@@ -36,7 +36,6 @@ class NewAppointmentView extends BaseView {
     
     
     saveNewAppointment() {
-        console.log(this);
         let theBuilder = new AppointmentBuilder(this.appointment);
         theBuilder.title = document.getElementById("appointmentTitle").value;
         theBuilder.date = new Date();

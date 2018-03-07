@@ -57,7 +57,7 @@ class FbDatabase {
 function snapshot() {
     FbDatabase.getDatabaseSnapshot("products", function(aSnapshot) {
         aSnapshot.forEach(function (aChildSnapshot) {
-            console.log(aChildSnapshot.child("name").val());
+            logString(aChildSnapshot.child("name").val());
         })
     });
 }
