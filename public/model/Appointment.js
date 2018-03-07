@@ -65,7 +65,7 @@ class Appointment extends BaseDatabaseObject {
         return this.date().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.date().getDate());
     }
     dateOnlyString() {
-        return this.getFullStringForNumber(this.date().getDate()) + "." + this.getFullStringForNumber(this.date().getMonth() + 1) + "." + this.date().getFullYear();
+        return this.stringForDate(this.date());
     }
     timeOnlyString() {
         return this.getFullStringForNumber(this.date().getHours()) + ":" + this.getFullStringForNumber(this.date().getMinutes());

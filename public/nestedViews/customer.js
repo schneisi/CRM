@@ -31,13 +31,15 @@ class CustomerView extends BaseView {
             document.getElementById("customerDataDiv").innerHTML = currentView.table.getHtml();
         });
     }
-    showContracts() {
-        currentView.contractList = new ListGrid();
-        currentView.contractList.addListGridField(new ListGridField("", aContract => aContract.date()));
-        currentView.contractList.addListGridField(new ListGridField("", aContract => aContract.productId()));
-        currentView.contractList.objects = currentView.customer.contracts;
-        document.getElementById("contractListDiv").innerHTML = currentView.contractList.getHtml();
-
+    showContracts(aPromiseList) {
+        Promise.all(aPromiseList).then(function () {
+            currentView.contractList = new ListGrid();
+            currentView.contractList.clickEventSelector = currentView.insuranceClicked;
+            currentView.contractList.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
+            currentView.contractList.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
+            currentView.contractList.objects = currentView.customer.contracts;
+            document.getElementById("contractListDiv").innerHTML = currentView.contractList.getHtml();
+        })
     }
 
     deleteMenuButtonClicked() {
@@ -51,5 +53,11 @@ class CustomerView extends BaseView {
 
     mapsButtonClicked() {
         callGoogleMaps(theCustomer.addressString());
+    }
+
+    insuranceClicked(anIndex) {
+        let theInsurance = this.contractList.objects[anIndex];
+        setActionId(theInsurance.key());
+        navigateToViewWithId("insurance");
     }
 }

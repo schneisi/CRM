@@ -62,14 +62,18 @@ class Customer extends BaseDatabaseObject {
         return this.birthday().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.birthday().getDate());
     }
 
-    loadContracts(aCallback){
+    async loadContracts(aCallback){
         let theReceiver = this;
-        let thePromise = this.populateChildren(this.snapshot.child("contracts"), this.contracts, "contracts", Contract);
-        thePromise.then(function () {
+        let thePromises = [];
+        await this.populateChildren(this.snapshot.child("contracts"), this.contracts, "contracts", Contract)
+        .then(function () {
             theReceiver.contracts.forEach(eachContract => {
-            eachContract.customer = theReceiver;
-            aCallback();
-        })});
+                eachContract.customer = theReceiver;
+                thePromises.push(eachContract.loadInsurance());
+            });
+            aCallback(thePromises);
+        });
+
     }
 
     static createTask() {
