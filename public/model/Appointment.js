@@ -35,10 +35,7 @@ class Appointment extends BaseDatabaseObject {
                 let theDifference = eachAppointment.date().getTime() - theCurrentDate.getTime();
                 theDifference = theDifference / (1000 * 60);
                 if (theDifference < 10) {
-                    showNotification("Bevorstehender Termin", eachAppointment.title(), function() {
-                        setActionId(eachAppointment.key());
-                        navigateToViewWithId("appointment");
-                    });
+                    showNotification("Bevorstehender Termin", eachAppointment.title(), "appointment", eachAppointment.key());
                     let theBuilder = new AppointmentBuilder(eachAppointment);
                     theBuilder.reminded = true;
                     theBuilder.save();
@@ -59,7 +56,6 @@ class Appointment extends BaseDatabaseObject {
                     }
                 };
                 FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
-
             }, 10);
             Scheduler.instance.addTask(theTask);
         }
