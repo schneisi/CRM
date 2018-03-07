@@ -57,6 +57,10 @@ class Customer extends BaseDatabaseObject {
     birthdayString() {
         return this.stringForDate(this.birthday());
     }
+    isoBirthdayOnlyString() {
+        let theDateMonth = this.birthday().getMonth() + 1;
+        return this.birthday().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.birthday().getDate());
+    }
 
     loadContracts(){
         let theReceiver = this;

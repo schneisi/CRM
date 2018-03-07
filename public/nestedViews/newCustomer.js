@@ -22,7 +22,7 @@ class NewCustomerView extends BaseView {
                 currentView.mailField.parentElement.classList.add("is-dirty");
                 currentView.noteField.value = theCustomer.notes();
                 currentView.noteField.parentElement.classList.add("is-dirty");
-                currentView.birthdayField.value = theCustomer.birthday();
+                currentView.birthdayField.value = theCustomer.isoBirthdayOnlyString();
                 currentView.birthdayField.parentElement.classList.add("is-dirty");
                 currentView.setRadioButtonByValue(currentView.sexRadio, theCustomer.sex());
                 currentView.customer = theCustomer;
