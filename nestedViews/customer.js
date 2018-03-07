@@ -1,4 +1,5 @@
 include("model/Customer.js");
+include("model/Contract.js");
 
 let theCustomer;
 
@@ -8,6 +9,7 @@ class CustomerView extends BaseView {
         showDeleteMenuButton();
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
             theCustomer = new Customer(aSnapshot);
+            theCustomer.loadContracts();
             currentView.customer = theCustomer;
             const theContentDiv = document.getElementById("content");
             currentView.table = new StaticList(["30%", "70%"]);
