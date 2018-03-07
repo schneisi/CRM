@@ -4,6 +4,7 @@ let jsFiles = [];
 const applicationServerPublicKey = "BPoW8cpPvtjGUYTU2kBj0OY91inszdxTDAcfrtXn0YoeR7lFSFFH7v45q96X067HwmaaRmvGeNNnIp272mSZGKw";
 let serviceWorkerRegistration;
 let isSubscribed;
+let hasServiceWorker = false;
 
 function logString(aString) {
     if (isDebugging) {
@@ -17,10 +18,10 @@ function initializeApp(){
         try {
             navigator.serviceWorker.register('serviceWorker.js').then(function (aRegistration){
                 serviceWorkerRegistration = aRegistration;
-                console.log(serviceWorkerRegistration);
-                initializePushNotification();
+                hasServiceWorker = true;
+                logString("SW registered");
             });
-            logString("SW registered");
+            
         } catch (error) {
             logString("SW registration failed");
         }
@@ -136,10 +137,14 @@ function include(aString) {
 function showNotification(aTitle, aMessage, aCallback) {
     if (Notification) {
         if (Notification.permission == "granted") {
-            let theNotification = new Notification(aTitle, {
-              body: aMessage  
-            });
-            theNotification.onclick = aCallback;
+            if (hasServiceWorker) {
+                serviceWorkerNotification(aTitle, aMessage, aCallback);
+            } else {
+                let theNotification = new Notification(aTitle, {
+                    body: aMessage  
+                  });
+                theNotification.onclick = aCallback;
+            }
         } else {
             Notification.requestPermission(aValue => {
                 if (aValue == "granted") {
@@ -150,18 +155,11 @@ function showNotification(aTitle, aMessage, aCallback) {
     }
 }
 
-function serviceWorkerNotification() {
-    serviceWorkerRegistration.showNotification("Titel", {
-        body: "Body",
-
-    }).then(aNotificationEvent => {
-        console.log(aNotificationEvent);
-    });
-} 
-
-function initializePushNotification() {
-    console.log("initialize");
-    serviceWorkerRegistration.addEventListener('notificationclose', function(event) {
-        console.log('On notification click: ', event.notification.tag);
+function serviceWorkerNotification(aTitleString, aBodyString, aCallback) {
+    serviceWorkerRegistration.showNotification(aTitleString, {
+        body: aBodyString,
+        data: {
+            callback: aCallback
+        }
     });
 }
