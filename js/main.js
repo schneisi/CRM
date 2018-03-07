@@ -1,6 +1,9 @@
 let isDebugging = true;
 let isAlwaysOnline = true;
 let jsFiles = [];
+const applicationServerPublicKey = "BPoW8cpPvtjGUYTU2kBj0OY91inszdxTDAcfrtXn0YoeR7lFSFFH7v45q96X067HwmaaRmvGeNNnIp272mSZGKw";
+let serviceWorkerRegistration;
+let isSubscribed;
 
 function logString(aString) {
     if (isDebugging) {
@@ -12,7 +15,11 @@ initializeApp();
 function initializeApp(){
     if ('serviceWorker' in navigator) {
         try {
-            navigator.serviceWorker.register('serviceWorker.js')
+            navigator.serviceWorker.register('serviceWorker.js').then(function (aRegistration){
+                serviceWorkerRegistration = aRegistration;
+                console.log(serviceWorkerRegistration);
+                initializePushNotification();
+            });
             logString("SW registered");
         } catch (error) {
             logString("SW registration failed");
@@ -124,6 +131,8 @@ function include(aString) {
     }  
 }
 
+
+//Notification
 function showNotification(aTitle, aMessage, aCallback) {
     if (Notification) {
         if (Notification.permission == "granted") {
@@ -139,4 +148,20 @@ function showNotification(aTitle, aMessage, aCallback) {
             });
         }
     }
+}
+
+function serviceWorkerNotification() {
+    serviceWorkerRegistration.showNotification("Titel", {
+        body: "Body",
+
+    }).then(aNotificationEvent => {
+        console.log(aNotificationEvent);
+    });
+} 
+
+function initializePushNotification() {
+    console.log("initialize");
+    serviceWorkerRegistration.addEventListener('notificationclose', function(event) {
+        console.log('On notification click: ', event.notification.tag);
+    });
 }
