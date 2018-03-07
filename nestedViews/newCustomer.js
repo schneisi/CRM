@@ -31,9 +31,6 @@ class NewCustomerView extends BaseView {
     }
 
     setRadioButtonByValue(radioButtonGroup, value) {
-        console.log("setRadio");
-        console.log(radioButtonGroup);
-        console.log(value);
         for (let radioButtonCounter = 0; radioButtonCounter < radioButtonGroup.length; radioButtonCounter++) {
             if (radioButtonGroup[radioButtonCounter].value == value) {
                 radioButtonGroup[radioButtonCounter].parentNode.MaterialRadio.check();
@@ -70,7 +67,7 @@ class NewCustomerView extends BaseView {
         theBuilder.firstname = this.firstNameField.value;
         theBuilder.lastname = this.lastNameField.value;
         theBuilder.street = this.streetField.value;
-        theBuilder.zip = this.streetField.value;
+        theBuilder.zip = this.zipField.value;
         theBuilder.place = this.placeField.value;
         theBuilder.notes = this.noteField.value;
         theBuilder.mail = this.mailField.value;

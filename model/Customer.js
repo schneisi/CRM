@@ -115,7 +115,7 @@ class CustomerBuilder extends BaseBuilder {
             birthday: this.birthday.getMonth() + 1 + "/" + this.birthday.getDate() + "/" + this.birthday.getFullYear(),
             sex: this.sex,
             phone: this.phone,
-            remark: this.notes,
+            notes: this.notes,
             address: {
                 place: this.place,
                 street: this.street,
