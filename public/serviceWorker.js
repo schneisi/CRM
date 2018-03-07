@@ -15,10 +15,13 @@ const staticAssets = [
     './nestedViews/demoForm.html',
     './nestedViews/demoTable.html',
 ];
+const useCaching = false;
 
 self.addEventListener('install', async event => {
     const cache = await caches.open('static-assets');
-    cache.addAll(staticAssets);
+    if (useCaching) {
+        cache.addAll(staticAssets);
+    }
 });
 
 
