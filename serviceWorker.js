@@ -27,6 +27,11 @@ self.addEventListener('fetch', async event => {
     event.respondWith(cachedFirst(theRequest));
 });
 
+self.addEventListener('notificationclick', function(event) {
+    console.log('On notification click: ', event.notification);
+    event.notification.data.callback();
+});
+
 
 async function cachedFirst (aRequest) {
     const theCachedResponse = await caches.match(aRequest);

@@ -1,5 +1,11 @@
 class Customer extends BaseDatabaseObject {
 
+
+    constructor(aSnapshot){
+        super(aSnapshot);
+        this.contracts = [];
+    }
+
     //Attributes
     firstname() {
         return this.getValueOfChild("firstname");
@@ -52,6 +58,14 @@ class Customer extends BaseDatabaseObject {
         return this.stringForDate(this.birthday());
     }
 
+    loadContracts(){
+        let theReceiver = this;
+        let thePromise = this.populateChildren(this.snapshot.child("contracts"), this.contracts, "contracts", Contract);
+        thePromise.then(function () {
+            theReceiver.contracts.forEach(eachContract => {
+            eachContract.customer = theReceiver;
+        })});
+    }
 
     static createTask() {
         //BirthdayTask

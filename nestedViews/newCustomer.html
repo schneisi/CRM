@@ -38,8 +38,9 @@
                 <label class="mdl-textfield__label" for="ort">Ort:</label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="phone">
-                <label class="mdl-textfield__label" for="telNr">Telefonnummer:</label>
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
+                <label class="mdl-textfield__label" for="sample4">Telefonnummer:</label>
+                <span class="mdl-textfield__error">Telefonnummern bestehen nicht aus Buchstaben, bitte geben Sie zahlen ein.</span>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="mail">
@@ -53,7 +54,7 @@
             <!-- Floating Multiline Textfield -->
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <textarea class="mdl-textfield__input" type="text" rows= "3" id="conracts" ></textarea>
-                <label class="mdl-textfield__label" for="verträge">Abgeschlossene Verträge:</label>
+                <label class="mdl-textfield__label" for="verträge">Abgeschlossene Versicherungsverträge:</label>
             </div>
             <!-- Expandable Textfield -->
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-grid">
@@ -99,34 +100,45 @@
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <p>Ist der Kunde selbstständig oder Arbeitnehmer:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-1">
-                    <input type="radio" id="education-1" class="mdl-radio__button" name="education" value="1" checked>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="workStyle-1">
+                    <input type="radio" id="workStyle-1" class="mdl-radio__button" name="workStyle" value="1" checked>
                     <span class="mdl-radio__label">Selbstständig</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-2">
-                    <input type="radio" id="education-2" class="mdl-radio__button" name="education" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="workStyle-2">
+                    <input type="radio" id="workStyle-2" class="mdl-radio__button" name="workStyle" value="2">
                     <span class="mdl-radio__label">Arbeitnehmer</span>
                 </label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <p>Ist der Kunde in einer Leitenden Position:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-1">
-                    <input type="radio" id="education-1" class="mdl-radio__button" name="education" value="1" checked>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="position-1">
+                    <input type="radio" id="position-1" class="mdl-radio__button" name="position" value="1" checked>
                     <span class="mdl-radio__label">Ja</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-2">
-                    <input type="radio" id="education-2" class="mdl-radio__button" name="education" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="position-2">
+                    <input type="radio" id="position-2" class="mdl-radio__button" name="position" value="2">
                     <span class="mdl-radio__label">Nein</span>
                 </label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <p>Ist der Kunde vermögend:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-1">
-                    <input type="radio" id="education-1" class="mdl-radio__button" name="education" value="1" checked>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="muchMoney-1">
+                    <input type="radio" id="muchMoney-1" class="mdl-radio__button" name="muchMoney" value="1" checked>
                     <span class="mdl-radio__label">Ja</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-2">
-                    <input type="radio" id="education-2" class="mdl-radio__button" name="education" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="muchMoney-2">
+                    <input type="radio" id="muchMoney-2" class="mdl-radio__button" name="muchMoney" value="2">
+                    <span class="mdl-radio__label">Nein</span>
+                </label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                    <p>Besitzt der Kunde ein Eigenheim:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownHouse-1">
+                    <input type="radio" id="ownHouse-1" class="mdl-radio__button" name="ownHouse" value="1" checked>
+                    <span class="mdl-radio__label">Ja</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownHouse-2">
+                    <input type="radio" id="ownHouse-2" class="mdl-radio__button" name="ownHouse" value="2">
                     <span class="mdl-radio__label">Nein</span>
                 </label>
             </div>
