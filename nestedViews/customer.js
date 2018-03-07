@@ -14,8 +14,8 @@ class CustomerView extends BaseView {
             const theContentDiv = document.getElementById("content");
             currentView.table = new StaticList(["30%", "70%"]);
             currentView.table
-                .addRow(["Name", theCustomer.firstname()])
-                .addRow(["Vorname", theCustomer.lastname()])
+                .addRow(["Name", theCustomer.lastname()])
+                .addRow(["Vorname", theCustomer.firstname()])
                 .addRow(["E-Mail", theCustomer.mail()])
                 .addRow(["Telefon", theCustomer.phone()])
                 .addRow(["Geburtstag", theCustomer.birthdayString()])

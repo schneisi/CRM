@@ -15,6 +15,7 @@ class BaseDatabaseObject {
             });
         });
         this.promises.push(thePromise);
+        return thePromise;
     }
 
     static createFromPathWithRealtimeQuery(aClass, aPath, aCallback) {

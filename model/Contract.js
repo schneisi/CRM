@@ -1,5 +1,9 @@
 class Contract extends BaseDatabaseObject{
 
+    constructor(aSnapshot) {
+        super(aSnapshot);
+        this.customer = null;
+    }
     customerId(){
         return this.getValueOfChild("customerId");
     }
