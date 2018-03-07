@@ -62,7 +62,6 @@ class NewCustomerView extends BaseView {
     }
 
     saveNewCustomer() {
-        console.log(this);
         let theBuilder = new CustomerBuilder(this.customer);
         theBuilder.firstname = this.firstNameField.value;
         theBuilder.lastname = this.lastNameField.value;

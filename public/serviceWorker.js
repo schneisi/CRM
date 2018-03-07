@@ -28,7 +28,6 @@ self.addEventListener('fetch', async event => {
 });
 
 self.addEventListener('notificationclick', function(event) {
-    console.log('On notification click: ', event.notification);
     event.notification.data.callback();
 });
 
