@@ -31,6 +31,9 @@ class Customer extends BaseDatabaseObject {
     birthday() {
         return new Date(this.getValueOfChild("birthday"));
     }
+    sex() {
+        return this.getValueOfChild("sex");
+    }
     notes() {
         return this.getValueOfChild("notes");
     }
@@ -48,6 +51,8 @@ class Customer extends BaseDatabaseObject {
     birthdayString() {
         return this.stringForDate(this.birthday());
     }
+
+
     static createTask() {
         //BirthdayTask
         let theBirthdayTaskName = "BirthdayTask"
@@ -80,6 +85,7 @@ class CustomerBuilder extends BaseBuilder {
         this.lastname = null;
         this.path = "customers";
         this.birthday = null;
+        this.sex = null;
         this.phone = null;
         this.mail = null;
         this.zip = null;
@@ -92,7 +98,8 @@ class CustomerBuilder extends BaseBuilder {
             lastname: this.lastname,
             firstname: this.firstname,
             mail: this.mail,
-            birthday: this.birthday,
+            birthday: this.birthday.getMonth() + 1 + "/" + this.birthday.getDate() + "/" + this.birthday.getFullYear(),
+            sex: this.sex,
             phone: this.phone,
             remark: this.notes,
             address: {

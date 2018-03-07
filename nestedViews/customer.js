@@ -14,6 +14,7 @@ class CustomerView extends BaseView {
             currentView.table
                 .addRow(["Name", theCustomer.firstname()])
                 .addRow(["Vorname", theCustomer.lastname()])
+                .addRow(["Geschlecht", theCustomer.sex()])
                 .addRow(["E-Mail", theCustomer.mail()])
                 .addRow(["Telefon", theCustomer.phone()])
                 .addRow(["Geburtstag", theCustomer.birthdayString()])
