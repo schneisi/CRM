@@ -2,7 +2,7 @@ class NewCustomerView extends BaseView {
     initializeView(){
         showSaveButton(this.saveNewCustomer);
         this.setComponents();
-    
+        this.initializeAccordion();
         if (hasActionId()) {
             FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function (aSnapshot) {
                 let theCustomer = new Customer(aSnapshot);

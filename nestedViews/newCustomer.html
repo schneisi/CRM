@@ -1,7 +1,6 @@
 <div id="content">
-<!--Trying out the Accordeon -->   
     <button class="accordion">Allgemeine Informationen zum Kunden</button>
-    <div class="panel">
+    <div class="panel panel-visible">
         <form>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" id="lastname">
@@ -145,21 +144,4 @@
             </div>
         </form>     
     </div>
-
-    <script>
-        var acc = document.getElementsByClassName("accordion");
-        var i;
-
-        for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        }
-    </script>
 </div>
