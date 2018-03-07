@@ -5,7 +5,7 @@ class NewAppointmentView extends BaseView {
         showSaveButton(this.saveNewAppointment);
         this.setComponents();
         if (hasActionId()){
-            FbDatabase.getDatabaseSnapshot("/appointments/" + getActionId(), function(aSnapshot) {
+            FbDatabase.getDatabaseSnapshot("/appointments/" + FbDatabase.getCurrentUserId() + "/" + getActionId(), function(aSnapshot) {
                 let theAppointment = new Appointment(aSnapshot);
                 currentView.appointment = theAppointment;
                 currentView.titleField.value = theAppointment.title();

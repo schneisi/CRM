@@ -28,7 +28,8 @@ self.addEventListener('fetch', async event => {
 });
 
 self.addEventListener('notificationclick', function(event) {
-    event.notification.data.callback();
+    /*setActionId(event.notification.data.actionId);
+    navigateToViewWithId(event.notification.data.viewId);*/
 });
 
 

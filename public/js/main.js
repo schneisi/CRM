@@ -134,32 +134,36 @@ function include(aString) {
 
 
 //Notification
-function showNotification(aTitle, aMessage, aCallback) {
+function showNotification(aTitle, aMessage, aViewId, anActionId) {
     if (Notification) {
         if (Notification.permission == "granted") {
             if (hasServiceWorker) {
-                serviceWorkerNotification(aTitle, aMessage, aCallback);
+                serviceWorkerNotification(aTitle, aMessage, aViewId, anActionId);
             } else {
                 let theNotification = new Notification(aTitle, {
                     body: aMessage  
                   });
-                theNotification.onclick = aCallback;
+                theNotification.onclick = function () {
+                    setActionId(anActionId);
+                    navigateToViewWithId(aViewId);
+                };
             }
         } else {
             Notification.requestPermission(aValue => {
                 if (aValue == "granted") {
-                    showNotification(aTitle, aMessage, aCallback);
+                    showNotification(aTitle, aMessage, aView, anActionId);
                 }
             });
         }
     }
 }
 
-function serviceWorkerNotification(aTitleString, aBodyString, aCallback) {
+function serviceWorkerNotification(aTitleString, aBodyString, aViewId, anActionId) {
     serviceWorkerRegistration.showNotification(aTitleString, {
         body: aBodyString,
         data: {
-            callback: aCallback
+            viewId: aViewId,
+            actionId: anActionId
         }
     });
 }
