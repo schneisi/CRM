@@ -5,7 +5,7 @@ class AppointmentView extends BaseView {
         showEditMenuButton();
         showDeleteMenuButton();
 
-        Appointment.createFromPathWithRealtimeQuery(Appointment, "/appointments/" + getActionId(), function (anAppointment) {
+        Appointment.createFromPathWithRealtimeQuery(Appointment, "/appointments/" + FbDatabase.getCurrentUserId()+ "/" + getActionId(), function (anAppointment) {
             currentView.appointment = anAppointment;
             currentView.showAppointment();
         });

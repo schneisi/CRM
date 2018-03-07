@@ -50,6 +50,10 @@ class FbDatabase {
         theDate.setTime(aNumber);
         return theDate;
     }
+
+    static getCurrentUserId() {
+        return firebase.auth().currentUser.uid;
+    }
 }
 
 

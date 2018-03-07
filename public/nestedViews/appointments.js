@@ -7,7 +7,7 @@ class AppointmentsView extends BaseView {
         theAppointmentList.addListGridField(new ListGridField("Titel", anAppointment => anAppointment.title()));
         theAppointmentList.clickEventSelector = this.appointmentClicked;
     
-        FbDatabase.getDatabaseSnapshot("appointments", function(aSnapshot) {
+        FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), function(aSnapshot) {
             theAppointmentList.objects = Appointment.createObjectsFromSnapshot(aSnapshot, Appointment);
             let theDiv = document.createElement("div");
             theDiv.innerHTML = theAppointmentList.getHtml();

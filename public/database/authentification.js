@@ -12,7 +12,7 @@ function initializeFirebase() {
     };
     firebase.initializeApp(config);
     fbDatabase = firebase.database();
-    /*firebase.database.enableLogging(function(message) {
-        console.log("[FIREBASE]", message);
-    });*/
+    firebase.database.enableLogging(function(message) {
+        logString("[FIREBASE]", message);
+    });
 }

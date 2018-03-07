@@ -58,7 +58,7 @@ class Appointment extends BaseDatabaseObject {
                         currentView.showNextAppointments();
                     }
                 };
-                FbDatabase.getDatabaseSnapshot("appointments", theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
+                FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
 
             }, 10);
             Scheduler.instance.addTask(theTask);
@@ -85,8 +85,8 @@ Appointment.upcomingAppointments = [];
 
 class AppointmentBuilder extends BaseBuilder {
     constructor(anObject) {
-        super (anObject);
-        this.path = "appointments";
+        super(anObject);
+        this.path = "appointments/" + FbDatabase.getCurrentUserId();
         if (anObject) {
             this.title = anObject.title();
             this.date = anObject.date();
