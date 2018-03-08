@@ -33,12 +33,18 @@ class CustomerView extends BaseView {
     }
     showContracts(aPromiseList) {
         Promise.all(aPromiseList).then(function () {
-            currentView.contractList = new ListGrid();
-            currentView.contractList.clickEventSelector = currentView.insuranceClicked;
-            currentView.contractList.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
-            currentView.contractList.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
-            currentView.contractList.objects = currentView.customer.contracts;
-            document.getElementById("contractListDiv").innerHTML = currentView.contractList.getHtml();
+            let theString = "<br /> <center>Keine Verträge</center>";
+            if (currentView.customer.contracts.length > 0) {
+                let theListGrid = new ListGrid();
+                theListGrid.clickEventSelector = currentView.insuranceClicked;
+                theListGrid.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
+                theListGrid.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
+                theListGrid.objects = currentView.customer.contracts;
+                theString = theListGrid.getHtml();
+                currentView.contractList = theListGrid;
+            }
+            
+            document.getElementById("contractListDiv").innerHTML = theString;
         })
     }
 

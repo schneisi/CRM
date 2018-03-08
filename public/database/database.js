@@ -13,16 +13,18 @@ class FbDatabase {
     }
 
     static getDatabaseSnapshot(aPath, aCallback, anOrderString, aStartObject, anEndObject, aLimitNumber = 100) {
-        let theFunction = aSnapshot => aCallback(aSnapshot);
+        let theErrorCallback = function (anError) {
+            logString(anError);
+        };
         let theReference = fbDatabase.ref(aPath);
         if (anOrderString) {
             if (anEndObject) {
-                theReference.orderByChild(anOrderString).startAt(aStartObject).endAt(anEndObject).limitToFirst(aLimitNumber).once('value').then(theFunction);
+                theReference.orderByChild(anOrderString).startAt(aStartObject).endAt(anEndObject).limitToFirst(aLimitNumber).once('value').then(aCallback);
             } else {
-                theReference.orderByChild(anOrderString).startAt(aStartObject).limitToFirst(aLimitNumber).once('value').then(theFunction);
+                theReference.orderByChild(anOrderString).startAt(aStartObject).limitToFirst(aLimitNumber).once('value').then(aCallback);
             }
         } else {
-            theReference.once('value').then(theFunction);
+            theReference.once('value', aCallback, theErrorCallback, currentView);
         }
     }
 
