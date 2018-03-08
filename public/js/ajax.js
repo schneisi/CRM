@@ -1,7 +1,13 @@
 
-async function getAjaxContent(aRequestUrl, aCallback) {
+async function getAjaxContent(aRequestUrl, aCallback, aIsLocalBoolean = true) {
     var theRequest = createRequestWithCallback(aCallback)
-    theRequest.open("GET", completeUrlForString(aRequestUrl), true);
+    let theUrlString;
+    if (aIsLocalBoolean) {
+        theUrlString = completeUrlForString(aRequestUrl);
+    } else {
+        theUrlString = aRequestUrl;
+    }
+    theRequest.open("GET", theUrlString, true);
     theRequest.setRequestHeader('Access-Control-Allow-Origin', '*');
     theRequest.send();
 }
