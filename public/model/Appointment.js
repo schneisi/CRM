@@ -55,7 +55,12 @@ class Appointment extends BaseDatabaseObject {
                         currentView.showNextAppointments();
                     }
                 };
-                FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), theCallback, "date", FbDatabase.valueForDate(new Date()), null, 3);
+                let theOptions = {
+                    orderChild: "date",
+                    startObject: FbDatabase.valueForDate(new Date()),
+                    limit: 3
+                }
+                FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), theCallback, null, theOptions);
             }, 10);
             Scheduler.instance.addTask(theTask);
         }

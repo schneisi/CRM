@@ -12,20 +12,32 @@ class FbDatabase {
         fbDatabase.ref().update(theDictionary);
     }
 
-    static getDatabaseSnapshot(aPath, aCallback, anOrderString, aStartObject, anEndObject, aLimitNumber = 100) {
+    static getDatabaseSnapshot(aPath, aCallback, aContextObject = null, anOptionsJson = {}) {
         let theErrorCallback = function (anError) {
             logString(anError);
         };
         let theReference = fbDatabase.ref(aPath);
-        if (anOrderString) {
-            if (anEndObject) {
-                theReference.orderByChild(anOrderString).startAt(aStartObject).endAt(anEndObject).limitToFirst(aLimitNumber).once('value').then(aCallback);
-            } else {
-                theReference.orderByChild(anOrderString).startAt(aStartObject).limitToFirst(aLimitNumber).once('value').then(aCallback);
+        
+        let thePromise = theReference;
+        if (anOptionsJson.orderChild) {
+            thePromise = thePromise.orderByChild(anOptionsJson.orderChild);
+            if (anOptionsJson.startObject) {
+                thePromise = thePromise.startAt(anOptionsJson.startObject);
             }
-        } else {
-            theReference.once('value', aCallback, theErrorCallback, currentView);
+            if (anOptionsJson.endObject) {
+                thePromise = thePromise.endAt(anOptionsJson.endObject);
+            }
         }
+        if (anOptionsJson.limit) {
+            thePromise = thePromise.limitToFirst(anOptionsJson.limit);
+        }
+
+        if (aContextObject) {
+            thePromise.once("value", aCallback, theErrorCallback, aContextObject);
+        } else {
+            thePromise.once("value", aCallback, theErrorCallback);
+        }
+        
     }
 
     static startRealTimeQuery(aPath, aCallback) {

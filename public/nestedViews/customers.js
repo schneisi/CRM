@@ -11,13 +11,16 @@ class CustomersView extends BaseView {
     
         let theCallback = function(aSnapshot) {
             let theCustomers = BaseDatabaseObject.createObjectsFromSnapshot(aSnapshot, Customer);
-            currentView.customerList.objects = theCustomers;
+            this.customerList.objects = theCustomers;
             let theDiv = document.createElement("div");
-            theDiv.innerHTML = currentView.customerList.getHtml();
+            theDiv.innerHTML = this.customerList.getHtml();
             contentDiv.appendChild(theDiv);
             hideSpinner();
         };
-        FbDatabase.getDatabaseSnapshot("customers", theCallback, "lastname", null, null);
+        let theOptions = {
+            orderChild: "lastname"
+        }
+        FbDatabase.getDatabaseSnapshot("customers", theCallback, this, theOptions);
     }
     
     addNewCustomerClicked() {

@@ -12,9 +12,9 @@ class InsurancesView extends BaseView {
             });
             let theDiv = document.createElement("div");
     
-            theDiv.innerHTML = currentView.insuranceList.getHtml();
+            theDiv.innerHTML = this.insuranceList.getHtml();
             contentDiv.appendChild(theDiv);
-        });
+        }, this);
     }
     
     insuranceClicked(anIndex) {

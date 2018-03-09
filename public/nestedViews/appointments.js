@@ -7,13 +7,17 @@ class AppointmentsView extends BaseView {
         theAppointmentList.addListGridField(new ListGridField("Titel", anAppointment => anAppointment.title()));
         theAppointmentList.clickEventSelector = this.appointmentClicked;
     
+
+        let theOptions = {
+            orderChild: "date"
+        }
         FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), function(aSnapshot) {
             theAppointmentList.objects = Appointment.createObjectsFromSnapshot(aSnapshot, Appointment);
             let theDiv = document.createElement("div");
             theDiv.innerHTML = theAppointmentList.getHtml();
             document.getElementById("content").appendChild(theDiv);
             hideSpinner();
-        }, "date");
+        }, this, theOptions);
     }
     
     addNewAppointmentClicked() {

@@ -89,7 +89,12 @@ class Customer extends BaseDatabaseObject {
                         currentView.showUpcomingBirthdays();
                     }
                 }
-                FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, "birthday", FbDatabase.birthdayStringForDate(new Date()), null, 3);
+                let theOptions = {
+                    orderChild: "birthday",
+                    startObject: FbDatabase.birthdayStringForDate(new Date()),
+                    limit: 3
+                }
+                FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, null, theOptions);
             }, 60);
             Scheduler.instance.addTask(theBirthdayTask);
         }
