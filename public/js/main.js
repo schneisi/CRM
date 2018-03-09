@@ -6,6 +6,11 @@ let serviceWorkerRegistration;
 let isSubscribed;
 let hasServiceWorker = false;
 
+window.onerror = function (message, url, lineNo){
+    alert('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
+    return false;
+};
+
 function logString(aString) {
     if (isDebugging) {
         console.log(aString);
