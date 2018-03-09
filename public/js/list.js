@@ -5,6 +5,7 @@ class ListGrid {
         this.objects = [];
         this.clickEventSelector = null;
         this.showTitle = true;
+        this.noElementsString = "Keine Elemente";
     }
     
     addListGridField(aField) {
@@ -14,6 +15,10 @@ class ListGrid {
     getHtml() {
         let theResultString = "<table class='listTable'>";
         
+        if (this.objects.length == 0) {
+            return "<center>" + this.noElementsString + "</center>"
+        }
+
 
         //Builing Table Header
         if (this.showTitle) {
