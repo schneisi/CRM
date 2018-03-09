@@ -1,9 +1,9 @@
 class Customer extends BaseDatabaseObject {
 
-
     constructor(aSnapshot){
         super(aSnapshot);
         this.contracts = [];
+        this.loadContracts();
     }
 
     //Attributes
@@ -62,18 +62,14 @@ class Customer extends BaseDatabaseObject {
         return this.birthday().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.birthday().getDate());
     }
 
-    async loadContracts(aCallback){
+    loadContracts(){
         let theReceiver = this;
-        let thePromises = [];
-        await this.populateChildren(this.snapshot.child("contracts"), this.contracts, "contracts", Contract)
-        .then(function () {
-            theReceiver.contracts.forEach(eachContract => {
-                eachContract.customer = theReceiver;
-                thePromises.push(eachContract.loadInsurance());
-            });
-            aCallback(thePromises);
+        this.promises = [];
+        this.snapshot.child("contracts").forEach(eachChildSnapshot => {
+            let theContract = new Contract(eachChildSnapshot);
+            theReceiver.contracts.push(theContract);
+            theReceiver.promises.push(theContract.loadInsurance());
         });
-
     }
 
     static createTask() {

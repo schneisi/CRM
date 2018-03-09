@@ -12,7 +12,7 @@ class CustomerView extends BaseView {
     showCustomerData(){
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
             theCustomer = new Customer(aSnapshot);
-            theCustomer.loadContracts(currentView.showContracts);
+            currentView.showContracts();
             currentView.customer = theCustomer;
             const theContentDiv = document.getElementById("content");
             currentView.table = new StaticList(["30%", "70%"]);
@@ -29,10 +29,10 @@ class CustomerView extends BaseView {
                 .addRow(["Bemerkung", aSnapshot.child("notes").val()]);
             currentView.updateName(theCustomer.lastname());
             document.getElementById("customerDataDiv").innerHTML = currentView.table.getHtml();
-        });
+        }, this);
     }
-    showContracts(aPromiseList) {
-        Promise.all(aPromiseList).then(function () {
+    showContracts() {
+        Promise.all(theCustomer.promises).then(function () {
             let theString = "<br /> <center>Keine Verträge</center>";
             if (currentView.customer.contracts.length > 0) {
                 let theListGrid = new ListGrid();
@@ -62,8 +62,8 @@ class CustomerView extends BaseView {
     }
 
     insuranceClicked(anIndex) {
-        let theInsurance = this.contractList.objects[anIndex];
-        setActionId(theInsurance.key());
+        let theContract = this.contractList.objects[anIndex];
+        setActionId(theContract.insurance.key());
         navigateToViewWithId("insurance");
     }
 }
