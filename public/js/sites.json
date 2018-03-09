@@ -71,6 +71,14 @@
             "js": "./nestedViews/appointment.js",
             "viewClass": "AppointmentView",
             "shownInMenu": false
+        },
+        {
+            "name": "Vertrag",
+            "id": "contract",
+            "url": "./nestedViews/contract.html",
+            "js": "./nestedViews/contract.js",
+            "viewClass": "ContractView",
+            "shownInMenu": false
         }
     ]
 }

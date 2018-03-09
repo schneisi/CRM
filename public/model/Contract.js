@@ -18,6 +18,10 @@ class Contract extends BaseDatabaseObject{
         return FbDatabase.dateForValue(this.getValueOfChild("date"));
     }
 
+    remark() {
+        return this.getValueOfChild("remark");
+    }
+
     //API
     loadInsurance() {
         let theReceiver = this;

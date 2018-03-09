@@ -38,7 +38,7 @@ class CustomerView extends BaseView {
             let theString = "<br /> <center>Keine Verträge</center>";
             if (currentView.customer.contracts.length > 0) {
                 let theListGrid = new ListGrid();
-                theListGrid.clickEventSelector = currentView.insuranceClicked;
+                theListGrid.clickEventSelector = currentView.contractClicked;
                 theListGrid.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
                 theListGrid.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
                 theListGrid.objects = currentView.customer.contracts;
@@ -62,9 +62,9 @@ class CustomerView extends BaseView {
         callGoogleMaps(theCustomer.addressString());
     }
 
-    insuranceClicked(anIndex) {
+    contractClicked(anIndex) {
         let theContract = this.contractList.objects[anIndex];
-        setActionId(theContract.insurance.key());
-        navigateToViewWithId("insurance");
+        setActionId("customers/" + theCustomer.key() + "/contracts/" + theContract.key());
+        navigateToViewWithId("contract");
     }
 }
