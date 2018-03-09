@@ -62,6 +62,11 @@ class Customer extends BaseDatabaseObject {
         return this.birthday().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.birthday().getDate());
     }
 
+    mapsApiUrl() {
+        let apiKey = "AIzaSyCeZvXTabw2_pt2TnB7KnfmcOndEbDwvhk";
+        return "https://www.google.com/maps/embed/v1/place?key=" + apiKey + "&q=" + encodeURI(this.addressString());
+    }
+
     loadContracts(){
         let theReceiver = this;
         this.promises = [];

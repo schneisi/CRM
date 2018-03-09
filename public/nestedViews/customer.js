@@ -7,6 +7,7 @@ class CustomerView extends BaseView {
     initializeView() {
         showEditMenuButton();
         showDeleteMenuButton();
+        this.initializeAccordion();
         this.showCustomerData();
     }
     showCustomerData(){
@@ -29,6 +30,7 @@ class CustomerView extends BaseView {
                 .addRow(["Bemerkung", aSnapshot.child("notes").val()]);
             currentView.updateName(theCustomer.lastname());
             document.getElementById("customerDataDiv").innerHTML = currentView.table.getHtml();
+            document.getElementById("mapsFrame").src = theCustomer.mapsApiUrl();
         }, this);
     }
     showContracts() {
@@ -43,7 +45,6 @@ class CustomerView extends BaseView {
                 theString = theListGrid.getHtml();
                 currentView.contractList = theListGrid;
             }
-            
             document.getElementById("contractListDiv").innerHTML = theString;
         })
     }

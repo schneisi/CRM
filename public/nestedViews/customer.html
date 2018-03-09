@@ -1,13 +1,16 @@
 <div id="content">
-    <button onclick="currentView.mapsButtonClicked()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored floatingButton">
-        Route
-    </button>
-    <div id="customerDataDiv">
-        
-    </div>
-    <div id="contractListDiv">
+   
+    <button class="accordion">Stammdaten</button>
+    <div id="customerDataDiv" class="panel panel-visible"></div>
+    
+    <button class="accordion">Verträge</button>
+    <div id="contractListDiv" class="panel"></div>
 
+    <button class="accordion">Maps</button>
+    <div class="panel">
+        <iframe id="mapsFrame" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
+
     <button onclick="currentView.mapsButtonClicked()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored floatingButton">
         Route
     </button>
