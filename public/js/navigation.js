@@ -45,33 +45,34 @@ function initializeBody() {
 }
 
 function createMenu() {
-    for (var i = 0; i < sites.pages.length; i++) {
-        let theSite = sites.pages[i];
-        if (theSite.shownInMenu) {
+    sites.pages.forEach( eachSite => {
+        if (eachSite.shownInMenu) {
             let theSpan = document.createElement('span');
 
-            theSpan.setAttribute("id", theSite.id);
+            theSpan.setAttribute("id", eachSite.id);
             theSpan.classList.add("mdl-navigation__link");
-            theSpan.innerHTML = theSite.name;
+            theSpan.innerHTML = eachSite.name;
             theSpan.addEventListener("click", function () {
-                navigateToView(theSite);
+                navigateToView(eachSite);
             });
             theMenu.appendChild(theSpan);
         }
-        if (theSite.js) {
-            include(theSite.js);
+        if (eachSite.js) {
+            include(eachSite.js);
         }
-    }
+    });
 }
 
 //Internal
 function viewForId(anIdString) {
-    for (var i = 0; i < sites.pages.length; i++) {
-        let theView = sites.pages[i];
-        if (theView.id == anIdString) {
-            return theView;
+    let theSite;
+    sites.pages.forEach(eachSite => {
+        if (eachSite.id == anIdString) {
+            theSite = eachSite;
+            return;
         }
-    }
+    });
+    return theSite;
 }
 
 async function navigateToViewWithId(anId) {
@@ -93,7 +94,6 @@ async function navigateToView(aJsonView, aPushStateBoolean = true) {
         theLayout.MaterialLayout.toggleDrawer();
     }
 
-    //sessionStorage.setItem('viewTitle', aTitleString);
     sessionStorage.setItem('viewId', aJsonView.id);
     if (aPushStateBoolean) {
         history.pushState(new HistoryObject(aJsonView, getActionId()), aJsonView.name, null);
@@ -109,10 +109,6 @@ function setContent(aText) {
     currentView.initializeView();
     if (currentView.name) {
         titleSpan.innerHTML = currentView.name;
-    }
-    for (var i = 0; i < theScriptElements.length; i++)
-    {
-        eval(theScriptElements[i].text);
     }
 }
 

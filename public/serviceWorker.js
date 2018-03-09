@@ -9,7 +9,7 @@ const staticAssets = [
     './js/ajax.js',
     './js/navigation.js',
     './js/login.js',
-    './js/dashboard.js',
+    './nestedViews/dashboard.js',
     './nestedViews/customers.html',
     './nestedViews/dashboard.html',
     './nestedViews/demoForm.html',
@@ -17,7 +17,7 @@ const staticAssets = [
 ];
 const useCaching = false;
 
-self.addEventListener('install', async event => {
+self.addEventListener('install', async anEvent => {
     const cache = await caches.open('static-assets');
     if (useCaching) {
         cache.addAll(staticAssets);
@@ -25,14 +25,14 @@ self.addEventListener('install', async event => {
 });
 
 
-self.addEventListener('fetch', async event => {
-    const theRequest = event.request;
-    event.respondWith(cachedFirst(theRequest));
+self.addEventListener('fetch', async anEvent => {
+    const theRequest = anEvent.request;
+    anEvent.respondWith(cachedFirst(theRequest));
 });
 
-self.addEventListener('notificationclick', function(event) {
-    /*setActionId(event.notification.data.actionId);
-    navigateToViewWithId(event.notification.data.viewId);*/
+self.addEventListener('notificationclick', function(anEvent) {
+    /*setActionId(anEvent.notification.data.actionId);
+    navigateToViewWithId(anEvent.notification.data.viewId);*/
 });
 
 

@@ -4,7 +4,7 @@
             "name": "Dashboard",
             "id": "dashboard",
             "url": "./nestedViews/dashboard.html",
-            "js": "./js/dashboard.js",
+            "js": "./nestedViews/dashboard.js",
             "viewClass": "DashboardView",
             "shownInMenu": true
         },
