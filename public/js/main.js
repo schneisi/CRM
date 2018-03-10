@@ -18,7 +18,7 @@ function logString(aString) {
 }
 
 initializeApp();
-function initializeApp(){
+async function initializeApp(){
     if ('serviceWorker' in navigator) {
         try {
             navigator.serviceWorker.register('serviceWorker.js').then(function (aRegistration){
@@ -32,7 +32,6 @@ function initializeApp(){
         }
     }
     initializeFirebase();
-    include("model/BaseDatabaseObject.js");
     if (Notification && Notification.permission !== "granted") {
         Notification.requestPermission();
     }
@@ -126,14 +125,22 @@ function isOnline(){
     return navigator.onLine;
 }
 
-function include(aString) {
+function include(aString, aCallback) {
     if (!jsFiles.includes(aString)) {
         var theScriptElement = document.createElement('script');
         theScriptElement.src = aString;
         theScriptElement.type = 'text/javascript';
         theScriptElement.defer = true;
-        document.getElementsByTagName('head').item(0).appendChild(theScriptElement);
-        jsFiles.push(aString);
+        var done = false;
+        theScriptElement.onload = theScriptElement.onreadstatechange = function () {
+            if ( !done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete") ) {
+                done = true;
+                theScriptElement.onload = theScriptElement.onreadystatechange = null;
+                document.head.removeChild(theScriptElement);
+                jsFiles.push(aString);
+              }
+        };
+        document.head.appendChild(theScriptElement);
     }  
 }
 

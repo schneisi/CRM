@@ -3,7 +3,6 @@ class Customer extends BaseDatabaseObject {
     constructor(aSnapshot){
         super(aSnapshot);
         this.contracts = [];
-        this.loadContracts();
     }
 
     //Attributes

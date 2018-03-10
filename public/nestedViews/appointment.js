@@ -1,5 +1,3 @@
-include("model/Appointment.js");
-
 class AppointmentView extends BaseView {
     initializeView(){
         showEditMenuButton();

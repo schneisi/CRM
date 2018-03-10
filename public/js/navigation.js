@@ -1,5 +1,4 @@
 'use strict';
-include("js/View.js");
 
 var sites;
 var defaultSite;
@@ -12,7 +11,6 @@ let theMenu;
 //Initialize
 document.addEventListener("DOMContentLoaded", function () {
     //Wait until MDL is initialized
-    include("js/View.js");
     setTimeout(function () {
         getAjaxContent("js/sites.json", initializeSites);
     } , 10);

@@ -1,5 +1,3 @@
-include("model/Appointment.js");
-
 class DashboardView extends BaseView{
     initializeView(){
         this.name = "Dashboard";

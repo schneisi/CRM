@@ -1,6 +1,3 @@
-include("model/Customer.js");
-include("model/Contract.js");
-
 let theCustomer;
 
 class CustomerView extends BaseView {
@@ -13,6 +10,7 @@ class CustomerView extends BaseView {
     showCustomerData(){
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
             theCustomer = new Customer(aSnapshot);
+            theCustomer.loadContracts();
             currentView.showContracts();
             currentView.customer = theCustomer;
             const theContentDiv = document.getElementById("content");

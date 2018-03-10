@@ -1,5 +1,3 @@
-include("model/Insurance.js");
-
 class InsuranceView extends BaseView {
     initializeView() {
         FbDatabase.getDatabaseSnapshot("/products/" + getActionId(), function (aSnapshot) {

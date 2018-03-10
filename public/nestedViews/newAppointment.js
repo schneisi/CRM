@@ -1,5 +1,3 @@
-include("model/Appointment.js");
-
 class NewAppointmentView extends BaseView {
     initializeView() {
         showSaveButton(this.saveNewAppointment);
