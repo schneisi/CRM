@@ -88,8 +88,7 @@ async function navigateToView(aJsonView, aPushStateBoolean = true) {
     hideSaveButton();
     getAjaxContent(theUrl, setContent);
     if (isDrawerExpanded()) {
-        var theLayout = document.querySelector('.mdl-layout');
-        theLayout.MaterialLayout.toggleDrawer();
+        toggleDrawer();
     }
 
     sessionStorage.setItem('viewId', aJsonView.id);
@@ -97,6 +96,22 @@ async function navigateToView(aJsonView, aPushStateBoolean = true) {
         history.pushState(new HistoryObject(aJsonView, getActionId()), aJsonView.name, null);
     }
 }
+
+function showDrawer() {
+    if (!isDrawerExpanded())
+        toggleDrawer();
+}
+
+function dismissDrawer() {
+    if (isDrawerExpanded())
+        toggleDrawer();
+}
+
+function toggleDrawer() {
+    var theLayout = document.querySelector('.mdl-layout');
+    theLayout.MaterialLayout.toggleDrawer();
+}
+
 
 function setContent(aText) {
     contentContainer.innerHTML = aText;

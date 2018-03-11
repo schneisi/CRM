@@ -7,6 +7,11 @@ class DashboardView extends BaseView{
         
         this.showNextAppointments();
         this.showUpcomingBirthdays();
+        let theDiv = document.getElementById("gestureDiv")
+        var theHammer = new Hammer(theDiv);
+        theHammer.on("panleft panright tap press", aGesture => {
+            theDiv.innerHTML = aGesture.type + " gesture detected";
+        });
     }
     
     navigateToCustomersClicked() {

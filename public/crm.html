@@ -18,6 +18,10 @@
         <script src="database/authentification.js"></script>
         <script src="database/database.js"></script>
 
+        <!-- Hammer -->
+        <!-- <script src="js/hammer.min.js"></script> -->
+        <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+
         <!-- Custom JS-->  
         <script src="js/ajax.js"></script>
         <script src="js/Scheduling.js"></script>
@@ -26,8 +30,8 @@
         <script src="model/Customer.js"></script>
         <script src="model/Contract.js"></script>
         <script src="model/Insurance.js"></script>
+
         <script src="js/View.js"></script>
-        
         <script src="js/main.js"></script>
         <script src="js/app.js"></script>
         <script src="js/navigation.js"></script>
@@ -45,7 +49,7 @@
                     <span id="titleSpan" class="mdl-layout-title">easyRelations</span>
                     <div class="mdl-layout-spacer"></div>
                     <nav class="mdl-navigation">
-                        <a id="saveButton" class="mdl-navigation__link" type="button" style="display: none"">Speichern</a>
+                        <a id="saveButton" class="mdl-navigation__link" type="button" style="display: none">Speichern</a>
                         <!-- Right aligned menu below button -->
                         <div id="menuDiv" style="display: none">
                             <button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
@@ -72,7 +76,7 @@
                     </button>
                 </nav>
             </div>
-            <main class="mdl-layout__content">
+            <main id="main" class="mdl-layout__content">
                 <div id="contentContainer">
                     <!-- Container for content -->
                 </div>
