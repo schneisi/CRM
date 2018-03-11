@@ -7,11 +7,6 @@ class DashboardView extends BaseView{
         
         this.showNextAppointments();
         this.showUpcomingBirthdays();
-        let theDiv = document.getElementById("gestureDiv")
-        var theHammer = new Hammer(theDiv);
-        theHammer.on("panleft panright tap press", aGesture => {
-            theDiv.innerHTML = aGesture.type + " gesture detected";
-        });
     }
     
     navigateToCustomersClicked() {
@@ -31,35 +26,33 @@ class DashboardView extends BaseView{
         theListGrid.addListGridField(new ListGridField("", anAppointment => anAppointment.title()));
 
         theListGrid.objects = Appointment.upcomingAppointments;
-        document.getElementById("appointmentsDiv").innerHTML = theListGrid.getHtml();
+        theListGrid.setAsChildOf(document.getElementById("appointmentsDiv"));
     }
 
     showUpcomingBirthdays() {
         let theDiv = document.getElementById("birthdayDiv");
         if (Customer.upcomingBirthdays.length > 0) {
-            let theBirthdayGrid = new ListGrid;
+            let theBirthdayGrid = new ListGrid();
             this.birthdayListGrid = theBirthdayGrid;
             theBirthdayGrid.showTitle = false;
             theBirthdayGrid.clickEventSelector = this.birthdayClicked;
             theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.birthdayString()));
             theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.fullName()))
             theBirthdayGrid.objects = Customer.upcomingBirthdays;
-            theDiv.innerHTML = theBirthdayGrid.getHtml();
+            theBirthdayGrid.setAsChildOf(theDiv);
         } else {
             theDiv.innerHTML = "Keine Anstehende Geburtstage";
         }
        
     }
 
-    appointmentClicked(anIndex) {
-        let theAppointment = this.appointmentListGrid.objects[anIndex];
-        setActionId(theAppointment.key());
+    appointmentClicked(anAppointment) {
+        setActionId(anAppointment.key());
         navigateToViewWithId("appointment");
     }
 
-    birthdayClicked(anIndex) {
-        let theCustomer = this.birthdayListGrid.objects[anIndex];
-        setActionId(theCustomer.key());
+    birthdayClicked(aCustomer) {
+        setActionId(aCustomer.key());
         navigateToViewWithId("customer");
     }
 }

@@ -6,12 +6,13 @@ class CustomersView extends BaseView {
         this.customerList.showTitle = false;
         this.customerList.addListGridField(new ListGridField("Name", anObject => anObject.tableName()));
         this.customerList.clickEventSelector = this.customerClicked;
+        this.customerList.deleteSelector = this.customerDeleteClicked;
     
         let theCallback = function(aSnapshot) {
             let theCustomers = BaseDatabaseObject.createObjectsFromSnapshot(aSnapshot, Customer);
             this.customerList.objects = theCustomers;
             let theDiv = document.createElement("div");
-            theDiv.innerHTML = this.customerList.getHtml();
+            theDiv.appendChild(this.customerList.getTableElement());
             contentDiv.appendChild(theDiv);
             hideSpinner();
         };
@@ -26,9 +27,13 @@ class CustomersView extends BaseView {
         navigateToViewWithId("newCustomerForm");
     }
     
-    customerClicked(anIndex){
-        let theCustomer = this.customerList.objects[anIndex];
-        setActionId(theCustomer.key());
+    customerClicked(aCustomer){
+        setActionId(aCustomer.key());
         navigateToViewWithId("customer");
+    }
+
+    customerDeleteClicked(aCustomer) {
+        aCustomer.aboutToDelete();
+        return true;
     }
 }

@@ -6,16 +6,14 @@ class AppointmentsView extends BaseView {
         theAppointmentList.addListGridField(new ListGridField("Datum", anAppointment => anAppointment.dateString()));
         theAppointmentList.addListGridField(new ListGridField("Titel", anAppointment => anAppointment.title()));
         theAppointmentList.clickEventSelector = this.appointmentClicked;
-    
+        theAppointmentList.deleteSelector = this.appointmentDeleteClicked;
 
         let theOptions = {
             orderChild: "date"
         }
         FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), function(aSnapshot) {
             theAppointmentList.objects = Appointment.createObjectsFromSnapshot(aSnapshot, Appointment);
-            let theDiv = document.createElement("div");
-            theDiv.innerHTML = theAppointmentList.getHtml();
-            document.getElementById("content").appendChild(theDiv);
+            document.getElementById("content").appendChild(theAppointmentList.getTableElement());
             hideSpinner();
         }, this, theOptions);
     }
@@ -25,9 +23,13 @@ class AppointmentsView extends BaseView {
         navigateToViewWithId("newAppointment");
     }
     
-    appointmentClicked(anIndex){
-        let theAppointment = this.appointmentList.objects[anIndex];
-        setActionId(theAppointment.key());
+    appointmentClicked(anAppointment){
+        setActionId(anAppointment.key());
         navigateToViewWithId("appointment");
+    }
+
+    appointmentDeleteClicked(anAppointment) {
+        anAppointment.aboutToDelete();
+        return true;
     }
 }

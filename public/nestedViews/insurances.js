@@ -10,16 +10,12 @@ class InsurancesView extends BaseView {
             aSnapshot.forEach(function (aChildSnapshot) {
                 currentView.insuranceList.objects.push(new ListGridHelper(aChildSnapshot.key, aChildSnapshot.child("name").val()));
             });
-            let theDiv = document.createElement("div");
-    
-            theDiv.innerHTML = this.insuranceList.getHtml();
-            contentDiv.appendChild(theDiv);
+            contentDiv.appendChild(this.insuranceList.getTableElement());
         }, this);
     }
     
-    insuranceClicked(anIndex) {
-        let theHelper = this.insuranceList.objects[anIndex];
-        setActionId(theHelper.object);
+    insuranceClicked(aHelper) {
+        setActionId(aHelper.object);
         navigateToViewWithId("insurance");
     }
 }

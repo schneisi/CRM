@@ -6,49 +6,115 @@ class ListGrid {
         this.clickEventSelector = null;
         this.showTitle = true;
         this.noElementsString = "Keine Elemente";
+        this.enableDeletion = false;
+        this.view = currentView;
+        this.deleteSelector = null;
+        this.tableRows = [];
+        this.isDeleteButtonVisible = false;
     }
     
     addListGridField(aField) {
         this.fields.push(aField);
     }
 
-    getHtml() {
-        let theResultString = "<table class='listTable'>";
-        
-        if (this.objects.length == 0) {
-            return "<center>" + this.noElementsString + "</center>"
+    setAsChildOf(anElement) {
+        while (anElement.firstChild) {
+            anElement.removeChild(anElement.firstChild);
         }
+        anElement.appendChild(this.getTableElement());
+    }
 
+    getTableElement() {
+        let theTableElement = document.createElement("table");
+        theTableElement.classList.add("listTable");
+
+        if (this.objects.length == 0) {
+            theTableElement.innerHTML =  "<center>" + this.noElementsString + "</center>";
+            return theTableElement;
+        }
 
         //Builing Table Header
         if (this.showTitle) {
-            theResultString += "<tr>";
+            let theTableRow = document.createElement("tr");
             for (var i = 0; i < this.fields.length; i++) {
                 let eachField = this.fields[i];
-                theResultString += '<th>'+eachField.title + '</th>';
+                let theTh = document.createElement("th");
+                theTh.innerHTML = eachField.title;
+                theTableRow.appendChild(theTh);
             }
-            theResultString += "</tr>";
+            if (this.deleteSelector) {
+                for (var i = 0; i < 2; i++) {
+                    let theTh = document.createElement("th");
+                    theTableRow.appendChild(theTh);
+                }
+            }
+            theTableElement.appendChild(theTableRow);
+            this.tableRows.push(theTableRow);
         }
 
         //Building Table content
-        for (var eachRowIndex = 0; eachRowIndex < this.objects.length; eachRowIndex++) {
-            let eachObject = this.objects[eachRowIndex];
+        this.objects.forEach(eachObject => {
+            let theTableRow = document.createElement("tr");
+            let theReceiver = this;
             if (this.clickEventSelector != null) {
-                theResultString += '<tr onclick="currentView.' + this.clickEventSelector.name + '(' + eachRowIndex + ');">';
-            } else {
-                theResultString += "<tr>";
+                let theTapHammer = new Hammer(theTableRow)
+                theTapHammer.on("tap", function () {
+                    if (theReceiver.isDeleteButtonVisible) {
+                        theReceiver.hideDeleteButtons();
+                    } else {
+                        theReceiver.clickEventSelector(eachObject);
+                    }
+                });
             }
+
             for (var eachFieldIndex = 0; eachFieldIndex < this.fields.length; eachFieldIndex++) {
                 let eachField = this.fields[eachFieldIndex];
                 let eachContentString = eachField.readSelector(eachObject);
-                theResultString += '<td>' + eachContentString + '</td>'
-                
+                let theTableDataElement = document.createElement("td");
+                theTableDataElement.innerHTML = eachContentString;
+                theTableRow.appendChild(theTableDataElement);
             }
-            theResultString += "</tr>";
-        }
 
-        theResultString += "</table>";
-        return theResultString;
+            if (this.deleteSelector) {
+                let theDummyTd = document.createElement("td")
+                theDummyTd.style.display = "block";
+                theTableRow.appendChild(theDummyTd);
+                let theTd = document.createElement("td");
+                theTd.style.backgroundColor = "red";
+                theTd.style.display = "none";
+                theTd.style.color = "white";
+                theTd.style.width = "50px";
+                theTd.innerHTML = "Löschen";
+                let theDeleteTapHammer = new Hammer(theTd);
+                theDeleteTapHammer.on("tap", aGesture => {
+                    if (theReceiver.deleteSelector(eachObject)) {
+                        theTableElement.removeChild(theTableRow);
+                    }
+                    theReceiver.isDeleteButtonVisible = false;
+                });
+                theTableRow.appendChild(theTd);
+                
+                let theHammer = Hammer(theTableRow);
+                theHammer.on("swipeleft", aGesture => {
+                    theReceiver.hideDeleteButtons();
+                    theHammer.element.children[this.fields.length + 1].style.display = "";
+                    theHammer.element.children[this.fields.length].style.display = "none";
+                    this.isDeleteButtonVisible = true;
+                });
+            }
+            this.tableRows.push(theTableRow);
+            theTableElement.appendChild(theTableRow);
+        });
+
+        return theTableElement;
+    }
+
+    hideDeleteButtons() {
+        this.tableRows.forEach(eachRow => {
+            eachRow.children[this.fields.length + 1].style.display = "none";
+            eachRow.children[this.fields.length].style.display = "block";
+        });
+        this.isDeleteButtonVisible = false;
     }
 }
 

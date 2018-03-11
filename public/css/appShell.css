@@ -26,7 +26,7 @@ body {
     border-color: lightgray;
 }
 
-.listTable tr:hover, .listTable tr:active {
+.listTable tr:hover {
     background-color: rgb(238,238,238);
 }
 

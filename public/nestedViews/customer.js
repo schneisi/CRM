@@ -33,18 +33,14 @@ class CustomerView extends BaseView {
     }
     showContracts() {
         Promise.all(theCustomer.promises).then(function () {
-            let theString = "<br /> <center>Keine Verträge</center>";
-            if (currentView.customer.contracts.length > 0) {
-                let theListGrid = new ListGrid();
-                theListGrid.clickEventSelector = currentView.contractClicked;
-                theListGrid.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
-                theListGrid.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
-                theListGrid.objects = currentView.customer.contracts;
-                theString = theListGrid.getHtml();
-                currentView.contractList = theListGrid;
-            }
-            document.getElementById("contractListDiv").innerHTML = theString;
-        })
+            let theListGrid = new ListGrid();
+            theListGrid.clickEventSelector = currentView.contractClicked;
+            theListGrid.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
+            theListGrid.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
+            theListGrid.objects = currentView.customer.contracts;
+            currentView.contractList = theListGrid;
+            currentView.contractList.setAsChildOf(document.getElementById("contractListDiv"));
+        });
     }
 
     deleteMenuButtonClicked() {
@@ -60,9 +56,8 @@ class CustomerView extends BaseView {
         callGoogleMaps(theCustomer.addressString());
     }
 
-    contractClicked(anIndex) {
-        let theContract = this.contractList.objects[anIndex];
-        setActionId("customers/" + theCustomer.key() + "/contracts/" + theContract.key());
+    contractClicked(aContract) {
+        setActionId("customers/" + currentView.customer.key() + "/contracts/" + aContract.key());
         navigateToViewWithId("contract");
     }
 }
