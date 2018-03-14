@@ -77,3 +77,8 @@ body {
     background-color: #FCFcFc;
     box-shadow: #444
 }
+
+.crm-mdl-select-list{
+    max-height: 200px;
+    overflow: scroll;
+}
