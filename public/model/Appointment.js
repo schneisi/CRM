@@ -87,7 +87,6 @@ Appointment.upcomingAppointments = [];
 class AppointmentBuilder extends BaseBuilder {
     constructor(anObject) {
         super(anObject);
-        this.path = "appointments/" + FbDatabase.getCurrentUserId();
         if (anObject) {
             this.title = anObject.title();
             this.date = anObject.date();
@@ -99,6 +98,10 @@ class AppointmentBuilder extends BaseBuilder {
         } else {
             this.reminded = false;
         }
+    }
+
+    path () {
+        return "appointments/" + FbDatabase.getCurrentUserId();
     }
 
     dateValue() {
