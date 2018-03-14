@@ -97,6 +97,6 @@ class BaseBuilder {
         } else {
             theKey = this.object.key();
         }
-        FbDatabase.writeInDatabase(this.path, theKey, this.getJson());
+        FbDatabase.writeInDatabase(this.path(), theKey, this.getJson());
     }
 }

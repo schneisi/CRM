@@ -111,7 +111,6 @@ class CustomerBuilder extends BaseBuilder {
         super(anObject);
         this.firstname = null;
         this.lastname = null;
-        this.path = "customers";
         this.birthday = null;
         this.sex = null;
         this.phone = null;
@@ -121,6 +120,11 @@ class CustomerBuilder extends BaseBuilder {
         this.street = null;
         this.notes = null;
     }
+
+    path() {
+        return "customers";
+    }
+
     getJson() {
         let theJsonObject = {
             lastname: this.lastname,

@@ -6,10 +6,9 @@ class Contract extends BaseDatabaseObject{
     }
 
     //Attributes
-    customerId(){
-        return this.getValueOfChild("customerId");
+    customerId() {
+        return this.reference().parent.parent.key;
     }
-
     productId(){
         return this.getValueOfChild("productId");
     }
@@ -39,4 +38,31 @@ class Contract extends BaseDatabaseObject{
         return this.insurance.name();
     }
 
+}
+
+
+class ContractBuilder extends BaseBuilder {
+    constructor(aContract) {
+        super(aContract);
+        this.date = new Date();
+        if (aContract) {
+            this.date = aContract.date();
+            this.remark = aContract.remark();
+            this.productId = aContract.productId();
+            this.customerId = aContract.customerId();
+        }
+    }
+    
+    path() {
+        return "customers/" + this.customerId + "/contracts";
+    }
+
+    getJson() {
+        let theJson = {
+            date: FbDatabase.valueForDate(this.date),
+            productId: this.productId,
+            remark: this.remark
+        };
+        return theJson
+    }
 }
