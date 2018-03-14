@@ -1,7 +1,7 @@
 class NewContractView extends BaseView {
     initializeView(){
         showSaveButton(this.saveNewContract);
-        getmdlSelect.init(".getmdl-select");
+        
             FbDatabase.getDatabaseSnapshot("products", function (aSnapshot) {
                 let theInsurances = Insurance.createObjectsFromSnapshot(aSnapshot, Insurance);
                 theInsurances.forEach(eachInsurance =>{
@@ -10,7 +10,7 @@ class NewContractView extends BaseView {
                     theLi.innerHTML = eachInsurance.name();
                     document.getElementById("insuranceList").appendChild(theLi);
                 });
-                
+                getmdlSelect.init(".getmdl-select");
             }, this);
         
     }
