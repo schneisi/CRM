@@ -11,13 +11,7 @@ function initialize() {
     });
     
     var theNavigationHammer = new Hammer(document.getElementById("main"));
-    theNavigationHammer.on("swiperight swipeleft", aGesture => {
-        if (aGesture.type == "swiperight") {
-            showDrawer();
-        } else {
-            dismissDrawer();
-        }
-    });
+    theNavigationHammer.on("swiperight", function () {showDrawer()});
 }
 
 function logoutClicked() {
