@@ -73,74 +73,136 @@
             <div class="mdl-grid">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                 <p>Familienstand:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="family-1">
-                    <input type="radio" id="family-1" class="mdl-radio__button" name="family" value="1" checked>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isMarried-0">
+                    <input type="radio" id="isMarried-0" class="mdl-radio__button" name="isMarried" value="false" checked>
                     <span class="mdl-radio__label">Ledig</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="family-2">
-                    <input type="radio" id="family-2" class="mdl-radio__button" name="family" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isMarried-1">
+                    <input type="radio" id="isMarried-1" class="mdl-radio__button" name="isMarried" value="true">
                     <span class="mdl-radio__label">Verheiratet</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="family-3">
-                        <input type="radio" id="family-3" class="mdl-radio__button" name="family" value="3">
-                        <span class="mdl-radio__label">Geschieden</span>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <p>Hat der Kunde ein KFZ:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCar-0">
+                    <input type="radio" id="ownsCar-0" class="mdl-radio__button" name="ownsCar" value="false" checked>
+                    <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCar-1">
+                    <input type="radio" id="ownsCar-1" class="mdl-radio__button" name="ownsCar" value="true">
+                    <span class="mdl-radio__label">Ja</span>
                 </label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <p>Hat der Kunde bereits eine Ausbildung abgeschlossen:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-1">
-                    <input type="radio" id="education-1" class="mdl-radio__button" name="education" value="1" checked>
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="education-2">
-                    <input type="radio" id="education-2" class="mdl-radio__button" name="education" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="completedInitialTraining-0">
+                    <input type="radio" id="completedInitialTraining-0" class="mdl-radio__button" name="completedInitialTraining" value="false" checked>
                     <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="completedInitialTraining-1">
+                    <input type="radio" id="completedInitialTraining-1" class="mdl-radio__button" name="completedInitialTraining" value="true">
+                    <span class="mdl-radio__label">Ja</span>
                 </label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                    <p>Ist der Kunde selbstständig oder Arbeitnehmer:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="workStyle-1">
-                    <input type="radio" id="workStyle-1" class="mdl-radio__button" name="workStyle" value="1" checked>
-                    <span class="mdl-radio__label">Selbstständig</span>
+                    <p>Ist der Kunde selbstständig:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isIndependent-0">
+                    <input type="radio" id="isIndependent-0" class="mdl-radio__button" name="isIndependent" value="false" checked>
+                    <span class="mdl-radio__label">Nein</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="workStyle-2">
-                    <input type="radio" id="workStyle-2" class="mdl-radio__button" name="workStyle" value="2">
-                    <span class="mdl-radio__label">Arbeitnehmer</span>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isIndependent-1">
+                    <input type="radio" id="isIndependent-1" class="mdl-radio__button" name="isIndependent" value="true">
+                    <span class="mdl-radio__label">Ja</span>
+                </label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <p>Ist der Kunde beamtet:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isOfficial-0">
+                    <input type="radio" id="isOfficial-0" class="mdl-radio__button" name="isOfficial" value="false" checked>
+                    <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isOfficial-1">
+                    <input type="radio" id="isOfficial-1" class="mdl-radio__button" name="isOfficial" value="true">
+                    <span class="mdl-radio__label">Ja</span>
                 </label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <p>Ist der Kunde in einer Leitenden Position:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="position-1">
-                    <input type="radio" id="position-1" class="mdl-radio__button" name="position" value="1" checked>
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="position-2">
-                    <input type="radio" id="position-2" class="mdl-radio__button" name="position" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasLeadingPosition-0">
+                    <input type="radio" id="hasLeadingPosition-0" class="mdl-radio__button" name="hasLeadingPosition" value="false" checked>
                     <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasLeadingPosition-1">
+                    <input type="radio" id="hasLeadingPosition-1" class="mdl-radio__button" name="hasLeadingPosition" value="true">
+                    <span class="mdl-radio__label">Ja</span>
                 </label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <p>Ist der Kunde vermögend:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="muchMoney-1">
-                    <input type="radio" id="muchMoney-1" class="mdl-radio__button" name="muchMoney" value="1" checked>
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="muchMoney-2">
-                    <input type="radio" id="muchMoney-2" class="mdl-radio__button" name="muchMoney" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="earnsMoreThanAverage-0">
+                    <input type="radio" id="earnsMoreThanAverage-0" class="mdl-radio__button" name="earnsMoreThanAverage" value="false" checked>
                     <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="earnsMoreThanAverage-1">
+                    <input type="radio" id="earnsMoreThanAverage-1" class="mdl-radio__button" name="earnsMoreThanAverage" value="true">
+                    <span class="mdl-radio__label">Ja</span>
                 </label>
             </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
                     <p>Besitzt der Kunde ein Eigenheim:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownHouse-1">
-                    <input type="radio" id="ownHouse-1" class="mdl-radio__button" name="ownHouse" value="1" checked>
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownHouse-2">
-                    <input type="radio" id="ownHouse-2" class="mdl-radio__button" name="ownHouse" value="2">
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsPrivateBuilding-0">
+                    <input type="radio" id="ownsPrivateBuilding-0" class="mdl-radio__button" name="ownsPrivateBuilding" value="false" checked>
                     <span class="mdl-radio__label">Nein</span>
                 </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsPrivateBuilding-1">
+                    <input type="radio" id="ownsPrivateBuilding-1" class="mdl-radio__button" name="ownsPrivateBuilding" value="true">
+                    <span class="mdl-radio__label">Ja</span>
+                </label>
             </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <p>Besitzt der Kunde ein gewerblich genutztes Gebäude:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCommercialBuilding-0">
+                    <input type="radio" id="ownsCommercialBuilding-0" class="mdl-radio__button" name="ownsCommercialBuilding" value="false" checked>
+                    <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCommercialBuilding-1">
+                    <input type="radio" id="ownsCommercialBuilding-1" class="mdl-radio__button" name="ownsCommercialBuilding" value="true">
+                    <span class="mdl-radio__label">Ja</span>
+                </label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <p>Führt der Kunde einen privaten Haushalt:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasPrivateHousehold-0">
+                    <input type="radio" id="hasPrivateHousehold-0" class="mdl-radio__button" name="hasPrivateHousehold" value="false" checked>
+                    <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasPrivateHousehold-1">
+                    <input type="radio" id="hasPrivateHousehold-1" class="mdl-radio__button" name="hasPrivateHousehold" value="true">
+                    <span class="mdl-radio__label">Ja</span>
+                </label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <p>Ist der Kunde am Kapitalmarkt interessiert:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isInterestInCapitalMarked-0">
+                    <input type="radio" id="isInterestInCapitalMarked-0" class="mdl-radio__button" name="isInterestInCapitalMarked" value="false" checked>
+                    <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isInterestInCapitalMarked-1">
+                    <input type="radio" id="isInterestInCapitalMarked-1" class="mdl-radio__button" name="isInterestInCapitalMarked" value="true">
+                    <span class="mdl-radio__label">Ja</span>
+                </label>
+            </div>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                <p>Hat der Kunde bereits eine Vorerkrankung:</p>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hadIllness-0">
+                    <input type="radio" id="hadIllness-0" class="mdl-radio__button" name="hadIllness" value="false" checked>
+                    <span class="mdl-radio__label">Nein</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hadIllness-1">
+                    <input type="radio" id="hadIllness-1" class="mdl-radio__button" name="hadIllness" value="true">
+                    <span class="mdl-radio__label">Ja</span>
+                </label>
+                </div>
             </div>
         </form>     
     </div>

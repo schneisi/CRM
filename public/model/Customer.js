@@ -42,6 +42,58 @@ class Customer extends BaseDatabaseObject {
     notes() {
         return this.getValueOfChild("notes");
     }
+    //Segmentation infos
+    completedInitialTraining() {
+        return this.getValueOfChild("completedInitialTraining");
+    }
+
+    isMarried() {
+        return this.getValueOfChild("isMarried");
+    }
+
+    ownsCar() {
+        return this.getValueOfChild("ownsCar");
+    }
+
+    ownsPrivateBuilding() {
+        return this.getValueOfChild("ownsPrivateBuilding");
+    }
+
+    ownsCommercialBuilding() {
+        return this.getValueOfChild("ownsCommercialBuilding");
+    }
+
+    hasPrivateHousehold() {
+        return this.getValueOfChild("hasPrivateHousehold");
+    }
+
+    isIndependent() {
+        return this.getValueOfChild("isIndependent");
+    }
+
+    isOfficial() {
+        return this.getValueOfChild("isOfficial");
+    }
+
+    isCrossBorderCommuter() {
+        return this.getValueOfChild("isCrossBorderCommuter");
+    }
+
+    hadIllness() {
+        return this.getValueOfChild("hadIllness");
+    }
+
+    earnsMoreThanAverage() {
+        return this.getValueOfChild("earnsMoreThanAverage");
+    }
+
+    isInterestInCapitalMarked() {
+        return this.getValueOfChild("isInterestInCapitalMarked");
+    }
+
+    hasLeadingPosition() {
+        return this.getValueOfChild("hasLeadingPosition");
+    }
 
     //API
     fullName() {
@@ -120,6 +172,21 @@ class CustomerBuilder extends BaseBuilder {
         this.place = null;
         this.street = null;
         this.notes = null;
+        //segmentierung
+        this.completedInitialTraining = false;
+        this.isMarried = false;
+        this.ownsCar = false;
+        this.ownsPrivateBuilding = false;
+        this.ownsCommercialBuilding = false;
+        this.hasPrivateHousehold = false;
+        this.isIndependent = false;
+        this.isOfficial = false;
+        this.isCrossBorderCommuter = false;
+        this.hadIllness = false;
+        this.earnsMoreThanAverage = false;
+        this.isInterestInCapitalMarked = false;
+        this.hasLeadingPosition = false;
+        
     }
     getJson() {
         let theJsonObject = {
@@ -134,7 +201,20 @@ class CustomerBuilder extends BaseBuilder {
                 place: this.place,
                 street: this.street,
                 zip: this.zip,
-            }
+            },
+            completedInitialTraining: this.completedInitialTraining,
+            isMarried: this.isMarried,
+            ownsCar: this.ownsCar,
+            ownsPrivateBuilding: this.ownsPrivateBuilding,
+            ownsCommercialBuilding: this.ownsCommercialBuilding,
+            hasPrivateHousehold: this.hasPrivateHousehold,
+            isIndependent: this.isIndependent,
+            isOfficial: this.isOfficial,
+            isCrossBorderCommuter: this.isCrossBorderCommuter,
+            hadIllness: this.hadIllness,
+            earnsMoreThanAverage: this.earnsMoreThanAverage,
+            isInterestInCapitalMarked: this.isInterestInCapitalMarked,
+            hasLeadingPosition: this.hasLeadingPosition
         }
         return theJsonObject;
     }
