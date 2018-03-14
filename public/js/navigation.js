@@ -164,3 +164,21 @@ function getActionId() {
 function setActionId(aString) {
     sessionStorage.setItem('actionId', aString);
 }
+
+function hasActionString(){
+    return sessionStorage.getItem('actionString') != null;
+}
+
+function resetActionString() {
+    sessionStorage.removeItem('actionString');
+}
+
+function getActionString() {
+    let theActionString = sessionStorage.getItem('actionString');
+    return theActionString;
+}
+
+function setActionString(aString) {
+    sessionStorage.setItem('actionString', aString);
+}
+

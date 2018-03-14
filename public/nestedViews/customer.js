@@ -60,4 +60,10 @@ class CustomerView extends BaseView {
         setActionId("customers/" + currentView.customer.key() + "/contracts/" + aContract.key());
         navigateToViewWithId("contract");
     }
+
+    newContractButtonClicked() {
+        setActionId(this.customer.key());
+        setActionString("customer");
+        navigateToViewWithId("newContract");
+    }
 }

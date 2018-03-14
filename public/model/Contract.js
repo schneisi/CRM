@@ -50,6 +50,8 @@ class ContractBuilder extends BaseBuilder {
             this.remark = aContract.remark();
             this.productId = aContract.productId();
             this.customerId = aContract.customerId();
+        } else {
+            this.remark = "";
         }
     }
     

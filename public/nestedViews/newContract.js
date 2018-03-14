@@ -7,6 +7,7 @@ class NewContractView extends BaseView {
                 theInsurances.forEach(eachInsurance =>{
                     let theLi = document.createElement("li");
                     theLi.classList.add("mdl-menu__item");
+                    theLi.setAttribute("data-val", eachInsurance.key());
                     theLi.innerHTML = eachInsurance.name();
                     document.getElementById("insuranceList").appendChild(theLi);
                 });
@@ -16,6 +17,13 @@ class NewContractView extends BaseView {
     }
 
     saveNewContract(){
-
+        let theBuilder = new ContractBuilder(this.contract);
+        theBuilder.date = new Date(document.getElementById("dateField").value);
+        if (getActionString() == "customer"){
+            theBuilder.customerId = getActionId();
+        }
+        theBuilder.productId = document.getElementById("insuranceValueField").value;
+        theBuilder.save();
+        navigateToViewWithId("customer");
     }
 }
