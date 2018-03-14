@@ -1,4 +1,4 @@
-let isDebugging = false;
+let isDebugging = true;
 let isAlwaysOnline = true;
 let jsFiles = [];
 const applicationServerPublicKey = "BPoW8cpPvtjGUYTU2kBj0OY91inszdxTDAcfrtXn0YoeR7lFSFFH7v45q96X067HwmaaRmvGeNNnIp272mSZGKw";
@@ -7,8 +7,11 @@ let isSubscribed;
 let hasServiceWorker = false;
 
 window.onerror = function (message, url, lineNo){
-    alert('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
-    return false;
+    if(!isDebugging){
+        alert('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
+        return false;
+    }
+    return true;
 };
 
 function logString(aString) {

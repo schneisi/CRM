@@ -79,6 +79,14 @@
             "js": "./nestedViews/contract.js",
             "viewClass": "ContractView",
             "shownInMenu": false
+        },
+        {
+            "name": "Neuer Vertrag",
+            "id": "newContract",
+            "url": "./nestedViews/newContract.html",
+            "js": "./nestedViews/newContract.js",
+            "viewClass": "NewContractView",
+            "shownInMenu": false
         }
     ]
 }
