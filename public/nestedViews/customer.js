@@ -35,6 +35,7 @@ class CustomerView extends BaseView {
         Promise.all(theCustomer.promises).then(function () {
             let theListGrid = new ListGrid();
             theListGrid.clickEventSelector = currentView.contractClicked;
+            theListGrid.deleteSelector = currentView.deleteContractClicked;
             theListGrid.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
             theListGrid.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
             theListGrid.objects = currentView.customer.contracts;
@@ -53,10 +54,6 @@ class CustomerView extends BaseView {
         navigateToViewWithId("newCustomerForm");
     }
 
-    mapsButtonClicked() {
-        callGoogleMaps(theCustomer.addressString());
-    }
-
     contractClicked(aContract) {
         setActionId("customers/" + currentView.customer.key() + "/contracts/" + aContract.key());
         navigateToViewWithId("contract");
@@ -68,7 +65,10 @@ class CustomerView extends BaseView {
         navigateToViewWithId("newContract");
     }
 
-
+    deleteContractClicked(aContract){
+        aContract.aboutToDelete();
+        return true;
+    }
 
     //Suggestions
     showSuggestions() {
@@ -81,4 +81,5 @@ class CustomerView extends BaseView {
         }
         theListGrid.setAsChildOf(document.getElementById("suggestionsDiv"));
     }
+
 }
