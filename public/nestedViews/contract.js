@@ -1,5 +1,7 @@
 class ContractView extends BaseView {
     initializeView() {
+        showEditMenuButton();
+        showDeleteMenuButton();
         FbDatabase.getDatabaseSnapshot(getActionId(), function(aSnapshot) {
             this.contract = new Contract(aSnapshot);
             this.contract.loadInsurance().then(function () {
@@ -15,5 +17,16 @@ class ContractView extends BaseView {
             .addRow(["Produkt", this.contract.insuranceName()])
             .addRow(["Bemerkung", this.contract.remark()]);
         document.getElementById("content").innerHTML = this.table.getHtml();
+    }
+
+    deleteMenuButtonClicked() {
+        this.contract.aboutToDelete();
+        navigateToViewWithId("contract");
+    }
+
+    editMenuButtonClicked() {
+        setActionString("contract");
+        setActionId("customers/" + this.contract.customerId() + "/contracts/" + this.contract.key())
+        navigateToViewWithId("newContract");
     }
 }
