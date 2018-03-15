@@ -6,6 +6,7 @@ class CustomerView extends BaseView {
         showDeleteMenuButton();
         this.initializeAccordion();
         this.showCustomerData();
+        this.generateEnsuranceSuggestion();
     }
     showCustomerData(){
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
@@ -45,6 +46,20 @@ class CustomerView extends BaseView {
         });
     }
 
+    //todo
+    generateEnsuranceSuggestion() {
+        let theEnsuranceSuggestionList = [];
+        FbDatabase.getDatabaseSnapshot("products", function (aProductsSnapshot) {
+            
+        }, this);
+       
+
+
+   
+    }
+
+   
+
     deleteMenuButtonClicked() {
         this.customer.aboutToDelete();
         navigateToViewWithId("customers");
@@ -77,9 +92,16 @@ class CustomerView extends BaseView {
         theListGrid.clickEventSelector = this.suggestionClicked;
         theListGrid.noElementsString = "Keine Vorschläge";
         theListGrid.addListGridField(new ListGridField("", aHelper => aHelper.value));
+
+
         if (theCustomer.ownsCar() && !theCustomer.hasCarInsurance()) {
             theListGrid.addObject(new ListGridHelper("carInsurance", "KFZ-Versicherung"));
         }
+
+        if (theCustomer.completedInitialTraining() && !theCustomer.hasPrivateLiabilityInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Private-Haftplficht-Versicherung"));
+        }
+
         theListGrid.setAsChildOf(document.getElementById("suggestionsDiv"));
     }
 
