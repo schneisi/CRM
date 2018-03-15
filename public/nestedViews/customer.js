@@ -58,10 +58,11 @@ class CustomerView extends BaseView {
 
     checkEligibilityForKFZInsurance() {
         if (this.customer.ownsCar) {
-            if (this.customer.hasCarEnsurance()) {
+            if (this.customer.hasCarInsurance()) {
                 return true
             }
         }
+        return false
     }
 
     deleteMenuButtonClicked() {
