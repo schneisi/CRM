@@ -36,11 +36,13 @@ class CustomerView extends BaseView {
         Promise.all(theCustomer.promises).then(function () {
             let theListGrid = new ListGrid();
             theListGrid.clickEventSelector = currentView.contractClicked;
+            theListGrid.deleteSelector = currentView.deleteContractClicked;
             theListGrid.addListGridField(new ListGridField("Datum", aContract => aContract.dateString()));
             theListGrid.addListGridField(new ListGridField("Produkt", aContract => aContract.insuranceName()));
             theListGrid.objects = currentView.customer.contracts;
             currentView.contractList = theListGrid;
             currentView.contractList.setAsChildOf(document.getElementById("contractListDiv"));
+            currentView.showSuggestions();
         });
     }
 
@@ -74,10 +76,6 @@ class CustomerView extends BaseView {
         navigateToViewWithId("newCustomerForm");
     }
 
-    mapsButtonClicked() {
-        callGoogleMaps(theCustomer.addressString());
-    }
-
     contractClicked(aContract) {
         setActionId("customers/" + currentView.customer.key() + "/contracts/" + aContract.key());
         navigateToViewWithId("contract");
@@ -88,4 +86,22 @@ class CustomerView extends BaseView {
         setActionString("customer");
         navigateToViewWithId("newContract");
     }
+
+    deleteContractClicked(aContract){
+        aContract.aboutToDelete();
+        return true;
+    }
+
+    //Suggestions
+    showSuggestions() {
+        let theListGrid = new ListGrid();
+        theListGrid.showTitle = false;
+        theListGrid.noElementsString = "Keine Vorschläge";
+        theListGrid.addListGridField(new ListGridField("", aHelper => aHelper.value));
+        if (theCustomer.ownsCar() && !theCustomer.hasCarInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "KFZ-Versicherung"));
+        }
+        theListGrid.setAsChildOf(document.getElementById("suggestionsDiv"));
+    }
+
 }

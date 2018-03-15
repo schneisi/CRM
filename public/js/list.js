@@ -17,6 +17,10 @@ class ListGrid {
         this.fields.push(aField);
     }
 
+    addObject(anObject) {
+        this.objects.push(anObject);
+    }
+
     setAsChildOf(anElement) {
         while (anElement.firstChild) {
             anElement.removeChild(anElement.firstChild);
