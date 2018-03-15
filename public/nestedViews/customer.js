@@ -40,6 +40,7 @@ class CustomerView extends BaseView {
             theListGrid.objects = currentView.customer.contracts;
             currentView.contractList = theListGrid;
             currentView.contractList.setAsChildOf(document.getElementById("contractListDiv"));
+            currentView.showSuggestions();
         });
     }
 
@@ -65,5 +66,19 @@ class CustomerView extends BaseView {
         setActionId(this.customer.key());
         setActionString("customer");
         navigateToViewWithId("newContract");
+    }
+
+
+
+    //Suggestions
+    showSuggestions() {
+        let theListGrid = new ListGrid();
+        theListGrid.showTitle = false;
+        theListGrid.noElementsString = "Keine Vorschläge";
+        theListGrid.addListGridField(new ListGridField("", aHelper => aHelper.value));
+        if (theCustomer.ownsCar() && !theCustomer.hasCarInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "KFZ-Versicherung"));
+        }
+        theListGrid.setAsChildOf(document.getElementById("suggestionsDiv"));
     }
 }
