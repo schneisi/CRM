@@ -128,6 +128,8 @@ class Customer extends BaseDatabaseObject {
         });
     }
 
+  
+
     static createTask() {
         //BirthdayTask
         let theBirthdayTaskName = "BirthdayTask"
@@ -171,7 +173,7 @@ class CustomerBuilder extends BaseBuilder {
         this.place = null;
         this.street = null;
         this.notes = null;
-        //segmentierung
+        
         this.completedInitialTraining = false;
         this.isMarried = false;
         this.ownsCar = false;
@@ -219,6 +221,10 @@ class CustomerBuilder extends BaseBuilder {
             earnsMoreThanAverage: this.earnsMoreThanAverage,
             isInterestInCapitalMarked: this.isInterestInCapitalMarked,
             hasLeadingPosition: this.hasLeadingPosition
+        };
+       
+        if (!this.isNew()) {
+            theJsonObject.contracts = this.object.snapshot.child("contracts").toJSON();
         }
         return theJsonObject;
     }

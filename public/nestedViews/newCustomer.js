@@ -122,7 +122,12 @@ class NewCustomerView extends BaseView {
         theBuilder.earnsMoreThanAverage = this.getSelectedValueFromRadioButtonGroup(this.earnsMoreThanAverageRadio);
         theBuilder.isInterestInCapitalMarked = this.getSelectedValueFromRadioButtonGroup(this.isInterestInCapitalMarkedRadio);
         theBuilder.hasLeadingPosition = this.getSelectedValueFromRadioButtonGroup(this.hasLeadingPositionRadio);
+
         
+
+       
+        
+
         theBuilder.save();
         navigateToViewWithId("customers");
     }

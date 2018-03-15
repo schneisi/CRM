@@ -6,6 +6,7 @@ class CustomerView extends BaseView {
         showDeleteMenuButton();
         this.initializeAccordion();
         this.showCustomerData();
+        this.generateEnsuranceSuggestion();
     }
     showCustomerData(){
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
@@ -41,6 +42,26 @@ class CustomerView extends BaseView {
             currentView.contractList = theListGrid;
             currentView.contractList.setAsChildOf(document.getElementById("contractListDiv"));
         });
+    }
+
+    //todo
+    generateEnsuranceSuggestion() {
+        let theEnsuranceSuggestionList = [];
+        FbDatabase.getDatabaseSnapshot("products", function (aProductsSnapshot) {
+            
+        }, this);
+       
+
+
+   
+    }
+
+    checkEligibilityForKFZInsurance() {
+        if (this.customer.ownsCar) {
+            if (this.customer.hasCarEnsurance()) {
+                return true
+            }
+        }
     }
 
     deleteMenuButtonClicked() {
