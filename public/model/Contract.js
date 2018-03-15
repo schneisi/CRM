@@ -21,6 +21,10 @@ class Contract extends BaseDatabaseObject{
         return this.getValueOfChild("remark");
     }
 
+    type() {
+        return this.getValueOfChild("type");
+    }
+
     //API
     loadInsurance() {
         let theReceiver = this;

@@ -128,6 +128,10 @@ class Customer extends BaseDatabaseObject {
         });
     }
 
+    hasCarInsurance() {
+        return this.hasInsuranceOfType("carInsurance");
+    }
+
     static createTask() {
         //BirthdayTask
         let theBirthdayTaskName = "BirthdayTask"
@@ -150,6 +154,14 @@ class Customer extends BaseDatabaseObject {
             }, 60);
             Scheduler.instance.addTask(theBirthdayTask);
         }
+    }
+
+
+    //Internal
+    hasInsuranceOfType(aString) {
+        return this.contracts.some(eachContract => {
+            return eachContract.type() == aString;
+        });
     }
 }
 
@@ -223,4 +235,3 @@ class CustomerBuilder extends BaseBuilder {
         return theJsonObject;
     }
 }
-
