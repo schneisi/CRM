@@ -1,4 +1,5 @@
 <div id="content">
+
     <button class="accordion">Allgemeine Informationen zum Kunden</button>
     <div class="panel panel-visible">
         <form>
@@ -52,6 +53,7 @@
             </div>
         </form>
     </div>
+
     <button class="accordion">Spezifischere Fragen</button>
     <div class="panel">
         <form>
@@ -67,19 +69,12 @@
                     <span class="mdl-radio__label">Verheiratet</span>
                 </label>
             </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Hat der Kunde ein KFZ:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCar-0">
-                    <input type="radio" id="ownsCar-0" class="mdl-radio__button" name="ownsCar" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
+                <label id="ownsCarCheckBoxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="ownsCarCheckBox">
+                    <input type="checkbox" id="ownsCarCheckBox" class="mdl-checkbox__input" >
+                    <span class="mdl-checkbox__label">Besitzt KFZ</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCar-1">
-                    <input type="radio" id="ownsCar-1" class="mdl-radio__button" name="ownsCar" value="true">
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-            </div>
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                    <p>Hat der Kunde bereits eine Ausbildung abgeschlossen:</p>
+                <p>Hat der Kunde bereits eine Ausbildung abgeschlossen:</p>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="completedInitialTraining-0">
                     <input type="radio" id="completedInitialTraining-0" class="mdl-radio__button" name="completedInitialTraining" value="false" checked>
                     <span class="mdl-radio__label">Nein</span>

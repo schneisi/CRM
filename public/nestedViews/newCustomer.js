@@ -27,7 +27,7 @@ class NewCustomerView extends BaseView {
                 currentView.setRadioButtonByValue(currentView.sexRadio, theCustomer.sex());
 
                 currentView.setRadioButtonByValue(currentView.isMarriedRadio, theCustomer.isMarried());
-                currentView.setRadioButtonByValue(currentView.ownsCarRadio, theCustomer.ownsCar());
+                if (theCustomer.ownsCar()) currentView.ownsCarHelper.check();
                 currentView.setRadioButtonByValue(currentView.ownsCommercialBuildingRadio, theCustomer.ownsCommercialBuilding());
                 currentView.setRadioButtonByValue(currentView.ownsPrivateBuildingRadio, theCustomer.ownsPrivateBuilding());
                 currentView.setRadioButtonByValue(currentView.hasPrivateHouseholdRadio, theCustomer.hasPrivateHousehold());
@@ -79,7 +79,8 @@ class NewCustomerView extends BaseView {
 
         this.completedInitialTrainingRadio = document.getElementsByName("completedInitialTraining");
         this.isMarriedRadio = document.getElementsByName("isMarried");
-        this.ownsCarRadio = document.getElementsByName("ownsCar");
+        //this.ownsCarMDLCheckBox = document.getElementById("ownsCarCheckBoxMDL").MaterialCheckbox;
+        this.ownsCarHelper = new CheckBoxHelper("ownsCarCheckBox");
         this.ownsPrivateBuildingRadio = document.getElementsByName("ownsPrivateBuilding");
         this.ownsCommercialBuildingRadio = document.getElementsByName("ownsCommercialBuilding");
         this.hasPrivateHouseholdRadio = document.getElementsByName("hasPrivateHousehold");
@@ -107,7 +108,7 @@ class NewCustomerView extends BaseView {
 
         theBuilder.completedInitialTraining = this.getSelectedValueFromRadioButtonGroup(this.completedInitialTrainingRadio);
         theBuilder.isMarried = this.getSelectedValueFromRadioButtonGroup(this.isMarriedRadio);
-        theBuilder.ownsCar = this.getSelectedValueFromRadioButtonGroup(this.ownsCarRadio);
+        theBuilder.ownsCar = this.ownsCarHelper.isChecked();
         theBuilder.ownsPrivateBuilding = this.getSelectedValueFromRadioButtonGroup(this.ownsPrivateBuildingRadio);
         theBuilder.ownsCommercialBuilding = this.getSelectedValueFromRadioButtonGroup(this.ownsCommercialBuildingRadio);
         theBuilder.hasPrivateHousehold = this.getSelectedValueFromRadioButtonGroup(this.hasPrivateHouseholdRadio);
