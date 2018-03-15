@@ -39,3 +39,17 @@ class HistoryObject {
         this.actionId = anActionId;
     }
 }
+
+class CheckBoxHelper {
+    constructor(anIdString) {
+        this.checkboxId = anIdString;
+    }
+
+    isChecked() {
+        return document.getElementById(this.checkboxId).checked;
+    }
+
+    check() {
+        document.getElementById(this.checkboxId + "MDL").MaterialCheckbox.check();
+    }
+}
