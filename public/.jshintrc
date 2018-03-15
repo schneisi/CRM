@@ -1,5 +1,10 @@
 {
-    "unused": true,
-
+    "unused": false,
+    "bitwise": true,
+    "freeze": true,
+    "maxdepth": 3,
+    "maxparams": 4,
+    "nonew": true,
+    "browser": true,
     "esversion": 6
 }
