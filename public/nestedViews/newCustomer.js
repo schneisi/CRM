@@ -53,10 +53,6 @@ class NewCustomerView extends BaseView {
                 }
             }
         }
-        else {
-            console.log("Empty radioButtonGroup" + radioButtonGroup);
-        }
-
     }
 
     getSelectedValueFromRadioButtonGroup(radioButtonGroup) {
