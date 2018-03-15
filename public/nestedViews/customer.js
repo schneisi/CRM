@@ -58,14 +58,7 @@ class CustomerView extends BaseView {
    
     }
 
-    checkEligibilityForKFZInsurance() {
-        if (this.customer.ownsCar) {
-            if (this.customer.hasCarInsurance()) {
-                return true
-            }
-        }
-        return false
-    }
+   
 
     deleteMenuButtonClicked() {
         this.customer.aboutToDelete();
@@ -98,9 +91,16 @@ class CustomerView extends BaseView {
         theListGrid.showTitle = false;
         theListGrid.noElementsString = "Keine Vorschläge";
         theListGrid.addListGridField(new ListGridField("", aHelper => aHelper.value));
+
+
         if (theCustomer.ownsCar() && !theCustomer.hasCarInsurance()) {
             theListGrid.addObject(new ListGridHelper("", "KFZ-Versicherung"));
         }
+
+        if (theCustomer.completedInitialTraining() && !theCustomer.hasPrivateLiabilityInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Private-Haftplficht-Versicherung"));
+        }
+
         theListGrid.setAsChildOf(document.getElementById("suggestionsDiv"));
     }
 

@@ -26,19 +26,20 @@ class NewCustomerView extends BaseView {
                 currentView.birthdayField.parentElement.classList.add("is-dirty");
                 currentView.setRadioButtonByValue(currentView.sexRadio, theCustomer.sex());
 
-                currentView.setRadioButtonByValue(currentView.isMarriedRadio, theCustomer.isMarried());
+                if (theCustomer.isMarried()) currentView.isMarriedHelper.check();
                 if (theCustomer.ownsCar()) currentView.ownsCarHelper.check();
-                currentView.setRadioButtonByValue(currentView.ownsCommercialBuildingRadio, theCustomer.ownsCommercialBuilding());
-                currentView.setRadioButtonByValue(currentView.ownsPrivateBuildingRadio, theCustomer.ownsPrivateBuilding());
-                currentView.setRadioButtonByValue(currentView.hasPrivateHouseholdRadio, theCustomer.hasPrivateHousehold());
-                currentView.setRadioButtonByValue(currentView.isIndependentRadio, theCustomer.isIndependent());
-                currentView.setRadioButtonByValue(currentView.isOfficialRadio, theCustomer.isOfficial());
-                currentView.setRadioButtonByValue(currentView.isCrossBorderCommuterRadio, theCustomer.isCrossBorderCommuter());
-                currentView.setRadioButtonByValue(currentView.hadIllnessRadio, theCustomer.hadIllness());
-                currentView.setRadioButtonByValue(currentView.earnsMoreThanAverageRadio, theCustomer.earnsMoreThanAverage());
-                currentView.setRadioButtonByValue(currentView.isInterestInCapitalMarkedRadio, theCustomer.isInterestInCapitalMarked());
-                currentView.setRadioButtonByValue(currentView.completedInitialTrainingRadio, theCustomer.completedInitialTraining());
-                currentView.setRadioButtonByValue(currentView.hasLeadingPositionRadio, theCustomer.hasLeadingPosition());
+                if (theCustomer.ownsCommercialBuilding()) currentView.ownsCommercialBuildingHelper.check();
+                if (theCustomer.ownsPrivateBuilding()) currentView.ownsPrivateBuildingHelper.check();
+                if (theCustomer.hasPrivateHousehold()) currentView.hasPrivateHouseholdHelper.check();
+                if (theCustomer.isIndependent()) currentView.isIndependentHelper.check();
+                if (theCustomer.isOfficial()) currentView.isOfficialHelper.check();
+                if (theCustomer.isCrossBorderCommuter()) currentView.isCrossBorderCommuterHelper.check();
+                if (theCustomer.hadIllness()) currentView.hadIllnessHelper.check();
+                if (theCustomer.earnsMoreThanAverage()) currentView.earnsMoreThanAverageHelper.check();
+                if (theCustomer.isInterestInCapitalMarked()) currentView.isInterestInCapitalMarkedHelper.check();
+                if (theCustomer.completedInitialTraining()) currentView.completedInitialTrainingHelper.check();
+                if (theCustomer.hasLeadingPosition()) currentView.hasLeadingPositionHelper.check();
+
                 currentView.customer = theCustomer;
             });
         }
@@ -77,20 +78,19 @@ class NewCustomerView extends BaseView {
         this.phoneField = document.getElementById("phone");
         this.sexRadio = document.getElementsByName("sex");
 
-        this.completedInitialTrainingRadio = document.getElementsByName("completedInitialTraining");
-        this.isMarriedRadio = document.getElementsByName("isMarried");
-        //this.ownsCarMDLCheckBox = document.getElementById("ownsCarCheckBoxMDL").MaterialCheckbox;
+        this.completedInitialTrainingHelper = new CheckBoxHelper("completedInitialTrainingCheckbox");
+        this.isMarriedHelper = new CheckBoxHelper("isMarriedCheckbox");
         this.ownsCarHelper = new CheckBoxHelper("ownsCarCheckBox");
-        this.ownsPrivateBuildingRadio = document.getElementsByName("ownsPrivateBuilding");
-        this.ownsCommercialBuildingRadio = document.getElementsByName("ownsCommercialBuilding");
-        this.hasPrivateHouseholdRadio = document.getElementsByName("hasPrivateHousehold");
-        this.isIndependentRadio = document.getElementsByName("isIndependent");
-        this.isOfficialRadio = document.getElementsByName("isOfficial");
-        this.isCrossBorderCommuterRadio = document.getElementsByName("isCrossBorderCommuter");
-        this.hadIllnessRadio = document.getElementsByName("hadIllness");
-        this.earnsMoreThanAverageRadio = document.getElementsByName("earnsMoreThanAverage");
-        this.isInterestInCapitalMarkedRadio = document.getElementsByName("isInterestInCapitalMarked");
-        this.hasLeadingPositionRadio = document.getElementsByName("hasLeadingPosition");
+        this.ownsPrivateBuildingHelper = new CheckBoxHelper("ownsPrivateBuildingCheckbox");
+        this.ownsCommercialBuildingHelper = new CheckBoxHelper("ownsCommercialBuildingCheckbox");
+        this.hasPrivateHouseholdHelper = new CheckBoxHelper("hasPrivateHouseholdCheckbox");
+        this.isIndependentHelper = new CheckBoxHelper("isIndependentCheckbox");
+        this.isOfficialHelper = new CheckBoxHelper("isOfficialCheckbox");
+        this.isCrossBorderCommuterHelper = new CheckBoxHelper("isCrossBorderCommuterCheckbox");
+        this.hadIllnessHelper = new CheckBoxHelper("hadIllnessCheckbox");
+        this.earnsMoreThanAverageHelper = new CheckBoxHelper("earnsMoreThanAverageCheckbox");
+        this.isInterestInCapitalMarkedHelper = new CheckBoxHelper("isInterestInCapitalMarkedCheckbox");
+        this.hasLeadingPositionHelper = new CheckBoxHelper("hasLeadingPositionCheckbox");
     }
 
     saveNewCustomer() {
@@ -106,24 +106,19 @@ class NewCustomerView extends BaseView {
         theBuilder.birthday = new Date(this.birthdayField.value);
         theBuilder.sex = this.getSelectedValueFromRadioButtonGroup(this.sexRadio);
 
-        theBuilder.completedInitialTraining = this.getSelectedValueFromRadioButtonGroup(this.completedInitialTrainingRadio);
-        theBuilder.isMarried = this.getSelectedValueFromRadioButtonGroup(this.isMarriedRadio);
+        theBuilder.completedInitialTraining = this.completedInitialTrainingHelper.isChecked();
+        theBuilder.isMarried = this.isMarriedHelper.isChecked();
         theBuilder.ownsCar = this.ownsCarHelper.isChecked();
-        theBuilder.ownsPrivateBuilding = this.getSelectedValueFromRadioButtonGroup(this.ownsPrivateBuildingRadio);
-        theBuilder.ownsCommercialBuilding = this.getSelectedValueFromRadioButtonGroup(this.ownsCommercialBuildingRadio);
-        theBuilder.hasPrivateHousehold = this.getSelectedValueFromRadioButtonGroup(this.hasPrivateHouseholdRadio);
-        theBuilder.isIndependent = this.getSelectedValueFromRadioButtonGroup(this.isIndependentRadio);
-        theBuilder.isOfficial = this.getSelectedValueFromRadioButtonGroup(this.isOfficialRadio);
-        theBuilder.isCrossBorderCommuter = this.getSelectedValueFromRadioButtonGroup(this.isOfficialRadio);
-        theBuilder.hadIllness = this.getSelectedValueFromRadioButtonGroup(this.hadIllnessRadio);
-        theBuilder.earnsMoreThanAverage = this.getSelectedValueFromRadioButtonGroup(this.earnsMoreThanAverageRadio);
-        theBuilder.isInterestInCapitalMarked = this.getSelectedValueFromRadioButtonGroup(this.isInterestInCapitalMarkedRadio);
-        theBuilder.hasLeadingPosition = this.getSelectedValueFromRadioButtonGroup(this.hasLeadingPositionRadio);
-
-        
-
-       
-        
+        theBuilder.ownsPrivateBuilding = this.ownsPrivateBuildingHelper.isChecked();
+        theBuilder.ownsCommercialBuilding = this.ownsCommercialBuildingHelper.isChecked();
+        theBuilder.hasPrivateHousehold = this.hasPrivateHouseholdHelper.isChecked();
+        theBuilder.isIndependent = this.isIndependentHelper.isChecked();
+        theBuilder.isOfficial = this.isOfficialHelper.isChecked();
+        theBuilder.isCrossBorderCommuter = this.isCrossBorderCommuterHelper.isChecked();
+        theBuilder.hadIllness = this.hadIllnessHelper.isChecked();
+        theBuilder.earnsMoreThanAverage = this.earnsMoreThanAverageHelper.isChecked();
+        theBuilder.isInterestInCapitalMarked = this.isInterestInCapitalMarkedHelper.isChecked();
+        theBuilder.hasLeadingPosition = this.hasLeadingPositionHelper.isChecked();
 
         theBuilder.save();
         navigateToViewWithId("customers");

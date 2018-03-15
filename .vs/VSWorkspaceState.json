@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\css",
     "\\database",
-    "\\js",
-    "\\model",
-    "\\nestedViews"
+    "\\public",
+    "\\public\\database",
+    "\\public\\js",
+    "\\public\\model",
+    "\\public\\nestedViews"
   ],
-  "SelectedNode": "\\nestedViews\\appointments.js",
+  "SelectedNode": "\\public\\nestedViews\\customer.js",
   "PreviewInSolutionExplorer": false
 }

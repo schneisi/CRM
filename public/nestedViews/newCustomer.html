@@ -58,131 +58,58 @@
     <div class="panel">
         <form>
             <div class="mdl-grid">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Familienstand:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isMarried-0">
-                    <input type="radio" id="isMarried-0" class="mdl-radio__button" name="isMarried" value="false" checked>
-                    <span class="mdl-radio__label">Ledig</span>
+                <label id="isMarriedCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="isMarriedCheckbox">
+                    <input type="checkbox" id="isMarriedCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Ist verheiratet</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isMarried-1">
-                    <input type="radio" id="isMarried-1" class="mdl-radio__button" name="isMarried" value="true">
-                    <span class="mdl-radio__label">Verheiratet</span>
-                </label>
-            </div>
                 <label id="ownsCarCheckBoxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="ownsCarCheckBox">
                     <input type="checkbox" id="ownsCarCheckBox" class="mdl-checkbox__input" >
                     <span class="mdl-checkbox__label">Besitzt KFZ</span>
                 </label>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Hat der Kunde bereits eine Ausbildung abgeschlossen:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="completedInitialTraining-0">
-                    <input type="radio" id="completedInitialTraining-0" class="mdl-radio__button" name="completedInitialTraining" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
+                <label id="completedInitialTrainingCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="completedInitialTrainingCheckbox">
+                    <input type="checkbox" id="completedInitialTrainingCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Ausbildung abgeschlossen</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="completedInitialTraining-1">
-                    <input type="radio" id="completedInitialTraining-1" class="mdl-radio__button" name="completedInitialTraining" value="true">
-                    <span class="mdl-radio__label">Ja</span>
+                <label id="isIndependentCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="isIndependentCheckbox">
+                    <input type="checkbox" id="isIndependentCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Ist selbstständig</span>
                 </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                    <p>Ist der Kunde selbstständig:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isIndependent-0">
-                    <input type="radio" id="isIndependent-0" class="mdl-radio__button" name="isIndependent" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
+                <label id="isOfficialCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="isOfficialCheckbox">
+                    <input type="checkbox" id="isOfficialCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Ist beamtet</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isIndependent-1">
-                    <input type="radio" id="isIndependent-1" class="mdl-radio__button" name="isIndependent" value="true">
-                    <span class="mdl-radio__label">Ja</span>
+                <label id="hasLeadingPositionCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="hasLeadingPositionCheckbox">
+                    <input type="checkbox" id="hasLeadingPositionCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Hat führende Position</span>
                 </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Ist der Kunde beamtet:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isOfficial-0">
-                    <input type="radio" id="isOfficial-0" class="mdl-radio__button" name="isOfficial" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
+                <label id="earnsMoreThanAverageCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="earnsMoreThanAverageCheckbox">
+                    <input type="checkbox" id="earnsMoreThanAverageCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Ist vermögend</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isOfficial-1">
-                    <input type="radio" id="isOfficial-1" class="mdl-radio__button" name="isOfficial" value="true">
-                    <span class="mdl-radio__label">Ja</span>
+                <label id="ownsPrivateBuildingCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="ownsPrivateBuildingCheckbox">
+                    <input type="checkbox" id="ownsPrivateBuildingCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Besitzt privat genutztes Gebäude</span>
                 </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                    <p>Ist der Kunde in einer Leitenden Position:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasLeadingPosition-0">
-                    <input type="radio" id="hasLeadingPosition-0" class="mdl-radio__button" name="hasLeadingPosition" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
+                <label id="ownsCommercialBuildingCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="ownsCommercialBuildingCheckbox">
+                    <input type="checkbox" id="ownsCommercialBuildingCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Besitzt privat genutztes Gebäude</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasLeadingPosition-1">
-                    <input type="radio" id="hasLeadingPosition-1" class="mdl-radio__button" name="hasLeadingPosition" value="true">
-                    <span class="mdl-radio__label">Ja</span>
+                <label id="hasPrivateHouseholdCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="hasPrivateHouseholdCheckbox">
+                    <input type="checkbox" id="hasPrivateHouseholdCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Führt privaten Haushalt</span>
                 </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                    <p>Ist der Kunde vermögend:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="earnsMoreThanAverage-0">
-                    <input type="radio" id="earnsMoreThanAverage-0" class="mdl-radio__button" name="earnsMoreThanAverage" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
+                <label id="isInterestInCapitalMarkedCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="isInterestInCapitalMarkedCheckbox">
+                    <input type="checkbox" id="isInterestInCapitalMarkedCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Ist am Kapitalmarkt interessiert</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="earnsMoreThanAverage-1">
-                    <input type="radio" id="earnsMoreThanAverage-1" class="mdl-radio__button" name="earnsMoreThanAverage" value="true">
-                    <span class="mdl-radio__label">Ja</span>
+                <label id="hadIllnessCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="hadIllnessCheckbox">
+                    <input type="checkbox" id="hadIllnessCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Hat Vorerkrankung</span>
                 </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                    <p>Besitzt der Kunde ein Eigenheim:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsPrivateBuilding-0">
-                    <input type="radio" id="ownsPrivateBuilding-0" class="mdl-radio__button" name="ownsPrivateBuilding" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
+                <label id="isCrossBorderCommuterCheckboxMDL" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="isCrossBorderCommuterCheckbox">
+                    <input type="checkbox" id="isCrossBorderCommuterCheckbox" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Ist Grenzgänger</span>
                 </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsPrivateBuilding-1">
-                    <input type="radio" id="ownsPrivateBuilding-1" class="mdl-radio__button" name="ownsPrivateBuilding" value="true">
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Besitzt der Kunde ein gewerblich genutztes Gebäude:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCommercialBuilding-0">
-                    <input type="radio" id="ownsCommercialBuilding-0" class="mdl-radio__button" name="ownsCommercialBuilding" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ownsCommercialBuilding-1">
-                    <input type="radio" id="ownsCommercialBuilding-1" class="mdl-radio__button" name="ownsCommercialBuilding" value="true">
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Führt der Kunde einen privaten Haushalt:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasPrivateHousehold-0">
-                    <input type="radio" id="hasPrivateHousehold-0" class="mdl-radio__button" name="hasPrivateHousehold" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hasPrivateHousehold-1">
-                    <input type="radio" id="hasPrivateHousehold-1" class="mdl-radio__button" name="hasPrivateHousehold" value="true">
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Ist der Kunde am Kapitalmarkt interessiert:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isInterestInCapitalMarked-0">
-                    <input type="radio" id="isInterestInCapitalMarked-0" class="mdl-radio__button" name="isInterestInCapitalMarked" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="isInterestInCapitalMarked-1">
-                    <input type="radio" id="isInterestInCapitalMarked-1" class="mdl-radio__button" name="isInterestInCapitalMarked" value="true">
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-            </div>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
-                <p>Hat der Kunde bereits eine Vorerkrankung:</p>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hadIllness-0">
-                    <input type="radio" id="hadIllness-0" class="mdl-radio__button" name="hadIllness" value="false" checked>
-                    <span class="mdl-radio__label">Nein</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="hadIllness-1">
-                    <input type="radio" id="hadIllness-1" class="mdl-radio__button" name="hadIllness" value="true">
-                    <span class="mdl-radio__label">Ja</span>
-                </label>
-                </div>
             </div>
         </form>     
     </div>

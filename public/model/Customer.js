@@ -132,6 +132,12 @@ class Customer extends BaseDatabaseObject {
         return this.hasInsuranceOfType("carInsurance");
     }
 
+    hasPrivateLiabilityInsurance() {
+        return this.hasInsuranceOfType("pirvateLiabilityInsurance");
+    }
+
+
+
     static createTask() {
         //BirthdayTask
         let theBirthdayTaskName = "BirthdayTask"
