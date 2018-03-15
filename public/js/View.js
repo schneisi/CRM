@@ -43,13 +43,20 @@ class HistoryObject {
 class CheckBoxHelper {
     constructor(anIdString) {
         this.checkboxId = anIdString;
+        this.mdlComponent = document.getElementById(this.checkboxId + "MDL").MaterialCheckbox;
+        this.component = document.getElementById(this.checkboxId);
     }
 
+    //API
     isChecked() {
-        return document.getElementById(this.checkboxId).checked;
+        return this.component.checked;
     }
 
     check() {
-        document.getElementById(this.checkboxId + "MDL").MaterialCheckbox.check();
+        this.mdlComponent.check();
+    }
+
+    disable() {
+        this.mdlComponent.disable();
     }
 }
