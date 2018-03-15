@@ -20,7 +20,7 @@ class NewContractView extends BaseView {
                 theLi.classList.add("mdl-menu__item");
                 theLi.setAttribute("data-val", eachInsurance.key());
                 theLi.innerHTML = eachInsurance.name();
-                if (this.contract.productId() == eachInsurance.key()) {
+                if (this.contract && this.contract.productId() == eachInsurance.key()) {
                     theLi.setAttribute("data-selected", true);
                 }
                 document.getElementById("insuranceList").appendChild(theLi);

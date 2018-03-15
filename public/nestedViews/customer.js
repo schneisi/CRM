@@ -6,7 +6,6 @@ class CustomerView extends BaseView {
         showDeleteMenuButton();
         this.initializeAccordion();
         this.showCustomerData();
-        this.generateEnsuranceSuggestion();
     }
     showCustomerData(){
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
@@ -44,21 +43,7 @@ class CustomerView extends BaseView {
             currentView.contractList.setAsChildOf(document.getElementById("contractListDiv"));
             currentView.showSuggestions();
         });
-    }
-
-    //todo
-    generateEnsuranceSuggestion() {
-        let theEnsuranceSuggestionList = [];
-        FbDatabase.getDatabaseSnapshot("products", function (aProductsSnapshot) {
-            
-        }, this);
-       
-
-
-   
-    }
-
-   
+    }   
 
     deleteMenuButtonClicked() {
         this.customer.aboutToDelete();

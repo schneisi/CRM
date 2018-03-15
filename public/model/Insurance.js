@@ -14,6 +14,10 @@ class Insurance extends BaseDatabaseObject {
         return this.getValueOfChild("description");
     }
 
+    type() {
+        return this.getValueOfChild("type");
+    }
+
     loadProviders() {
         this.populateChildren(this.snapshot.child("providers"), this.providers, "providers", Provider);
     }

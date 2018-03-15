@@ -22,7 +22,7 @@ class Contract extends BaseDatabaseObject{
     }
 
     type() {
-        return this.getValueOfChild("type");
+        return this.insurance.type();
     }
 
     //API

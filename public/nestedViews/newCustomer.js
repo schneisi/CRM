@@ -4,6 +4,7 @@ class NewCustomerView extends BaseView {
         this.setComponents();
         this.initializeAccordion();
         if (hasActionId()) {
+            this.updateName("Kunde bearbeiten");
             FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function (aSnapshot) {
                 let theCustomer = new Customer(aSnapshot);
                 currentView.lastNameField.value = theCustomer.lastname();
@@ -121,6 +122,8 @@ class NewCustomerView extends BaseView {
         theBuilder.hasLeadingPosition = this.hasLeadingPositionHelper.isChecked();
 
         theBuilder.save();
-        navigateToViewWithId("customers");
+        let theViewId = "customers";
+        if (this.customer) theViewId = "customer";
+        navigateToViewWithId(theViewId);
     }
 }

@@ -133,7 +133,7 @@ class Customer extends BaseDatabaseObject {
     }
 
     hasPrivateLiabilityInsurance() {
-        return this.hasInsuranceOfType("pirvateLiabilityInsurance");
+        return this.hasInsuranceOfType("privateLiabilityInsurance");
     }
 
 
