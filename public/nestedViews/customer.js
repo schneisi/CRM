@@ -89,12 +89,13 @@ class CustomerView extends BaseView {
     showSuggestions() {
         let theListGrid = new ListGrid();
         theListGrid.showTitle = false;
+        theListGrid.clickEventSelector = this.suggestionClicked;
         theListGrid.noElementsString = "Keine Vorschläge";
         theListGrid.addListGridField(new ListGridField("", aHelper => aHelper.value));
 
 
         if (theCustomer.ownsCar() && !theCustomer.hasCarInsurance()) {
-            theListGrid.addObject(new ListGridHelper("", "KFZ-Versicherung"));
+            theListGrid.addObject(new ListGridHelper("carInsurance", "KFZ-Versicherung"));
         }
 
         if (theCustomer.completedInitialTraining() && !theCustomer.hasPrivateLiabilityInsurance()) {
@@ -104,4 +105,9 @@ class CustomerView extends BaseView {
         theListGrid.setAsChildOf(document.getElementById("suggestionsDiv"));
     }
 
+    suggestionClicked(aHelper) {
+        let theId = aHelper.object;
+        setActionId(theId);
+        navigateToViewWithId("insurance");
+    }
 }
