@@ -7,15 +7,12 @@ class InsuranceView extends BaseView {
             thePromise.then(function () {
                 currentView.showInsurance();
             });
-        })
+        });
     }
 
     showInsurance() {
         const theContentDiv = document.getElementById("content");
             let theTable = new StaticList(["30%", "70%"]);
-    
-            let theName = currentView.insurance.name();
-            let theDescription = currentView.insurance.description();
             theTable
                 .addRow(["Versicherung: ", currentView.insurance.name()])
                 .addRow(["Beschreibung: ", currentView.insurance.description()])

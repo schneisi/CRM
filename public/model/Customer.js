@@ -140,7 +140,7 @@ class Customer extends BaseDatabaseObject {
 
     static createTask() {
         //BirthdayTask
-        let theBirthdayTaskName = "BirthdayTask"
+        let theBirthdayTaskName = "BirthdayTask";
         if (Scheduler.instance.hasTaskWithName(theBirthdayTaskName)) {
             this.showUpcomingBirthdays();
         } else {
@@ -150,18 +150,17 @@ class Customer extends BaseDatabaseObject {
                     if (currentView instanceof DashboardView) {
                         currentView.showUpcomingBirthdays();
                     }
-                }
+                };
                 let theOptions = {
                     orderChild: "birthday",
                     startObject: FbDatabase.birthdayStringForDate(new Date()),
                     limit: 3
-                }
+                };
                 FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, null, theOptions);
             }, 60);
             Scheduler.instance.addTask(theBirthdayTask);
         }
     }
-
 
     //Internal
     hasInsuranceOfType(aString) {
@@ -173,7 +172,6 @@ class Customer extends BaseDatabaseObject {
 
 Customer.upcomingBirthdays = [];
 Customer.createTask();
-
 
 
 class CustomerBuilder extends BaseBuilder {

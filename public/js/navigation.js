@@ -75,7 +75,7 @@ function viewForId(anIdString) {
 
 async function navigateToViewWithId(anId) {
     let theView = viewForId(anId);
-    navigateToView(theView)
+    navigateToView(theView);
 }
 
 async function navigateToView(aJsonView, aPushStateBoolean = true) {

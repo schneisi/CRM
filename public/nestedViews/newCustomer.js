@@ -61,7 +61,6 @@ class NewCustomerView extends BaseView {
         for (let radioButtonCounter = 0; radioButtonCounter < radioButtonGroup.length; radioButtonCounter++) {
             if (radioButtonGroup[radioButtonCounter].checked) {
                 return radioButtonGroup[radioButtonCounter].value;
-                break;
             }
         }
     }

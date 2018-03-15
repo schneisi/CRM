@@ -1,6 +1,5 @@
-
 async function getAjaxContent(aRequestUrl, aCallback, aIsLocalBoolean = true) {
-    var theRequest = createRequestWithCallback(aCallback)
+    var theRequest = createRequestWithCallback(aCallback);
     let theUrlString;
     if (aIsLocalBoolean) {
         theUrlString = completeUrlForString(aRequestUrl);
@@ -25,7 +24,7 @@ function createRequestWithCallback(aCallback) {
         if (theRequest.readyState == XMLHttpRequest.DONE && theRequest.status == 200) {
             aCallback(theRequest.responseText);
         }
-    }
+    };
     return theRequest;
 }
 

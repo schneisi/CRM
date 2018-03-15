@@ -30,7 +30,7 @@ class BaseDatabaseObject {
         aSnapshot.forEach(function (aChildSnapshot) {
             theObjectList.push(new aClass(aChildSnapshot));
         });
-        return theObjectList
+        return theObjectList;
     }
 
     key() {

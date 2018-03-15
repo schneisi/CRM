@@ -9,7 +9,6 @@ let hasServiceWorker = false;
 window.onerror = function (message, url, lineNo){
     if(!isDebugging){
         alert('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
-        return false;
     }
     return false;
 };
@@ -29,7 +28,6 @@ async function initializeApp(){
                 hasServiceWorker = true;
                 logString("SW registered");
             });
-            
         } catch (error) {
             logString("SW registration failed");
         }
@@ -61,7 +59,7 @@ function showModal(aTitleString, aMessageString) {
         let theDialogToClose = document.querySelector("dialog");
         theDialogToClose.close();
         theDialogToClose.parentNode.removeChild(theDialogToClose);
-    })
+    });
     theCloseButton.innerHTML = "Schließen";
     theActionGroup.appendChild(theCloseButton);
     theDialog.appendChild(theHeading);
@@ -74,7 +72,7 @@ function showModal(aTitleString, aMessageString) {
 
 
 function saveButton() {
-    return document.getElementById("saveButton")
+    return document.getElementById("saveButton");
 }
 
 function showSaveButton(aCallback) {
@@ -103,7 +101,7 @@ function hideMenu() {
     });
 }
 
-function showMenu(anArray) {
+function showMenu() {
     document.getElementById("menuDiv").style.display = "block";
 }
 

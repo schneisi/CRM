@@ -1,7 +1,6 @@
-//API
 class FbDatabase {
     static writeInDatabase(aPath, aKey, aJSONData){
-        let theKey
+        let theKey;
         if (aKey) {
             theKey = aKey;
         } else {
@@ -68,14 +67,4 @@ class FbDatabase {
     static getCurrentUserId() {
         return firebase.auth().currentUser.uid;
     }
-}
-
-
-//Example
-function snapshot() {
-    FbDatabase.getDatabaseSnapshot("products", function(aSnapshot) {
-        aSnapshot.forEach(function (aChildSnapshot) {
-            logString(aChildSnapshot.child("name").val());
-        })
-    });
 }

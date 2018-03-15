@@ -40,14 +40,14 @@ class ListGrid {
         //Builing Table Header
         if (this.showTitle) {
             let theTableRow = document.createElement("tr");
-            for (var i = 0; i < this.fields.length; i++) {
-                let eachField = this.fields[i];
+            this.fields.forEach(eachField => {
                 let theTh = document.createElement("th");
                 theTh.innerHTML = eachField.title;
                 theTableRow.appendChild(theTh);
-            }
+            });
+
             if (this.deleteSelector) {
-                for (var i = 0; i < 2; i++) {
+                for (let i = 0; i < 2; i++) {
                     let theTh = document.createElement("th");
                     theTableRow.appendChild(theTh);
                 }
@@ -61,7 +61,7 @@ class ListGrid {
             let theTableRow = document.createElement("tr");
             let theReceiver = this;
             if (this.clickEventSelector != null) {
-                let theTapHammer = new Hammer(theTableRow)
+                let theTapHammer = new Hammer(theTableRow);
                 theTapHammer.on("tap", function () {
                     if (theReceiver.isDeleteButtonVisible) {
                         theReceiver.hideDeleteButtons();
@@ -80,7 +80,7 @@ class ListGrid {
             }
 
             if (this.deleteSelector) {
-                let theDummyTd = document.createElement("td")
+                let theDummyTd = document.createElement("td");
                 theDummyTd.style.display = "block";
                 theTableRow.appendChild(theDummyTd);
                 let theTd = document.createElement("td");
