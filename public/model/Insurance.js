@@ -20,7 +20,9 @@ const InsuranceTypes = {
     TRAVEL_INSURANCE: "travelInsurance",
     UNABLE_TO_WORK_INSURANCE: "unableToWorkInsurance",
     UNEMPLOYMENT_INSURANCE: "unemploymentInsurance",
-    UNIT_LINKED_PENSION_INSURANCE: "unitLinkedPensionInsurance"
+    UNIT_LINKED_PENSION_INSURANCE: "unitLinkedPensionInsurance",
+    RUERUP_PENSION: "ruerupPension",
+    RIESTER_PENSION: "riesterPension"
 };
 
 class Insurance extends BaseDatabaseObject {
