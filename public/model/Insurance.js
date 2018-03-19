@@ -1,3 +1,11 @@
+const InsuranceTypes = {
+    ACCIDENT_INSURANCE: "accidentInsurance",
+    BASIC_ABILITY_INSURANCE: "basicAbilityInsurance",
+    CAR_INSURANCE: "carInsurance",
+    CARE_INSURANCE: "careInsurance",
+    COMMERCIAL_BUILDING_INSURANCE, "commercialBuildingInsurance",
+};
+
 class Insurance extends BaseDatabaseObject {
     //Attributes
 
