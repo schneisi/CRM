@@ -42,7 +42,12 @@ class Customer extends BaseDatabaseObject {
     notes() {
         return this.getValueOfChild("notes");
     }
-    //Segmentation infos
+
+    age() {
+        
+    }
+
+    //Segmentation information
     completedInitialTraining() {
         return this.getValueOfChild("completedInitialTraining");
     }
@@ -132,11 +137,83 @@ class Customer extends BaseDatabaseObject {
     }
 
     hasCarInsurance() {
-        return this.hasInsuranceOfType("carInsurance");
+        return this.hasInsuranceOfType(InsuranceTypes.CAR_INSURANCE);
     }
 
     hasPrivateLiabilityInsurance() {
-        return this.hasInsuranceOfType("privateLiabilityInsurance");
+        return this.hasInsuranceOfType(InsuranceTypes.PRIVATE_LIABILITY_INSURANCE);
+    }
+
+    hasAccidentInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.ACCIDENT_INSURANCE);
+    }
+
+    hasCareInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.CARE_INSURANCE);
+    }
+
+    hasCommercialBuildingInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.COMMERCIAL_BUILDING_INSURANCE);
+    }
+
+    hasDirectorsAndOfficersInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.DIRECTORS_AND_OFFICERS_INSURANCE);
+    }
+
+    hasDisabilityInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.DISABILITY_INSURANCE);
+    }
+
+    hasHouseInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.HOUSE_INSURANCE);
+    }
+
+    hasCompanyLegalExpensesInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.COMPANY_LEGAL_EXPENSES_INSURANCE);
+    }
+
+    hasLegalExpensesInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.LEGAL_EXPENSES_INSURANCE);
+    }
+
+    hasPensionInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.PENSION_INSURANCE);
+    }
+
+    hasBasicAbilityInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.BASIC_ABILITY_INSURANCE);
+    }
+
+    hasDreadDiseaseInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.DREAD_DISEASE_INSURANCE);
+    }
+
+    hasPrivateAdditionalHealthInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.PRIVATE_ADDITIONAL_HEALTH_INSURANCE);
+    }
+
+    hasUnitLinkedPensionInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.UNIT_LINKED_PENSION_INSURANCE);
+    }
+
+    hasPrivateBuildingInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.PRIVATE_BUILDING_INSURANCE);
+    }
+
+    hasPrivateHealthInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.PRIVATE_HEALTH_INSURANCE);
+    }
+
+    hasRiskLifeInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.RISK_LIFE_INSURANCE);
+    }
+
+    hasTravelInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.TRAVEL_INSURANCE);
+    }
+
+    hasUnemploymentInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.UNEMPLOYMENT_INSURANCE);
     }
 
 
