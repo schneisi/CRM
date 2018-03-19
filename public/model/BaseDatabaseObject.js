@@ -62,15 +62,12 @@ class BaseDatabaseObject {
         this.reference().off('value', this.listeningCallback);
     }
 
-    getFullStringForNumber(aNumber) {
-        if (aNumber < 10) {
-            return "0" + aNumber;
-        }
-        return aNumber.toString();
+    stringForDate(aDate) {
+        return moment(aDate).format("DD.MM.YYYY");
     }
 
-    stringForDate(aDate) {
-        return this.getFullStringForNumber(aDate.getDate()) + "." + this.getFullStringForNumber(aDate.getMonth() + 1) + "." + aDate.getFullYear();
+    isoStringForDate(aDate) {
+        return moment(aDate).format("YYYY-MM-DD");
     }
 }
 

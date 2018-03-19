@@ -48,16 +48,6 @@ class FbDatabase {
         return aDate.getTime();
     }
 
-    static birthdayStringForDate(aDate) {
-        function addLeadingZero(aNumber) {
-            if (aNumber < 10) {
-                return "0" + aNumber;
-            }
-            return aNumber;
-        }
-        return addLeadingZero(aDate.getMonth() + 1) + "/" + addLeadingZero(aDate.getDate());
-    }
-
     static dateForValue(aNumber) {
         var theDate = new Date();
         theDate.setTime(aNumber);

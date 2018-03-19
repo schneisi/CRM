@@ -32,9 +32,9 @@ class Appointment extends BaseDatabaseObject {
         let theCurrentDate = new Date();
         anArry.forEach(eachAppointment => {
             if (!eachAppointment.reminded()) {
-                let theDifference = eachAppointment.date().getTime() - theCurrentDate.getTime();
-                theDifference = theDifference / (1000 * 60);
-                if (theDifference < 10) {
+                let theDifferenceInSeconds = eachAppointment.date().getTime() - theCurrentDate.getTime();
+                let theDuration = moment.duration(theDifferenceInSeconds, "seconds");
+                if (theDuration.asMinutes() < 10) {
                     showNotification("Bevorstehender Termin", eachAppointment.title(), "appointment", eachAppointment.key());
                     let theBuilder = new AppointmentBuilder(eachAppointment);
                     theBuilder.reminded = true;
@@ -66,14 +66,13 @@ class Appointment extends BaseDatabaseObject {
         }
     }
     isoDateOnlyString() {
-        let theDateMonth = this.date().getMonth() + 1;
-        return this.date().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.date().getDate());
+        return this.isoStringForDate(this.date());
     }
     dateOnlyString() {
         return this.stringForDate(this.date());
     }
     timeOnlyString() {
-        return this.getFullStringForNumber(this.date().getHours()) + ":" + this.getFullStringForNumber(this.date().getMinutes());
+        return moment(this.date()).format("HH:mm");
     }
     addressString() {
         return this.street() + " " + this.zip() + " " + this.place();

@@ -114,8 +114,7 @@ class Customer extends BaseDatabaseObject {
         return this.stringForDate(this.birthday());
     }
     isoBirthdayOnlyString() {
-        let theDateMonth = this.birthday().getMonth() + 1;
-        return this.birthday().getFullYear() + "-" + this.getFullStringForNumber(theDateMonth) + "-" + this.getFullStringForNumber(this.birthday().getDate());
+        return this.isoStringForDate(this.birthday());
     }
 
     mapsApiUrl() {
@@ -230,7 +229,7 @@ class Customer extends BaseDatabaseObject {
                 };
                 let theOptions = {
                     orderChild: "birthday",
-                    startObject: FbDatabase.birthdayStringForDate(new Date()),
+                    startObject: moment().format("MM/DD"),
                     limit: 3
                 };
                 FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, null, theOptions);
