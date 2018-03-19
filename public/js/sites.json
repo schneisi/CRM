@@ -9,6 +9,30 @@
             "shownInMenu": true
         },
         {
+            "name": "Termine",
+            "id": "appointments",
+            "url": "./nestedViews/appointments.html",
+            "js": "./nestedViews/appointments.js",
+            "viewClass": "AppointmentsView",
+            "shownInMenu": true
+        },
+        {
+            "name": "Neuer Termin",
+            "id": "newAppointment",
+            "url": "./nestedViews/newAppointment.html",
+            "js": "./nestedViews/newAppointment.js",
+            "viewClass": "NewAppointmentView",
+            "shownInMenu": false
+        },
+        {
+            "name": "Termin",
+            "id": "appointment",
+            "url": "./nestedViews/appointment.html",
+            "js": "./nestedViews/appointment.js",
+            "viewClass": "AppointmentView",
+            "shownInMenu": false
+        },
+        {
             "name": "Kunden",
             "id": "customers",
             "url": "./nestedViews/customers.html",
@@ -46,30 +70,6 @@
             "url": "./nestedViews/insurance.html",
             "js": "./nestedViews/insurance.js",
             "viewClass": "InsuranceView",
-            "shownInMenu": false
-        },
-        {
-            "name": "Termine",
-            "id": "appointments",
-            "url": "./nestedViews/appointments.html",
-            "js": "./nestedViews/appointments.js",
-            "viewClass": "AppointmentsView",
-            "shownInMenu": true
-        },
-        {
-            "name": "Neuer Termin",
-            "id": "newAppointment",
-            "url": "./nestedViews/newAppointment.html",
-            "js": "./nestedViews/newAppointment.js",
-            "viewClass": "NewAppointmentView",
-            "shownInMenu": false
-        },
-        {
-            "name": "Termin",
-            "id": "appointment",
-            "url": "./nestedViews/appointment.html",
-            "js": "./nestedViews/appointment.js",
-            "viewClass": "AppointmentView",
             "shownInMenu": false
         },
         {

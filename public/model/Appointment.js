@@ -10,14 +10,26 @@ class Appointment extends BaseDatabaseObject {
     dateString() {
         return this.dateOnlyString() + " " + this.timeOnlyString();
     }
+    hasStreet() {
+        return this.hasChild("address/street");
+    }
     street() {
         return this.getValueOfChild("address/street");
+    }
+    hasPlace() {
+        return this.hasChild("address/place");
     }
     place() {
         return this.getValueOfChild("address/place");
     }
+    hasZip() {
+        return this.hasChild("address/zip");
+    }
     zip() {
         return this.getValueOfChild("address/zip");
+    }
+    hasNotes() {
+        return this.hasChild("notes");
     }
     notes() {
         return this.getValueOfChild("notes");
@@ -121,5 +133,23 @@ class AppointmentBuilder extends BaseBuilder {
         }
         theJsonObject.reminded = this.reminded;
         return theJsonObject;
+    }
+
+    //Error
+    errorForNumber(aNumber) {
+        let theErrorText;
+        switch(aNumber) {
+            case 1:
+                theErrorText = "Titel ist Pflichtfeld";
+                break;
+            default:
+                throw "Error: No error found";
+        }
+        return new BuilderError(aNumber, theErrorText);
+    }
+    check() {
+        if (!this.title || this.title.length == 0) {
+            this.addError(1);
+        }
     }
 }

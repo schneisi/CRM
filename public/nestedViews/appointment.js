@@ -15,11 +15,19 @@ class AppointmentView extends BaseView {
         let theAppointment = this.appointment;
         theTable
             .addRow(["Titel:", theAppointment.title()])
-            .addRow(["Datum:", theAppointment.dateString()])
-            .addRow(["Strasse:", theAppointment.street()])
-            .addRow(["PLZ:", theAppointment.zip()])
-            .addRow(["Ort:", theAppointment.place()])
-            .addRow(["Notizen:", theAppointment.notes()]);
+            .addRow(["Datum:", theAppointment.dateString()]);
+        if (theAppointment.hasStreet()) {
+            theTable.addRow(["Strasse:", theAppointment.street()]);
+        }
+        if (theAppointment.hasZip()) {
+            theTable.addRow(["PLZ:", theAppointment.zip()]);
+        }
+        if (theAppointment.hasPlace()) {
+            theTable.addRow(["Ort:", theAppointment.place()]);
+        }
+        if (theAppointment.hasNotes()) {
+            theTable.addRow(["Notizen:", theAppointment.notes()]);
+        }
 
         let theTableDiv = document.createElement("div");
         theTableDiv.innerHTML = theTable.getHtml();
