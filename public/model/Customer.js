@@ -42,7 +42,12 @@ class Customer extends BaseDatabaseObject {
     notes() {
         return this.getValueOfChild("notes");
     }
-    //Segmentation infos
+
+    age() {
+        
+    }
+
+    //Segmentation information
     completedInitialTraining() {
         return this.getValueOfChild("completedInitialTraining");
     }
@@ -134,6 +139,78 @@ class Customer extends BaseDatabaseObject {
 
     hasPrivateLiabilityInsurance() {
         return this.hasInsuranceOfType("privateLiabilityInsurance");
+    }
+
+    hasAccidentInsurance() {
+        return this.hasInsuranceOfType("accidentInsurance");
+    }
+
+    hasCareInsurance() {
+        return this.hasInsuranceOfType("careInsurance");
+    }
+
+    hasCommercialBuildingInsurance() {
+        return this.hasInsuranceOfType("commercialBuildingInsurance");
+    }
+
+    hasDirectorsAndOfficersInsurance() {
+        return this.hasInsuranceOfType("directorsAndOfficersInsurance");
+    }
+
+    hasDisabilityInsurance() {
+        return this.hasInsuranceOfType("disabilityInsurance");
+    }
+
+    hasHouseInsurance() {
+        return this.hasInsuranceOfType("houseInsurance");
+    }
+
+    hasCompanyLiabilityInsurance() {
+        return this.hasInsuranceOfType("companyLiabilityInsurance");
+    }
+
+    hasLegalExpensesInsurance() {
+        return this.hasInsuranceOfType("legalExpensesInsurance");
+    }
+
+    hasPensionInsurance() {
+        return this.hasInsuranceOfType("pensionInsurance");
+    }
+
+    hasBasicAbilityInsurance() {
+        return this.hasInsuranceOfType("basicAbilityInsurance");
+    }
+
+    hasDreadDiseaseInsurance() {
+        return this.hasInsuranceOfType("dreadDiseaseInsurance");
+    }
+
+    hasPrivateAdditionalHealthInsurance(){
+        return this.hasInsuranceOfType("privateAdditionalHealthInsurance");
+    }
+
+    hasUnitLinkedPensionInsurance() {
+        return this.hasInsuranceOfType("unitLinkedPensionInsurance");
+    }
+
+    hasPrivateBuildingInsurance() {
+        return this.hasInsuranceOfType("privateBuildingInsurance");
+    }
+
+    hasPrivateHealthInsurance() {
+        return this.hasInsuranceOfType("privateHealthInsurance");
+    }
+
+    hasRiskLifeInsurance() {
+        return this.hasInsuranceOfType("riskLifeInsurance");
+    }
+
+    hasTravelInsurance() {
+        return this.hasInsuranceOfType("riskLifeInsurance");
+    }
+
+    hasUnemploymentInsurance() {
+        return this.hasInsuranceOfType("unemploymentInsurance");
     }
 
 

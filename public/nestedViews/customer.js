@@ -78,14 +78,85 @@ class CustomerView extends BaseView {
         theListGrid.noElementsString = "Keine Vorschläge";
         theListGrid.addListGridField(new ListGridField("", aHelper => aHelper.value));
 
-
+        //CarInsurance
         if (theCustomer.ownsCar() && !theCustomer.hasCarInsurance()) {
             theListGrid.addObject(new ListGridHelper("carInsurance", "KFZ-Versicherung"));
         }
 
+        //PrivateLiabilityInsurance
         if (theCustomer.completedInitialTraining() && !theCustomer.hasPrivateLiabilityInsurance()) {
             theListGrid.addObject(new ListGridHelper("", "Private-Haftplficht-Versicherung"));
         }
+
+        if (theCustomer.hasPrivateHousehold() && !theCustomer.hasHouseInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Private Hausratsversicherung"));
+        }
+
+        if (theCustomer.isIndependent() && !theCustomer.hasPrivateLiabilityInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Private Hausratsversicherung"));
+        } else if (!theCustomer.isIndependent() && !theCustomer.hasCompanyLiabilityInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Firmenrechtsschutzversicherung"));
+        }
+
+        if (theCustomer.ownsPrivateBuilding() && !theCustomer.hasPrivateBuildingInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Private Gebäudeversicherung"));
+        }
+
+        if (theCustomer.ownsCommercialBuilding() && !theCustomer.hasCommercialBuildingInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Firmen Gebäudeversicherung"));
+        }
+
+        if (theCustomer.getAge() > 67 && !theCustomer.isInterestInCapitalMarked() && !theCustomer.hasPensionInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Rentenversicherung"));
+        } else if (theCustomer.getAge() > 67 && theCustomer.isInterestInCapitalMarked() && !theCustomer.hasUnitLinkedPensionInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Fondsgebundene Rentenversicherung"));
+        }
+
+        if (theCustomer.getAge() > 67) {
+            if (!theCustomer.isInterestInCapitalMarked() && !theCustomer.hasPensionInsurance()) {
+                theListGrid.addObject(new ListGridHelper("", "Rentenversicherung"));
+            } else if (theCustomer.isInterestInCapitalMarked() && !theCustomer.hasUnitLinkedPensionInsurance()) {
+                theListGrid.addObject(new ListGridHelper("", "Fondsgebundene Rentenversicherung"));
+            }
+
+            if (theCustomer.hadIllness()) {
+                if (!theCustomer.hasDisabilityInsurance()) {
+                    theListGrid.addObject(new ListGridHelper("", "Erwerbsunfähigkeitsversicherung"));
+                }
+                if (!theCustomer.hasBasicAbilityInsurance()) {
+                    theListGrid.addObject(new ListGridHelper("", "Grundfähigkeitsversicherung"));
+                }
+
+                if (!theCustomer.hasDreadDiseaseInsurance()) {
+                    theListGrid.addObject(new ListGridHelper("", "Dread-Disease Versicherung"));
+                }
+                
+            } else {
+                theListGrid.addObject(new ListGridHelper("", "Berufsunfähigkeitsversicherung"));
+            }
+        }
+
+        if (!theCustomer.hasRiskLifeInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Risikolebensversicherung"));
+        }
+
+        if (!theCustomer.hasAccidentInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Unfallversicherung"));
+        }
+
+        if (theCustomer.earnsMoreThanAverage() && !theCustomer.isOfficial() && theCustomer.hasPrivateAddiationalHealthInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Private Krankenzusatzversicherung"));
+        }
+
+        if (theCustomer.isIndependent() || theCustomer.isOfficial() || theCustomer.isCrossBoarderCommuter() || theCustomer.earnsMoreThanAverage()) {
+            theListGrid.addObject(new ListGridHelper("", "Private Krankenversicherung"));
+        }
+
+        if (theCustomer.hasLeadingPosition() && !theCustomer.hasDirectorsAndOfficersInsurance()) {
+            theListGrid.addObject(new ListGridHelper("", "Vermögensschadensversicherung"));
+        }
+
+      
 
         theListGrid.setAsChildOf(document.getElementById("suggestionsDiv"));
     }
