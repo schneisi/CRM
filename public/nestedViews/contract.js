@@ -20,8 +20,10 @@ class ContractView extends BaseView {
     }
 
     deleteMenuButtonClicked() {
+        let theCustomerId = this.contract.customerId();
         this.contract.aboutToDelete();
-        navigateToViewWithId("contract");
+        setActionId(theCustomerId);
+        navigateToViewWithId("customer");
     }
 
     editMenuButtonClicked() {
