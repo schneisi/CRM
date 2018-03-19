@@ -85,7 +85,7 @@ class CustomerView extends BaseView {
 
         //PrivateLiabilityInsurance
         if (theCustomer.completedInitialTraining() && !theCustomer.hasPrivateLiabilityInsurance()) {
-            theListGrid.addObject(new ListGridHelper(InsuranceTypes.PRIVATE_LIABILITY_INSURANCE, "Private-Haftplficht-Versicherung"));
+            theListGrid.addObject(new ListGridHelper(InsuranceTypes.PRIVATE_LIABILITY_INSURANCE, "Private-Haftpflicht-Versicherung"));
         }
 
         //House Insurance
