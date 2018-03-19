@@ -3,7 +3,24 @@ const InsuranceTypes = {
     BASIC_ABILITY_INSURANCE: "basicAbilityInsurance",
     CAR_INSURANCE: "carInsurance",
     CARE_INSURANCE: "careInsurance",
-    COMMERCIAL_BUILDING_INSURANCE, "commercialBuildingInsurance",
+    COMMERCIAL_BUILDING_INSURANCE: "commercialBuildingInsurance",
+    COMPANY_LEGAL_EXPENSES_INSURANCE: "companyLegalExpensesInsurance",
+    DIRECTORS_AND_OFFICERS_INSURANCE: "directorsAndOfficersInsurance",
+    LEGAL_EXPENSES_INSURANCE: "legalExpensesInsurance",
+    DISABILITY_INSURANCE: "disabilityInsurance",
+    DREAD_DISEASE_INSURANCE: "dreadDiseaseInsurance",
+    HOUSE_INSURANCE: "houseInsurance",
+    LEGAL_EXPENSES_INSURANCE: "legalExpensesInsurance",
+    PENSION_INSURANCE: "pensionInsurance",
+    PRIVATE_ADDITIONAL_HEALTH_INSURANCE: "privateAdditionalHealthInsurance",
+    PRIVATE_BUILDING_INSURANCE: "privateBuildingInsurance",
+    PRIVATE_HEALTH_INSURANCE: "privateHealthInsurance",
+    PRIVATE_LIABILITY_INSURANCE: "privateLiabilityInsurance",
+    RISK_LIFE_INSURANCE: "riskLifeInsurance",
+    TRAVEL_INSURANCE: "travelInsurance",
+    UNABLE_TO_WORK_INSURANCE: "unableToWorkInsurance",
+    UNEMPLOYMENT_INSURANCE: "unemploymentInsurance",
+    UNIT_LINKED_PENSION_INSURANCE: "unitLinkedPensionInsurance"
 };
 
 class Insurance extends BaseDatabaseObject {
