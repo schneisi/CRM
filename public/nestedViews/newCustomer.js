@@ -27,7 +27,6 @@ class NewCustomerView extends BaseView {
                 currentView.birthdayField.parentElement.classList.add("is-dirty");
                 currentView.setRadioButtonByValue(currentView.sexRadio, theCustomer.sex());
 
-                if (theCustomer.isMarried()) currentView.isMarriedHelper.check();
                 if (theCustomer.ownsCar()) currentView.ownsCarHelper.check();
                 if (theCustomer.ownsCommercialBuilding()) currentView.ownsCommercialBuildingHelper.check();
                 if (theCustomer.ownsPrivateBuilding()) currentView.ownsPrivateBuildingHelper.check();
@@ -79,7 +78,6 @@ class NewCustomerView extends BaseView {
         this.sexRadio = document.getElementsByName("sex");
 
         this.completedInitialTrainingHelper = new CheckBoxHelper("completedInitialTrainingCheckbox");
-        this.isMarriedHelper = new CheckBoxHelper("isMarriedCheckbox");
         this.ownsCarHelper = new CheckBoxHelper("ownsCarCheckBox");
         this.ownsPrivateBuildingHelper = new CheckBoxHelper("ownsPrivateBuildingCheckbox");
         this.ownsCommercialBuildingHelper = new CheckBoxHelper("ownsCommercialBuildingCheckbox");
@@ -107,7 +105,6 @@ class NewCustomerView extends BaseView {
         theBuilder.sex = this.getSelectedValueFromRadioButtonGroup(this.sexRadio);
 
         theBuilder.completedInitialTraining = this.completedInitialTrainingHelper.isChecked();
-        theBuilder.isMarried = this.isMarriedHelper.isChecked();
         theBuilder.ownsCar = this.ownsCarHelper.isChecked();
         theBuilder.ownsPrivateBuilding = this.ownsPrivateBuildingHelper.isChecked();
         theBuilder.ownsCommercialBuilding = this.ownsCommercialBuildingHelper.isChecked();

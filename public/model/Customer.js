@@ -52,10 +52,6 @@ class Customer extends BaseDatabaseObject {
         return this.getValueOfChild("completedInitialTraining");
     }
 
-    isMarried() {
-        return this.getValueOfChild("isMarried");
-    }
-
     ownsCar() {
         return this.getValueOfChild("ownsCar");
     }
@@ -269,7 +265,6 @@ class CustomerBuilder extends BaseBuilder {
         this.notes = null;
         
         this.completedInitialTraining = false;
-        this.isMarried = false;
         this.ownsCar = false;
         this.ownsPrivateBuilding = false;
         this.ownsCommercialBuilding = false;
@@ -303,7 +298,6 @@ class CustomerBuilder extends BaseBuilder {
                 zip: this.zip,
             },
             completedInitialTraining: this.completedInitialTraining,
-            isMarried: this.isMarried,
             ownsCar: this.ownsCar,
             ownsPrivateBuilding: this.ownsPrivateBuilding,
             ownsCommercialBuilding: this.ownsCommercialBuilding,
