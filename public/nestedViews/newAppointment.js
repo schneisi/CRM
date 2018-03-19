@@ -36,7 +36,6 @@ class NewAppointmentView extends BaseView {
     saveNewAppointment() {
         let theBuilder = new AppointmentBuilder(this.appointment);
         theBuilder.title = document.getElementById("appointmentTitle").value;
-        theBuilder.date = new Date();
         theBuilder.place = document.getElementById("location").value;
         theBuilder.street = document.getElementById("street").value;
         theBuilder.zip = document.getElementById("zip").value;
@@ -44,7 +43,11 @@ class NewAppointmentView extends BaseView {
         theBuilder.date = new Date(this.dateField.value);
         theBuilder.date.setHours(this.timeField.value.split(":")[0]);
         theBuilder.date.setMinutes(this.timeField.value.split(":")[1]);
-        theBuilder.save();
-        navigateToViewWithId("appointments");
+        if (theBuilder.save()) {
+            //Success
+            navigateToViewWithId("appointments");
+        } else {
+            showModal("Fehler", theBuilder.errorStringBrSeparated());
+        }
     }
 }

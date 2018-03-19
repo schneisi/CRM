@@ -49,6 +49,10 @@ class BaseDatabaseObject {
         return this.snapshot.child(aString).val();
     }
 
+    hasChild(aString) {
+        return this.snapshot.child(aString).exists();
+    }
+
     startListening(aCallback) {
         this.listeningCallback = aCallback;
         let theReceiver = this;
@@ -77,6 +81,7 @@ class BaseBuilder {
     constructor(anObject) {
         this.object = anObject;
         this.key = null;
+        this.errors = [];
     }
 
     isNew() {
@@ -88,12 +93,47 @@ class BaseBuilder {
     }
 
     save() {
-        let theKey;
-        if (this.isNew()) {
-            theKey = null;
+        this.check();
+        if (this.hasError()) {
+            return false;
         } else {
-            theKey = this.object.key();
+            let theKey;
+            if (this.isNew()) {
+                theKey = null;
+            } else {
+                theKey = this.object.key();
+            }
+            FbDatabase.writeInDatabase(this.path(), theKey, this.getJson());
+            return true;
         }
-        FbDatabase.writeInDatabase(this.path(), theKey, this.getJson());
+    }
+
+    //Errors
+    check() {}
+    hasError() {
+        return this.errors.length > 0;
+    }
+    addError(aNumber) {
+        let theError = this.errorForNumber(aNumber);
+        this.errors.push(theError);
+        return theError;
+    }
+
+    errorForNumber(aNumber) {
+        throw "Implement in subclass";
+    }
+    errorStringBrSeparated() {
+        let theErrorTexts = [];
+        this.errors.forEach(eachError => {
+            theErrorTexts.push(eachError.text);
+        })
+        return theErrorTexts.join("<br />");
+    }
+}
+
+class BuilderError {
+    constructor(aNumber, aString) {
+        this.number = aNumber;
+        this.text = aString;
     }
 }
