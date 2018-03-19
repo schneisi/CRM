@@ -96,6 +96,10 @@ class Customer extends BaseDatabaseObject {
     }
 
     //API
+    ageInFullYears() {
+        let theNowMoment = moment();
+        return theNowMoment.diff(moment(this.birthday()), "year");
+    }
     fullName() {
         return this.firstname() + " " + this.lastname();
     }
