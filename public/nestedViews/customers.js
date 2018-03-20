@@ -7,6 +7,7 @@ class CustomersView extends BaseView {
         this.customerList.addListGridField(new ListGridField("Name", anObject => anObject.tableName()));
         this.customerList.clickEventSelector = this.customerClicked;
         this.customerList.deleteSelector = this.customerDeleteClicked;
+        this.customerList.groupingMode = ListGridGroupingModes.ALPHABETICAL;
     
         let theCallback = function(aSnapshot) {
             let theCustomers = BaseDatabaseObject.createObjectsFromSnapshot(aSnapshot, Customer);

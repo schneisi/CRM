@@ -1,5 +1,11 @@
-class ListGrid {
+let ListGridGroupingModes = {
+    NONE: "none",
+    ALPHABETICAL: "alphabetical",
+    NESTED_ARRAYS: "nested_arrays"
+};
 
+
+class ListGrid {
     constructor () {
         this.fields = [];
         this.objects = [];
@@ -11,6 +17,8 @@ class ListGrid {
         this.deleteSelector = null;
         this.tableRows = [];
         this.isDeleteButtonVisible = false;
+        this.groupingMode = ListGridGroupingModes.NONE;
+        this.groups = [];
     }
     
     addListGridField(aField) {
@@ -29,6 +37,8 @@ class ListGrid {
     }
 
     getTableElement() {
+        let theReceiver = this;
+    
         let theTableElement = document.createElement("table");
         theTableElement.classList.add("listTable");
 
@@ -57,9 +67,29 @@ class ListGrid {
         }
 
         //Building Table content
+        function groupHeadingRow(aString) {
+            let theTr = document.createElement("tr");
+            let theTd = document.createElement("td");
+            theTd.innerHTML = aString;
+            theTr.appendChild(theTd);
+            if (theReceiver.deleteSelector) {
+                theTr.appendChild(document.createElement("td"));
+            }
+            theTr.classList.add("listTable-groupRow");
+            theTableElement.appendChild(theTr);
+        };
+
         this.objects.forEach(eachObject => {
+            if (this.groupingMode == ListGridGroupingModes.ALPHABETICAL) {
+                let theFirstString = this.fields[0].readSelector(eachObject);
+                let theFirstCharacter = theFirstString[0];
+                if (this.groups.length == 0 || this.groups[this.groups.length - 1] != theFirstCharacter) {
+                    groupHeadingRow(theFirstCharacter)
+                    this.groups.push(theFirstCharacter);
+                }
+            }
+
             let theTableRow = document.createElement("tr");
-            let theReceiver = this;
             if (this.clickEventSelector != null) {
                 let theTapHammer = new Hammer(theTableRow);
                 theTapHammer.on("tap", function () {
