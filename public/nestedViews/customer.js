@@ -138,7 +138,16 @@ class CustomerView extends BaseView {
             } else {
                 theListGrid.addObject(new ListGridHelper(InsuranceTypes.UNABLE_TO_WORK_INSURANCE, "Berufsunfähigkeitsversicherung"));
             }
+        } else {
+            if (!theCustomer.isIndependent() || theCustomer.partnerIsEmployee()) {
+                theListGrid.addObject(new ListGridHelper(InsuranceTypes.RIESTER_PENSION, "Riester Rente"));
+            } else {
+                theListGrid.addObject(new ListGridHelper(InsuranceTypes.RUERUP_PENSION, "Rürup Rente"));
+            }
+            
         }
+
+
 
         //Risklife Insurance
         if (!theCustomer.hasRiskLifeInsurance()) {

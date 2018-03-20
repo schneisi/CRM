@@ -96,6 +96,10 @@ class Customer extends BaseDatabaseObject {
         return this.getValueOfChild("hasLeadingPosition");
     }
 
+    partnerIsEmployee() {
+        return this.getValueOfChild("partnerIsEmployee");
+    }
+
     //API
     ageInFullYears() {
         let theNowMoment = moment();
@@ -212,6 +216,14 @@ class Customer extends BaseDatabaseObject {
         return this.hasInsuranceOfType(InsuranceTypes.UNEMPLOYMENT_INSURANCE);
     }
 
+    hasRiesterPension() {
+        return this.hasInsuranceOfType(InsuranceTypes.RIESTER_PENSION);
+    }
+
+    hasRuerupPension() {
+        return this.hasInsuranceOfType(InsuranceTypes.RUERUP_PENSION);
+    }
+
 
 
     static createTask() {
@@ -276,6 +288,7 @@ class CustomerBuilder extends BaseBuilder {
         this.earnsMoreThanAverage = false;
         this.isInterestInCapitalMarked = false;
         this.hasLeadingPosition = false;
+        this.partnerIsEmployee = false;
         
     }
 
@@ -308,7 +321,8 @@ class CustomerBuilder extends BaseBuilder {
             hadIllness: this.hadIllness,
             earnsMoreThanAverage: this.earnsMoreThanAverage,
             isInterestInCapitalMarked: this.isInterestInCapitalMarked,
-            hasLeadingPosition: this.hasLeadingPosition
+            hasLeadingPosition: this.hasLeadingPosition,
+            partnerIsEmployee: this.partnerIsEmployee
         };
        
         if (!this.isNew()) {
