@@ -23,10 +23,10 @@ class BaseView {
                 let thePanel = this.nextElementSibling;
                 if (thePanel.classList.contains("panel-visible")) {
                     thePanel.classList.remove("panel-visible");
-                    eachAccordion.classList.remove("accordion-active");
+                    eachAccordion.classList.remove("accordion-selected");
                 } else {
                     thePanel.classList.add("panel-visible");
-                    eachAccordion.classList.add("accordion-active");
+                    eachAccordion.classList.add("accordion-selected");
                 }
             });
         });

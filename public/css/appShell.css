@@ -59,7 +59,7 @@ body {
     transition: 0.4s;
 }
 
-.accordion-active, .accordion:hover {
+.accordion-selected, .accordion:hover {
     background-color: #ccc; 
 }
 
