@@ -27,16 +27,16 @@ body {
 }
 
 .listTable tr:hover {
-    background-color: rgb(238,238,238);
+    background-color: rgb(245,245,245);
 }
 
 .listTable tr td {
     padding: 10px;
 }
 
-.listTable-groupRow {
+.listTable-groupRow, .listTable-groupRow:hover{
     font-weight: bold;
-    background-color: rgb(238,238,238);
+    background-color: rgb(238,238,238) !important;
     height: 40px !important;
 }
 
