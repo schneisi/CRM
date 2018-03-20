@@ -90,22 +90,23 @@ class ListGrid {
             }
 
             let theTableRow = document.createElement("tr");
-            if (this.clickEventSelector != null) {
-                let theTapHammer = new Hammer(theTableRow);
-                theTapHammer.on("tap", function () {
-                    if (theReceiver.isDeleteButtonVisible) {
-                        theReceiver.hideDeleteButtons();
-                    } else {
-                        theReceiver.clickEventSelector(eachObject);
-                    }
-                });
-            }
+            
 
             for (var eachFieldIndex = 0; eachFieldIndex < this.fields.length; eachFieldIndex++) {
                 let eachField = this.fields[eachFieldIndex];
                 let eachContentString = eachField.readSelector(eachObject);
                 let theTableDataElement = document.createElement("td");
                 theTableDataElement.innerHTML = eachContentString;
+                if (this.clickEventSelector != null) {
+                    let theTapHammer = new Hammer(theTableDataElement);
+                    theTapHammer.on("tap", function () {
+                        if (theReceiver.isDeleteButtonVisible) {
+                            theReceiver.hideDeleteButtons();
+                        } else {
+                            theReceiver.clickEventSelector(eachObject);
+                        }
+                    });
+                }
                 theTableRow.appendChild(theTableDataElement);
             }
 
