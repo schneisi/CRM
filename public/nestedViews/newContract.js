@@ -5,7 +5,7 @@ class NewContractView extends BaseView {
         if (getActionString() == "contract" ){
             FbDatabase.getDatabaseSnapshot(getActionId(), function (aSnapshot) {
                 let theContract = new Contract(aSnapshot);
-                currentView.dateField.value = theContract.date();
+                currentView.dateField.value = theContract.isoDateString();
                 currentView.productId.value = theContract.productId();
                 currentView.remarkField.value = theContract.remark();
                 currentView.remarkField.parentElement.classList.add("is-dirty");
@@ -31,10 +31,13 @@ class NewContractView extends BaseView {
 
     saveNewContract(){
         let theBuilder = new ContractBuilder(this.contract);
-        theBuilder.date = new Date(document.getElementById("dateField").value);
+        theBuilder.date = new Date(this.dateField.value);
         if (getActionString() == "customer"){
             theBuilder.customerId = getActionId();
+        } else {
+            setActionId(this.contract.customerId());
         }
+        theBuilder.remark = this.remarkField.value;
         theBuilder.productId = document.getElementById("insuranceValueField").value;
         theBuilder.save();
         navigateToViewWithId("customer");

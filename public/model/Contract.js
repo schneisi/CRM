@@ -41,7 +41,9 @@ class Contract extends BaseDatabaseObject{
     insuranceName() {
         return this.insurance.name();
     }
-
+    isoDateString() {
+        return this.isoStringForDate(this.date());
+    }
 }
 
 
