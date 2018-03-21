@@ -36,6 +36,27 @@ class ListGrid {
         anElement.appendChild(this.getTableElement());
     }
 
+    search(aString) {
+        this.tableRows.forEach(eachTr => {
+            if (eachTr.innerText.toLowerCase().includes(aString.toLowerCase())) {
+                eachTr.style.display = "";
+            } else {
+                eachTr.style.display = "none";
+            }
+        });
+        this.groups.forEach(eachGroup => {
+            let theHideBoolean = eachGroup.children.every(eachChild => {
+                console.log(eachChild.style.display == "none");
+                return eachChild.style.display == "none";
+            });
+            let theDisplayString = "";
+            if (theHideBoolean) {
+                theDisplayString = "none";
+            }
+            eachGroup.element.style.display = theDisplayString; 
+        });
+    }
+
     getTableElement() {
         let theReceiver = this;
     
@@ -77,19 +98,26 @@ class ListGrid {
             }
             theTr.classList.add("listTable-groupRow");
             theTableElement.appendChild(theTr);
+            return theTr;
         };
 
         this.objects.forEach(eachObject => {
+            let theTableRow = document.createElement("tr");
+
+            //Grouping
             if (this.groupingMode == ListGridGroupingModes.ALPHABETICAL) {
                 let theFirstString = this.fields[0].readSelector(eachObject);
                 let theFirstCharacter = theFirstString[0];
-                if (this.groups.length == 0 || this.groups[this.groups.length - 1] != theFirstCharacter) {
-                    groupHeadingRow(theFirstCharacter)
-                    this.groups.push(theFirstCharacter);
+                let theGroup;
+                if (this.groups.length == 0 || this.groups[this.groups.length - 1].title != theFirstCharacter) {
+                    let theTr = groupHeadingRow(theFirstCharacter)
+                    theGroup = new ListGridGroup(theFirstCharacter, [], theTr);
+                    this.groups.push(theGroup);
+                } else {
+                    theGroup = this.groups[this.groups.length - 1]
                 }
+                theGroup.appendChild(theTableRow);
             }
-
-            let theTableRow = document.createElement("tr");
             
 
             for (var eachFieldIndex = 0; eachFieldIndex < this.fields.length; eachFieldIndex++) {
@@ -150,6 +178,26 @@ class ListGrid {
             eachRow.children[this.fields.length].style.display = "block";
         });
         this.isDeleteButtonVisible = false;
+    }
+}
+
+class ListGridGroup {
+    constructor(aString, anArray, anElement) {
+        this.title = aString;
+        this.children = anArray;
+        this.element = anElement;
+    }
+    hide() {
+        this.setDisplayType("none");
+    }
+    show() {
+        this.setDisplayType("");
+    }
+    appendChild(anElement) {
+        this.children.push(anElement);
+    }
+    setDisplayType(aString) {
+        this.element.style.display = aString;
     }
 }
 

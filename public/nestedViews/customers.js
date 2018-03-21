@@ -37,4 +37,8 @@ class CustomersView extends BaseView {
         aCustomer.aboutToDelete();
         return true;
     }
+
+    searchStringChanged(anEvent) {
+        this.customerList.search(anEvent.target.value);
+    }
 }
