@@ -187,10 +187,16 @@ class StaticList {
 
     getHtml() {
         let theString = '<table class="listTable mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">';
-        this.rows.forEach( eachRow => {
+        this.rows.forEach(eachRow => {
             theString += eachRow.getHtml();
         });
         return theString + "</tr>";
+    }
+
+    getHtmlElement() {
+        let theDiv = document.createElement("div");
+        theDiv.innerHTML = this.getHtml();
+        return theDiv;
     }
 }
 

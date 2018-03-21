@@ -12,14 +12,18 @@ class InsuranceView extends BaseView {
 
     showInsurance() {
         const theContentDiv = document.getElementById("content");
-            let theTable = new StaticList(["30%", "70%"]);
-            theTable
-                .addRow(["Versicherung: ", currentView.insurance.name()])
-                .addRow(["Beschreibung: ", currentView.insurance.description()])
-                .addRow(["Mögliche Anbieter: ", currentView.insurance.providersAsHtmlList()]);
-            let theTableDiv = document.createElement("div");
-            theTableDiv.innerHTML = theTable.getHtml();
-            theContentDiv.appendChild(theTableDiv);
-            hideSpinner();
+        let theTable = new StaticList(["30%", "70%"]);
+        let theInsurance = currentView.insurance;
+        theTable
+            .addRow(["Versicherung: ", theInsurance.name()])
+            .addRow(["Beschreibung: ", theInsurance.description()])
+            .addRow(["Mögliche Anbieter: ", theInsurance.providersAsHtmlList()]);
+        theContentDiv.appendChild(theTable.getHtmlElement());
+        if (theInsurance.hasLink()) {
+            let theButtonLink = document.getElementById("calculatorLink");
+            theButtonLink.href = theInsurance.link();
+            theButtonLink.style.display = "";
+        }
+        hideSpinner();
     }
 }

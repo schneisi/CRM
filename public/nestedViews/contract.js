@@ -16,7 +16,13 @@ class ContractView extends BaseView {
             .addRow(["Datum", this.contract.dateString()])
             .addRow(["Produkt", this.contract.insuranceName()])
             .addRow(["Bemerkung", this.contract.remark()]);
-        document.getElementById("content").innerHTML = this.table.getHtml();
+        let theInsurance = this.contract.insurance;
+        if (theInsurance.hasLink()) {
+            let theButtonLink = document.getElementById("calculatorLink");
+            theButtonLink.href = theInsurance.link();
+            theButtonLink.style.display = "";
+        }
+        document.getElementById("content").appendChild(this.table.getHtmlElement());
     }
 
     deleteMenuButtonClicked() {
