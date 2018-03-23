@@ -120,6 +120,15 @@ class Customer extends BaseDatabaseObject {
     isoBirthdayOnlyString() {
         return this.isoStringForDate(this.birthday());
     }
+    phoneLink() {
+        return this.linkForString("tel", this.phone());
+    }
+    mailLink() {
+        return this.linkForString("mailto", this.mail());
+    }
+    linkForString(anAttributeName, aValueString) {
+        return "<a href='" + anAttributeName + ":" + aValueString + "'>" + aValueString + "</a>";
+    }
 
     mapsApiUrl() {
         let apiKey = "AIzaSyCeZvXTabw2_pt2TnB7KnfmcOndEbDwvhk";
