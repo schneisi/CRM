@@ -20,4 +20,8 @@ class InsurancesView extends BaseView {
         setActionId(aHelper.object);
         navigateToViewWithId("insurance");
     }
+
+    searchStringChanged(anEvent) {
+        this.insuranceList.search(anEvent.target.value);
+    }
 }
