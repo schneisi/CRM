@@ -38,7 +38,16 @@ class ListGrid {
 
     search(aString) {
         this.tableRows.forEach(eachTr => {
-            if (eachTr.innerText.toLowerCase().includes(aString.toLowerCase())) {
+            let theTextArray = [];
+            Array.from(eachTr.children).forEach(eachChildElement => {
+                theTextArray.push(eachChildElement.innerText);
+            });
+            if (this.deleteSelector) {
+                //Remove the 'Löschen' substring
+                theTextArray.pop();
+            }
+            let theRowContextString = theTextArray.join(" ");
+            if (theRowContextString.toLowerCase().includes(aString.toLowerCase())) {
                 eachTr.style.display = "";
             } else {
                 eachTr.style.display = "none";
