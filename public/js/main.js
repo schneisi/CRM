@@ -1,4 +1,4 @@
-let isDebugging = false;
+let isDebugging = true;
 let isAlwaysOnline = true;
 let jsFiles = [];
 const applicationServerPublicKey = "BPoW8cpPvtjGUYTU2kBj0OY91inszdxTDAcfrtXn0YoeR7lFSFFH7v45q96X067HwmaaRmvGeNNnIp272mSZGKw";
@@ -179,4 +179,10 @@ function serviceWorkerNotification(aTitleString, aBodyString, aViewId, anActionI
             actionId: anActionId
         }
     });
+}
+
+function trimByChar(aString, aCharacter) {
+    const theFirstIndex = [...aString].findIndex(eachChar => eachChar !== aCharacter);
+    const theLastIndex = [...aString].reverse().findIndex(char => char !== aCharacter);
+    return aString.substring(theFirstIndex, aString.length - theLastIndex);
 }

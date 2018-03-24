@@ -6,7 +6,7 @@ class Scheduler {
             return scheduler;
         } else {
             this.tasks = [];
-            this.isActive = true;
+            this.isActive = false;
             this.seconds = 0;
             this.interval = setInterval(function (){scheduler.loop();}, 1000);
         }

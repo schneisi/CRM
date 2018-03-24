@@ -6,16 +6,37 @@ const staticAssets = [
     './crm.html',
     './css/appShell.css',
     './css/dashboard.css',
+    './css/getmdl-select.min.css',
+    './Frameworks/getmdl-select.min.js',
+    './Frameworks/hammer.min.js',
+    './Frameworks/moment.js',
+    './database/authentification.js',
+    './database/database.js',
+    './database/offlineDatabase.js',
     './js/ajax.js',
-    './js/navigation.js',
+    './js/app.js',
+    './js/list.js',
     './js/login.js',
+    './js/main.js',
+    './js/navigation.js',
+    './js/Scheduling.js',
+    './js/sites.json',
+    './js/View.js',
+    './model/Appointment.js',
+    './model/BaseDatabaseObject.js',
+    './model/Contract.js',
+    './model/Customer.js',
+    './model/Insurance.js',
     './nestedViews/dashboard.js',
-    './nestedViews/customers.html',
     './nestedViews/dashboard.html',
-    './nestedViews/demoForm.html',
-    './nestedViews/demoTable.html',
+    './nestedViews/customers.html',
+    './nestedViews/customers.js',
+    './nestedViews/customer.html',
+    './nestedViews/customer.js',
 ];
-const useCaching = false;
+
+
+const useCaching = true;
 
 self.addEventListener('install', async anEvent => {
     const cache = await caches.open('static-assets');

@@ -1,7 +1,14 @@
 class BaseDatabaseObject {
-    constructor(aSnapshot) {
-        this.snapshot = aSnapshot;
+    constructor(aSnapshotOrJsonObject) {
+        this.online = isOnline();
+        if (this.online) {
+            this.snapshot = aSnapshotOrJsonObject;
+        } else {
+            this.json = aSnapshotOrJsonObject;
+        }
+        
         this.promises = [];
+        this.id = null;
     }
 
     populateChildren(aSnapshot, anArray, aPath, aClass) {
@@ -25,16 +32,28 @@ class BaseDatabaseObject {
         });
     }
 
-    static createObjectsFromSnapshot(aSnapshot, aClass) {
+    static createObjectsFromSnapshot(aSnapshotOrJson, aClass) {
         let theObjectList = [];
-        aSnapshot.forEach(function (aChildSnapshot) {
-            theObjectList.push(new aClass(aChildSnapshot));
-        });
+        if (isOnline()) {
+            aSnapshotOrJson.forEach(function (aChildSnapshot) {
+                theObjectList.push(new aClass(aChildSnapshot));
+            });
+        } else {
+            Object.keys(aSnapshotOrJson).forEach(aKeyString => {
+                let theObject = new aClass(aSnapshotOrJson[aKeyString]);
+                theObject.id = aKeyString;
+                theObjectList.push(theObject);
+            })
+        }
         return theObjectList;
     }
 
     key() {
-        return this.snapshot.key;
+        if (this.online) {
+            return this.snapshot.key;
+        } else {
+            return this.id;
+        }
     }
 
     reference() {
@@ -46,7 +65,14 @@ class BaseDatabaseObject {
     }
 
     getValueOfChild(aString) {
-        return this.snapshot.child(aString).val();
+        if (this.online) {
+            return this.snapshot.child(aString).val();
+        } else {
+            let theSubPathCollection = aString.split("/");
+            let theResponseObject = this.json;
+            theSubPathCollection.forEach(eachString => theResponseObject = theResponseObject[eachString]);
+            return theResponseObject;
+        }
     }
 
     hasChild(aString) {

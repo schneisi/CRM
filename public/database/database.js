@@ -12,31 +12,44 @@ class FbDatabase {
     }
 
     static getDatabaseSnapshot(aPath, aCallback, aContextObject = null, anOptionsJson = {}) {
-        let theErrorCallback = function (anError) {
-            logString(anError);
-        };
-        let theReference = fbDatabase.ref(aPath);
         
-        let thePromise = theReference;
-        if (anOptionsJson.orderChild) {
-            thePromise = thePromise.orderByChild(anOptionsJson.orderChild);
-            if (anOptionsJson.startObject) {
-                thePromise = thePromise.startAt(anOptionsJson.startObject);
-            }
-            if (anOptionsJson.endObject) {
-                thePromise = thePromise.endAt(anOptionsJson.endObject);
-            }
-        }
-        if (anOptionsJson.limit) {
-            thePromise = thePromise.limitToFirst(anOptionsJson.limit);
+        let theCallback;
+        if (aContextObject) {
+            theCallback = aCallback.bind(aContextObject);
+        } else {
+            theCallback = aCallback;
         }
 
-        if (aContextObject) {
-            thePromise.once("value", aCallback, theErrorCallback, aContextObject);
+        if (isOnline()) {
+            let theErrorCallback = function (anError) {
+                logString(anError);
+            };
+            let theReference = fbDatabase.ref(aPath);
+            
+            let thePromise = theReference;
+            if (anOptionsJson.orderChild) {
+                thePromise = thePromise.orderByChild(anOptionsJson.orderChild);
+                if (anOptionsJson.startObject) {
+                    thePromise = thePromise.startAt(anOptionsJson.startObject);
+                }
+                if (anOptionsJson.endObject) {
+                    thePromise = thePromise.endAt(anOptionsJson.endObject);
+                }
+            }
+            if (anOptionsJson.limit) {
+                thePromise = thePromise.limitToFirst(anOptionsJson.limit);
+            }
+    
+    
+            thePromise.once("value", aSnapshot => {
+                offlineDatabase.saveSnapshot(aSnapshot);
+                theCallback(aSnapshot);
+            }).catch(anError => theErrorCallback(anError));
         } else {
-            thePromise.once("value", aCallback, theErrorCallback);
+            offlineDatabase.jsonForPath(aPath).then(aJson => {
+                theCallback(aJson);
+            });
         }
-        
     }
 
     static startRealTimeQuery(aPath, aCallback) {

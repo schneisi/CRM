@@ -2,16 +2,20 @@ let theCustomer;
 
 class CustomerView extends BaseView {
     initializeView() {
-        showEditMenuButton();
-        showDeleteMenuButton();
+        if (isOnline()) {
+            showEditMenuButton();
+            showDeleteMenuButton();
+        }
         this.initializeAccordion();
         this.showCustomerData();
     }
     showCustomerData(){
         FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
             theCustomer = new Customer(aSnapshot);
-            theCustomer.loadContracts();
-            currentView.showContracts();
+            if (theCustomer.online) {
+                theCustomer.loadContracts();
+                currentView.showContracts();
+            }
             currentView.customer = theCustomer;
             const theContentDiv = document.getElementById("content");
             currentView.table = new StaticList(["30%", "70%"]);
@@ -25,7 +29,7 @@ class CustomerView extends BaseView {
                 .addRow(["Straße", theCustomer.street()])
                 .addRow(["PLZ", theCustomer.zipCode()])
                 .addRow(["Ort", theCustomer.place()])
-                .addRow(["Bemerkung", aSnapshot.child("notes").val()]);
+                .addRow(["Bemerkung", theCustomer.notes()]);
             currentView.updateName(theCustomer.lastname());
             document.getElementById("customerDataDiv").innerHTML = currentView.table.getHtml();
             document.getElementById("mapsFrame").src = theCustomer.mapsApiUrl();
