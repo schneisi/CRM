@@ -55,7 +55,6 @@ class ListGrid {
         });
         this.groups.forEach(eachGroup => {
             let theHideBoolean = eachGroup.children.every(eachChild => {
-                console.log(eachChild.style.display == "none");
                 return eachChild.style.display == "none";
             });
             let theDisplayString = "";
