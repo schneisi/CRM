@@ -24,5 +24,7 @@
         "src": "img/logo144.png",
         "sizes": "144x144",
         "type": "image/png"
-      }]
+      }],
+    "background_color": "#4248AF",
+    "theme_color": "#4248AF"
 }
