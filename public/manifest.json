@@ -3,5 +3,26 @@
     "short_name": "EZR",
     "lang": "de",
     "start_url": "/index.html",
-    "display": "standalone"
+    "display": "standalone",
+    "Icons": [{
+        "src": "img/logo.png",
+        "sizes": "384x384",
+        "type": "image/png"
+      }, {
+        "src": "img/logo72.png",
+        "sizes": "72x72",
+        "type": "image/png"
+      }, {
+        "src": "img/logo48.png",
+        "sizes": "48x48",
+        "type": "image/png"
+      }, {
+        "src": "img/logo16.png",
+        "sizes": "16x16",
+        "type": "image/png"
+      },  {
+        "src": "img/logo144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      }]
 }
