@@ -1,4 +1,4 @@
-var fbDatabase;
+var fsDatabase;
 
 function initializeFirebase() {
     // Initialize Firebase
@@ -11,8 +11,21 @@ function initializeFirebase() {
         messagingSenderId: "629201658789"
     };
     firebase.initializeApp(config);
-    fbDatabase = firebase.database();
-    firebase.database.enableLogging(function(message) {
-        logString("[FIREBASE]" + message);
-    });
+    firebase.firestore().enablePersistence()
+        .then(function() {
+            // Initialize Cloud Firestore through firebase
+            fsDatabase = firebase.firestore();
+        })
+        .catch(anError => {
+            console.log(anError);
+            if (anError.code == 'failed-precondition') {
+                // Multiple tabs open, persistence can only be enabled
+                // in one tab at a a time.
+                // ...
+            } else if (anError.code == 'unimplemented') {
+                // The current browser does not support all of the
+                // features required to enable persistence
+                // ...
+            }
+        });
 }

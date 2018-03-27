@@ -2,7 +2,7 @@ class ContractView extends BaseView {
     initializeView() {
         showEditMenuButton();
         showDeleteMenuButton();
-        FbDatabase.getDatabaseSnapshot(getActionId(), function(aSnapshot) {
+        FSDatabase.getDatabaseSnapshotForDoc(getActionId(), function(aSnapshot) {
             this.contract = new Contract(aSnapshot);
             this.contract.loadInsurance().then(function () {
                 this.showContract();
@@ -11,7 +11,7 @@ class ContractView extends BaseView {
     }
 
     showContract() {
-        this.table = new StaticList(["30%", "70%"]);
+        this.table = new StaticList();
         this.table
             .addRow(["Datum", this.contract.dateString()])
             .addRow(["Produkt", this.contract.insuranceName()])

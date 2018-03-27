@@ -3,17 +3,17 @@ class NewContractView extends BaseView {
         showSaveButton(this.saveNewContract);
         this.setComponents();
         if (getActionString() == "contract" ){
-            FbDatabase.getDatabaseSnapshot(getActionId(), function (aSnapshot) {
+            FSDatabase.getDatabaseSnapshotForDoc(getActionId(), aSnapshot =>  {
                 let theContract = new Contract(aSnapshot);
-                currentView.dateField.value = theContract.isoDateString();
-                currentView.productId.value = theContract.productId();
-                currentView.remarkField.value = theContract.remark();
-                currentView.remarkField.parentElement.classList.add("is-dirty");
+                this.dateField.value = theContract.isoDateString();
+                this.productId.value = theContract.productId();
+                this.remarkField.value = theContract.remark();
+                this.remarkField.parentElement.classList.add("is-dirty");
 
-                currentView.contract = theContract;
-            });
+                this.contract = theContract;
+            }, this);
         }
-        FbDatabase.getDatabaseSnapshot("products", function (aSnapshot) {
+        FSDatabase.getDatabaseSnapshotForCollection("products", aSnapshot =>  {
             let theInsurances = Insurance.createObjectsFromSnapshot(aSnapshot, Insurance);
             theInsurances.forEach(eachInsurance =>{
                 let theLi = document.createElement("li");

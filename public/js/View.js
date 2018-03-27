@@ -16,6 +16,10 @@ class BaseView {
         titleSpan.innerHTML = aString;
     }
 
+    getUserId() {
+        return FSDatabase.getCurrentUserId();
+    }
+
     initializeAccordion() {
         let theAccordion = document.getElementsByClassName("accordion");
         Array.from(theAccordion).forEach(eachAccordion => {

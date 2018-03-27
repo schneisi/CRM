@@ -1,85 +1,47 @@
 class BaseDatabaseObject {
-    constructor(aSnapshotOrJsonObject) {
-        this.online = isOnline();
-        if (this.online) {
-            this.snapshot = aSnapshotOrJsonObject;
-        } else {
-            this.json = aSnapshotOrJsonObject;
-        }
+    constructor(aSnapshot) {
+        this.snapshot = aSnapshot
         
         this.promises = [];
         this.id = null;
     }
 
-    populateChildren(aSnapshot, anArray, aPath, aClass) {
-        let thePromise = new Promise(function (resolve, reject) {
-            FbDatabase.getDatabaseSnapshot(aPath, anObjectsSnapshot => {
-                aSnapshot.forEach(aChildSnapshot => {
-                    let theId = aChildSnapshot.child("id").val();
-                    anArray.push(new aClass(anObjectsSnapshot.child(theId)));
-                });
-                resolve();
-            });
-        });
-        this.promises.push(thePromise);
-        return thePromise;
-    }
-
-    static createFromPathWithRealtimeQuery(aClass, aPath, aCallback) {
-        FbDatabase.startRealTimeQuery(aPath, function (aSnapshot) {
-            let theDatabaseObject = new aClass (aSnapshot);
-            aCallback(theDatabaseObject);
-        });
-    }
 
     static createObjectsFromSnapshot(aSnapshotOrJson, aClass) {
         let theObjectList = [];
-        if (isOnline()) {
-            aSnapshotOrJson.forEach(function (aChildSnapshot) {
-                theObjectList.push(new aClass(aChildSnapshot));
-            });
-        } else {
-            Object.keys(aSnapshotOrJson).forEach(aKeyString => {
-                let theObject = new aClass(aSnapshotOrJson[aKeyString]);
-                theObject.id = aKeyString;
-                theObjectList.push(theObject);
-            })
-        }
+        aSnapshotOrJson.forEach(function (aChildSnapshot) {
+            theObjectList.push(new aClass(aChildSnapshot));
+        });
         return theObjectList;
     }
 
     key() {
-        if (this.online) {
-            return this.snapshot.key;
-        } else {
-            return this.id;
-        }
+        return this.snapshot.id;
     }
 
     reference() {
-        return this.snapshot.getRef();
+        return this.snapshot.ref;
     }
 
     aboutToDelete() {
-        this.reference().remove();
+        this.reference().delete();
     }
 
     getValueOfChild(aString) {
-        if (this.online) {
-            return this.snapshot.child(aString).val();
-        } else {
-            let theSubPathCollection = aString.split("/");
-            let theResponseObject = this.json;
-            theSubPathCollection.forEach(eachString => theResponseObject = theResponseObject[eachString]);
-            return theResponseObject;
-        }
+        return this.snapshot.get(aString);
     }
 
     hasChild(aString) {
-        return this.snapshot.child(aString).exists();
+        let theValue = this.getValueOfChild(aString);
+        if (theValue) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     startListening(aCallback) {
+        //TODO => Migrate to new database or remove
         this.listeningCallback = aCallback;
         let theReceiver = this;
         this.reference().on('value', function (aSnapshot) {
@@ -89,6 +51,7 @@ class BaseDatabaseObject {
     }
 
     stopListening() {
+        //TODO => Migrate to new database or remove
         this.reference().off('value', this.listeningCallback);
     }
 
@@ -118,6 +81,10 @@ class BaseBuilder {
         throw "Needs to be defined in subclass";
     }
 
+    getReference() {
+        throw "Needs to be defined in subclass";
+    }
+
     save() {
         this.check();
         if (this.hasError()) {
@@ -129,7 +96,7 @@ class BaseBuilder {
             } else {
                 theKey = this.object.key();
             }
-            FbDatabase.writeInDatabase(this.path(), theKey, this.getJson());
+            FSDatabase.writeInDatabaseCollection(this.path(), this.getJson(), theKey);
             return true;
         }
     }

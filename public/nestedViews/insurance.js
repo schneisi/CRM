@@ -1,12 +1,8 @@
 class InsuranceView extends BaseView {
     initializeView() {
-        FbDatabase.getDatabaseSnapshot("/products/" + getActionId(), function (aSnapshot) {
+        FSDatabase.getDatabaseSnapshotForDoc("/products/" + getActionId(), function (aSnapshot) {
             currentView.insurance = new Insurance(aSnapshot);
-            currentView.insurance.loadProviders();
-            let thePromise = currentView.insurance.promises[0];
-            thePromise.then(function () {
-                currentView.showInsurance();
-            });
+            currentView.showInsurance();
         });
     }
 
@@ -17,7 +13,6 @@ class InsuranceView extends BaseView {
         theTable
             .addRow(["Versicherung: ", theInsurance.name()])
             .addRow(["Beschreibung: ", theInsurance.description()])
-            .addRow(["Mögliche Anbieter: ", theInsurance.providersAsHtmlList()]);
         theContentDiv.appendChild(theTable.getHtmlElement());
         if (theInsurance.hasLink()) {
             let theButtonLink = document.getElementById("calculatorLink");

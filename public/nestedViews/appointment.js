@@ -3,10 +3,10 @@ class AppointmentView extends BaseView {
         showEditMenuButton();
         showDeleteMenuButton();
 
-        Appointment.createFromPathWithRealtimeQuery(Appointment, "/appointments/" + FbDatabase.getCurrentUserId()+ "/" + getActionId(), function (anAppointment) {
-            currentView.appointment = anAppointment;
-            currentView.showAppointment();
-        });
+        FSDatabase.getDatabaseSnapshotForDoc("users/" + this.getUserId() + "/appointments/" + getActionId(), aSnapshot => {
+            this.appointment = new Appointment(aSnapshot);
+            this.showAppointment();
+        }, this);
     }
 
     showAppointment() {
@@ -47,9 +47,5 @@ class AppointmentView extends BaseView {
 
     mapsButtonClicked() {
         callGoogleMaps(this.appointment.addressString());
-    }
-
-    unload() {
-        this.appointment.stopListening();
     }
 }

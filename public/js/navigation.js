@@ -37,9 +37,8 @@ function initializeBody() {
     titleSpan = document.getElementById("titleSpan");
     theMenu = document.getElementById("menu");
 
-    logString(sites);
     createMenu();
-    setTimeout(showStartPage, 250); //Make sure all JS-Files are loaded. Crashes otherwise
+    setTimeout(showStartPage, 300); //Make sure all JS-Files are loaded. Crashes otherwise
 }
 
 function createMenu() {
@@ -181,4 +180,3 @@ function getActionString() {
 function setActionString(aString) {
     sessionStorage.setItem('actionString', aString);
 }
-

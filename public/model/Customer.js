@@ -23,15 +23,15 @@ class Customer extends BaseDatabaseObject {
     }
 
     zipCode() {
-        return this.getValueOfChild("address/zip");
+        return this.getValueOfChild("address.zip");
     }
 
     street() {
-        return this.getValueOfChild("address/street");
+        return this.getValueOfChild("address.street");
     }
 
     place() {
-        return this.getValueOfChild("address/place");
+        return this.getValueOfChild("address.place");
     }
     birthday() {
         return new Date(this.getValueOfChild("birthday"));
@@ -135,13 +135,16 @@ class Customer extends BaseDatabaseObject {
         return "https://www.google.com/maps/embed/v1/place?key=" + apiKey + "&q=" + encodeURI(this.addressString());
     }
 
-    loadContracts(){
+    loadContracts(aCallback){
         let theReceiver = this;
         this.promises = [];
-        this.snapshot.child("contracts").forEach(eachChildSnapshot => {
-            let theContract = new Contract(eachChildSnapshot);
-            theReceiver.contracts.push(theContract);
-            theReceiver.promises.push(theContract.loadInsurance());
+        this.snapshot.ref.collection("contracts").get().then(aSnapshot => {
+            aSnapshot.forEach(eachContractSnapshot => {
+                let theContract = new Contract(eachContractSnapshot);
+                theReceiver.contracts.push(theContract);
+                theReceiver.promises.push(theContract.loadInsurance());
+            });
+            aCallback();
         });
     }
 
@@ -253,7 +256,7 @@ class Customer extends BaseDatabaseObject {
                     startObject: moment().format("MM/DD"),
                     limit: 3
                 };
-                FbDatabase.getDatabaseSnapshot("customers", theBirthdayCallback, null, theOptions);
+                FSDatabase.getDatabaseSnapshotForCollection("customers", theBirthdayCallback, null, theOptions);
             }, 60);
             Scheduler.instance.addTask(theBirthdayTask);
         }
@@ -334,9 +337,6 @@ class CustomerBuilder extends BaseBuilder {
             partnerIsEmployee: this.partnerIsEmployee
         };
        
-        if (!this.isNew()) {
-            theJsonObject.contracts = this.object.snapshot.child("contracts").toJSON();
-        }
         return theJsonObject;
     }
 }

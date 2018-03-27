@@ -5,7 +5,7 @@ class NewCustomerView extends BaseView {
         this.initializeAccordion();
         if (hasActionId()) {
             this.updateName("Kunde bearbeiten");
-            FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function (aSnapshot) {
+            FSDatabase.getDatabaseSnapshotForDoc("/customers/" + getActionId(), aSnapshot => {
                 let theCustomer = new Customer(aSnapshot);
                 currentView.lastNameField.value = theCustomer.lastname();
                 currentView.lastNameField.parentElement.classList.add("is-dirty");

@@ -2,21 +2,16 @@ let theCustomer;
 
 class CustomerView extends BaseView {
     initializeView() {
-        if (isOnline()) {
-            showEditMenuButton();
-            showDeleteMenuButton();
-        }
+        showEditMenuButton();
+        showDeleteMenuButton();
         this.initializeAccordion();
         this.showCustomerData();
     }
     showCustomerData(){
-        FbDatabase.getDatabaseSnapshot("/customers/" + getActionId(), function(aSnapshot) {
+        FSDatabase.getDatabaseSnapshotForDoc("/customers/" + getActionId(), function(aSnapshot) {
             theCustomer = new Customer(aSnapshot);
-            if (theCustomer.online) {
-                theCustomer.loadContracts();
-                currentView.showContracts();
-            }
             currentView.customer = theCustomer;
+            theCustomer.loadContracts(currentView.showContracts);
             const theContentDiv = document.getElementById("content");
             currentView.table = new StaticList(["30%", "70%"]);
             currentView.table

@@ -5,28 +5,28 @@ class Appointment extends BaseDatabaseObject {
         return this.getValueOfChild("title");
     }
     date() {
-        return FbDatabase.dateForValue(this.getValueOfChild("date"));
+        return FSDatabase.dateForValue(this.getValueOfChild("date"));
     }
     dateString() {
         return this.dateOnlyString() + " " + this.timeOnlyString();
     }
     hasStreet() {
-        return this.hasChild("address/street");
+        return this.hasChild("address.street");
     }
     street() {
-        return this.getValueOfChild("address/street");
+        return this.getValueOfChild("address.street");
     }
     hasPlace() {
-        return this.hasChild("address/place");
+        return this.hasChild("address.place");
     }
     place() {
-        return this.getValueOfChild("address/place");
+        return this.getValueOfChild("address.place");
     }
     hasZip() {
-        return this.hasChild("address/zip");
+        return this.hasChild("address.zip");
     }
     zip() {
-        return this.getValueOfChild("address/zip");
+        return this.getValueOfChild("address.zip");
     }
     hasNotes() {
         return this.hasChild("notes");
@@ -69,10 +69,10 @@ class Appointment extends BaseDatabaseObject {
                 };
                 let theOptions = {
                     orderChild: "date",
-                    startObject: FbDatabase.valueForDate(new Date()),
+                    startObject: FSDatabase.valueForDate(new Date()),
                     limit: 3
                 }
-                FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), theCallback, null, theOptions);
+                FSDatabase.getDatabaseSnapshotForCollection("users/" + FSDatabase.getCurrentUserId() + "/appointments", theCallback, null, theOptions);
             }, 10);
             Scheduler.instance.addTask(theTask);
         }
@@ -112,11 +112,11 @@ class AppointmentBuilder extends BaseBuilder {
     }
 
     path () {
-        return "appointments/" + FbDatabase.getCurrentUserId();
+        return "users/" + FSDatabase.getCurrentUserId() + "/appointments";
     }
 
     dateValue() {
-        return FbDatabase.valueForDate(this.date);
+        return FSDatabase.valueForDate(this.date);
     }
 
     getJson() {

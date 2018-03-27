@@ -20,7 +20,7 @@ class CustomersView extends BaseView {
         let theOptions = {
             orderChild: "lastname"
         }
-        FbDatabase.getDatabaseSnapshot("customers", theCallback, this, theOptions);
+        FSDatabase.getDatabaseSnapshotForCollection("customers", theCallback, this, theOptions);
     }
     
     addNewCustomerClicked() {

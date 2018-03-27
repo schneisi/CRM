@@ -11,7 +11,7 @@ class AppointmentsView extends BaseView {
         let theOptions = {
             orderChild: "date"
         }
-        FbDatabase.getDatabaseSnapshot("appointments/" + FbDatabase.getCurrentUserId(), function(aSnapshot) {
+        FSDatabase.getDatabaseSnapshotForCollection("users/" + FSDatabase.getCurrentUserId() + "/appointments", function(aSnapshot) {
             theAppointmentList.objects = Appointment.createObjectsFromSnapshot(aSnapshot, Appointment);
             document.getElementById("content").appendChild(theAppointmentList.getTableElement());
             hideSpinner();

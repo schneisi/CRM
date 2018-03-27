@@ -7,14 +7,14 @@ class Contract extends BaseDatabaseObject{
 
     //Attributes
     customerId() {
-        return this.reference().parent.parent.key;
+        return this.reference().parent.parent.id;
     }
     productId(){
         return this.getValueOfChild("productId");
     }
 
     date(){
-        return FbDatabase.dateForValue(this.getValueOfChild("date"));
+        return FSDatabase.dateForValue(this.getValueOfChild("date"));
     }
 
     remark() {
@@ -29,7 +29,7 @@ class Contract extends BaseDatabaseObject{
     loadInsurance() {
         let theReceiver = this;
         return new Promise(function (resolve, reject) {
-            FbDatabase.getDatabaseSnapshot("products/" + theReceiver.productId(), aSnapshot => {
+            FSDatabase.getDatabaseSnapshotForDoc("products/" + theReceiver.productId(), aSnapshot => {
                 theReceiver.insurance = new Insurance(aSnapshot);
                 resolve(theReceiver);
             });
@@ -67,7 +67,7 @@ class ContractBuilder extends BaseBuilder {
 
     getJson() {
         let theJson = {
-            date: FbDatabase.valueForDate(this.date),
+            date: FSDatabase.valueForDate(this.date),
             productId: this.productId,
             remark: this.remark
         };
