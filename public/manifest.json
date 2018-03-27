@@ -3,5 +3,7 @@
     "short_name": "EZR",
     "lang": "de",
     "start_url": "/index.html",
-    "display": "standalone"
+    "display": "standalone",
+    "background_color": "#4248AF",
+    "theme_color": "#4248AF"
 }
