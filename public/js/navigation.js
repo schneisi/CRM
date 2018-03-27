@@ -38,7 +38,7 @@ function initializeBody() {
     theMenu = document.getElementById("menu");
 
     createMenu();
-    setTimeout(showStartPage, 300); //Make sure all JS-Files are loaded. Crashes otherwise
+    setTimeout(showStartPage, 500); //Make sure all JS-Files are loaded. Crashes otherwise
 }
 
 function createMenu() {

@@ -4,7 +4,7 @@
     "lang": "de",
     "start_url": "/index.html",
     "display": "standalone",
-    "Icons": [{
+    "icons": [{
         "src": "img/logo.png",
         "sizes": "384x384",
         "type": "image/png"
