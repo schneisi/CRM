@@ -14,7 +14,6 @@ const staticAssets = [
     './database/authentification.js',
     './database/database.js',
     './database/fsDatabase.js',
-    './database/offlineDatabase.js',
     './js/ajax.js',
     './js/app.js',
     './js/list.js',

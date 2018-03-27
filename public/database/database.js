@@ -42,13 +42,13 @@ class FbDatabase {
     
     
             thePromise.once("value", aSnapshot => {
-                offlineDatabase.saveSnapshot(aSnapshot);
+                //offlineDatabase.saveSnapshot(aSnapshot);
                 theCallback(aSnapshot);
             }).catch(anError => theErrorCallback(anError));
         } else {
-            offlineDatabase.jsonForPath(aPath).then(aJson => {
+            /*offlineDatabase.jsonForPath(aPath).then(aJson => {
                 theCallback(aJson);
-            });
+            });*/
         }
     }
 
