@@ -1,14 +1,23 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    initialize();
+    initializeApp();
 });
 
-function initialize() {
-    firebase.auth().onAuthStateChanged(aFirebaseUser => {
-        if (aFirebaseUser) {
-        } else {
-            logout();
-        }
-    });
+function initializeApp() {
+    if (fsDatabase) {
+        intialize();
+    } else {
+        initializeFirebase().then(intialize);
+    } 
+
+    function intialize() {
+        initializeNavigation();
+        firebase.auth().onAuthStateChanged(aFirebaseUser => {
+            if (aFirebaseUser) {
+            } else {
+                logout();
+            }
+        });
+    }
     
     var theNavigationHammer = new Hammer(document.getElementById("main"));
     theNavigationHammer.on("swiperight", function () {showDrawer()});

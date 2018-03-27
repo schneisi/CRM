@@ -12,9 +12,19 @@ function redirect() {
     redirectToUrl('/crm.html');
 }
 
+initializeLogin();
+function initializeLogin() {
+    if (fsDatabase) {
+        setAuthStatusListener();
+    } else {
+        initializeFirebase().then(setAuthStatusListener);
+    }
 
-firebase.auth().onAuthStateChanged(aFirebaseUser => {
-        if (aFirebaseUser) {
-            redirect();
-        }
-    })
+    function setAuthStatusListener() {
+        firebase.auth().onAuthStateChanged(aFirebaseUser => {
+            if (aFirebaseUser) {
+                redirect();
+            }
+        })
+    } 
+}

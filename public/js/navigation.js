@@ -9,12 +9,18 @@ let titleSpan;
 let theMenu;
 
 //Initialize
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     //Wait until MDL is initialized
     setTimeout(function () {
-        getAjaxContent("js/sites.json", initializeSites);
+        if (fsDatabase) {
+            getAjaxContent("js/sites.json", initializeSites);
+        }
     } , 10);
-});
+});*/
+
+function initializeNavigation() {
+    getAjaxContent("js/sites.json", initializeSites);
+}
 
 function initializeSites(aJsonString) {
     sites = JSON.parse(aJsonString);
@@ -38,7 +44,7 @@ function initializeBody() {
     theMenu = document.getElementById("menu");
 
     createMenu();
-    setTimeout(showStartPage, 500); //Make sure all JS-Files are loaded. Crashes otherwise
+    setTimeout(showStartPage, 100); //Make sure all JS-Files are loaded. Crashes otherwise
 }
 
 function createMenu() {

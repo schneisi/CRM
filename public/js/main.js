@@ -8,7 +8,7 @@ let hasServiceWorker = false;
 
 window.onerror = function (message, url, lineNo){
     if(!isDebugging){
-        alert('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
+        showModal('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
     }
     return false;
 };
@@ -17,6 +17,9 @@ function logString(aString) {
     if (isDebugging) {
         console.log(aString);
     }
+}
+function logError(aString) {
+    console.log("ERROR: " + aString);
 }
 
 initializeApp();
@@ -29,10 +32,9 @@ async function initializeApp(){
                 logString("SW registered");
             });
         } catch (error) {
-            logString("SW registration failed");
+            logError("SW registration failed");
         }
     }
-    initializeFirebase();
     if (Notification && Notification.permission !== "granted") {
         Notification.requestPermission();
     }
