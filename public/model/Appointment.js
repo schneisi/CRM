@@ -136,20 +136,18 @@ class AppointmentBuilder extends BaseBuilder {
     }
 
     //Error
-    errorForNumber(aNumber) {
-        let theErrorText;
-        switch(aNumber) {
-            case 1:
-                theErrorText = "Titel ist Pflichtfeld";
-                break;
-            default:
-                throw "Error: No error found";
+    errorJson() {
+        return {
+            1: "Titel ist Pflichtfeld",
+            2: "Ungültige Uhrzeit bzw. Datum",
         }
-        return new BuilderError(aNumber, theErrorText);
     }
     check() {
         if (!this.title || this.title.length == 0) {
             this.addError(1);
+        }
+        if (!this.date.isValid()) {
+            this.addError(2);
         }
     }
 }

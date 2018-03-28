@@ -1,5 +1,4 @@
 let isDebugging = false;
-let isAlwaysOnline = true;
 let jsFiles = [];
 const applicationServerPublicKey = "BPoW8cpPvtjGUYTU2kBj0OY91inszdxTDAcfrtXn0YoeR7lFSFFH7v45q96X067HwmaaRmvGeNNnIp272mSZGKw";
 let serviceWorkerRegistration;

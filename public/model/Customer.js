@@ -347,4 +347,28 @@ class CustomerBuilder extends BaseBuilder {
        
         return theJsonObject;
     }
+
+    check() {
+        if (!this.hasValidString(this.firstname)) {
+            this.addError(1);
+        }
+        if (!this.hasValidString(this.lastname)) {
+            this.addError(2);
+        }
+        if (!this.hasValidString(this.mail)) {
+            this.addError(3);
+        }
+        if (!this.birthday.isValid() || this.birthday > new Date()) {
+            this.addError(4);
+        }
+    }
+
+    errorJson() {
+        return {
+            1: "Vorname ist Pflichtfeld",
+            2: "Nachname ist Pflichtfeld",
+            3: "E-Mail ist ungültig",
+            4: "Geburtsdatum ist ungültig"
+        }
+    }
 }

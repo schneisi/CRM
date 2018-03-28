@@ -39,8 +39,12 @@ class NewContractView extends BaseView {
         }
         theBuilder.remark = this.remarkField.value;
         theBuilder.productId = document.getElementById("insuranceValueField").value;
-        theBuilder.save();
-        navigateToViewWithId("customer");
+        if (theBuilder.save()) {
+            navigateToViewWithId("customer");
+        } else {
+            showModal("Fehler", theBuilder.errorStringBrSeparated());
+        }
+        
     }
 
     setComponents(){

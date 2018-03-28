@@ -120,9 +120,12 @@ class NewCustomerView extends BaseView {
         theBuilder.hasLeadingPosition = this.hasLeadingPositionHelper.isChecked();
         theBuilder.partnerIsEmployee = this.partnerIsEmployee.isChecked();
 
-        theBuilder.save();
-        let theViewId = "customers";
-        if (this.customer) theViewId = "customer";
-        navigateToViewWithId(theViewId);
+        if (theBuilder.save()) {
+            let theViewId = "customers";
+            if (this.customer) theViewId = "customer";
+            navigateToViewWithId(theViewId);
+        } else {
+            showModal("Fehler", theBuilder.errorStringBrSeparated());
+        }
     }
 }

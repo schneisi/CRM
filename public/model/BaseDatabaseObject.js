@@ -85,6 +85,10 @@ class BaseBuilder {
         throw "Needs to be defined in subclass";
     }
 
+    hasValidString(aString) {
+        return aString && aString.length > 0;
+    }
+
     save() {
         this.check();
         if (this.hasError()) {
@@ -113,7 +117,8 @@ class BaseBuilder {
     }
 
     errorForNumber(aNumber) {
-        throw "Implement in subclass";
+        let theErrorText = this.errorJson()[aNumber];
+        return new BuilderError(aNumber, theErrorText);
     }
     errorStringBrSeparated() {
         let theErrorTexts = [];

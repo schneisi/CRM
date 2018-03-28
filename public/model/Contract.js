@@ -73,4 +73,20 @@ class ContractBuilder extends BaseBuilder {
         };
         return theJson
     }
+
+    errorJson() {
+        return {
+            1: "Ungültiges Datum",
+            2: "Ungültiges Produkt"
+        }
+    }
+
+    check() {
+        if (!this.date.isValid()) {
+            this.addError(1);
+        }
+        if (!this.productId || this.productId <= 0) {
+            this.addError(2);
+        }
+    }
 }
