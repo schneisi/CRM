@@ -124,7 +124,7 @@ class CustomerView extends BaseView {
 
             if (theCustomer.hadIllness()) {
                 if (!theCustomer.hasDisabilityInsurance()) {
-                    theListGrid.addObject(new ListGridHelper(InsuranceTypes.UNEMPLOYMENT_INSURANCE, "Erwerbsunfähigkeitsversicherung"));
+                    theListGrid.addObject(new ListGridHelper(InsuranceTypes.DISABILITY_INSURANCE, "Erwerbsunfähigkeitsversicherung"));
                 }
                 if (!theCustomer.hasBasicAbilityInsurance()) {
                     theListGrid.addObject(new ListGridHelper(InsuranceTypes.BASIC_ABILITY_INSURANCE, "Grundfähigkeitsversicherung"));
@@ -135,10 +135,10 @@ class CustomerView extends BaseView {
                 }
 
             } else if (!theCustomer.hasUnableToWorkInsurance()) {
-                theListGrid.addObject(new ListGridHelper(InsuranceTypes.UNABLE_TO_WORK_INSURANCE, "Arbeitsunfähigkeitsversicherung"));
+                theListGrid.addObject(new ListGridHelper(InsuranceTypes.UNABLE_TO_WORK_INSURANCE, "Berufsunfähigkeitsversicherung"));
             }
         } else {
-            if (!theCustomer.isIndependent() || theCustomer.partnerIsEmployee() && !theCustomer.hasRiesterPension()) {
+            if (!theCustomer.hasRiesterPension() && !theCustomer.isIndependent() || theCustomer.partnerIsEmployee()) {
                 theListGrid.addObject(new ListGridHelper(InsuranceTypes.RIESTER_PENSION, "Riester Rente"));
             } else if (!theCustomer.hasRuerupPension()) {
                 theListGrid.addObject(new ListGridHelper(InsuranceTypes.RUERUP_PENSION, "Rürup Rente"));
