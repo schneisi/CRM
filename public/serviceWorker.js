@@ -47,7 +47,7 @@ const staticAssets = [
 ];
 
 
-const useCaching = false;
+const useCaching = true;
 
 self.addEventListener('install', async anEvent => {
     const cache = await caches.open('static-assets');

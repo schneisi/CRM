@@ -160,7 +160,7 @@ class CustomerView extends BaseView {
         }
 
         //Private Additional Health Insurance
-        if (theCustomer.earnsMoreThanAverage() && !theCustomer.isOfficial() && theCustomer.hasPrivateAddiationalHealthInsurance()) {
+        if (theCustomer.earnsMoreThanAverage() && !theCustomer.isOfficial() && theCustomer.hasPrivateAdditionalHealthInsurance()) {
             theListGrid.addObject(new ListGridHelper(InsuranceTypes.PRIVATE_ADDITIONAL_HEALTH_INSURANCE, "Private Krankenzusatzversicherung"));
         }
 
