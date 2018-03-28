@@ -2,6 +2,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     initializeApp();
 });
 
+navigator.serviceWorker.addEventListener('message', anEvent => {
+    setActionId(anEvent.data.actionId);
+    navigateToViewWithId(anEvent.data.viewId);
+});
+
 function initializeApp() {
     if (fsDatabase) {
         intialize();
