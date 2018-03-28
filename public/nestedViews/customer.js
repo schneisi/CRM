@@ -8,13 +8,13 @@ class CustomerView extends BaseView {
         this.showCustomerData();
     }
     showCustomerData(){
-        FSDatabase.getDatabaseSnapshotForDoc("/customers/" + getActionId(), function(aSnapshot) {
+        FSDatabase.getDatabaseSnapshotForDoc("/customers/" + getActionId(), aSnapshot => {
             theCustomer = new Customer(aSnapshot);
-            currentView.customer = theCustomer;
-            theCustomer.loadContracts(currentView.showContracts);
-            const theContentDiv = document.getElementById("content");
-            currentView.table = new StaticList(["30%", "70%"]);
-            currentView.table
+            this.customer = theCustomer;
+            this.updateName(theCustomer.lastname());
+            theCustomer.loadContracts(this.showContracts);
+            let theTable = new StaticList(); 
+            theTable
                 .addRow(["Name", theCustomer.lastname()])
                 .addRow(["Vorname", theCustomer.firstname()])
                 .addRow(["Geschlecht", theCustomer.sex()])
@@ -25,8 +25,9 @@ class CustomerView extends BaseView {
                 .addRow(["PLZ", theCustomer.zipCode()])
                 .addRow(["Ort", theCustomer.place()])
                 .addRow(["Bemerkung", theCustomer.notes()]);
-            currentView.updateName(theCustomer.lastname());
-            document.getElementById("customerDataDiv").innerHTML = currentView.table.getHtml();
+            
+            document.getElementById("customerDataDiv").innerHTML = theTable.getHtml();
+            this.showCustomerInfo();
             document.getElementById("mapsFrame").src = theCustomer.mapsApiUrl();
         }, this);
     }
@@ -182,5 +183,34 @@ class CustomerView extends BaseView {
         let theId = aHelper.object;
         setActionId(theId);
         navigateToViewWithId("insurance");
+    }
+
+    showCustomerInfo(){
+        let theTable = new StaticList();
+        theTable
+            .addRow(["Besitzt KFZ", this.stringForBoolean(theCustomer.ownsCar())])
+            .addRow(["Besitzt Ausbildung abgeschlossen",this.stringForBoolean(theCustomer.completedInitialTraining())])
+            .addRow(["Kunde ist selbstständig", this.stringForBoolean(theCustomer.isIndependent())])
+            .addRow(["Kunde ist beamter", this.stringForBoolean(theCustomer.isOfficial())])
+            .addRow(["Kunde hat führende Position", this.stringForBoolean(theCustomer.hasLeadingPosition())])
+            .addRow(["Kunde ist vermögend", this.stringForBoolean(theCustomer.earnsMoreThanAverage())])
+            .addRow(["Besitzt privat genutztes Gebäude", this.stringForBoolean(theCustomer.ownsPrivateBuilding())])
+            .addRow(["Besitzt gewerblich genutztes Gebäude", this.stringForBoolean(theCustomer.ownsCommercialBuilding())])
+            .addRow(["Führt privaten Haushalt",this.stringForBoolean(theCustomer.hasPrivateHousehold())])
+            .addRow(["Ist am Kapitalmarkt interessiert", this.stringForBoolean(theCustomer.isInterestInCapitalMarked())])
+            .addRow(["Hat Vorerkrankung",this.stringForBoolean(theCustomer.hadIllness())])
+            .addRow(["Der Partner ist angestellte/r", this.stringForBoolean(theCustomer.partnerIsEmployee())])
+            .addRow(["Der Kunde ist Grenzgänger", this.stringForBoolean(theCustomer.isCrossBorderCommuter())]);
+        document.getElementById("customerInformation").innerHTML = theTable.getHtml();
+
+    }
+
+    stringForBoolean(aBoolean){
+        if(aBoolean){
+            return "Ja";
+        }else{
+            return "Nein";
+        }
+
     }
 }
