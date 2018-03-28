@@ -189,17 +189,17 @@ class CustomerView extends BaseView {
         let theTable = new StaticList();
         theTable
             .addRow(["Besitzt KFZ", this.stringForBoolean(theCustomer.ownsCar())])
-            .addRow(["Besitzt Ausbildung abgeschlossen",this.stringForBoolean(theCustomer.completedInitialTraining())])
-            .addRow(["Kunde ist selbstständig", this.stringForBoolean(theCustomer.isIndependent())])
-            .addRow(["Kunde ist beamter", this.stringForBoolean(theCustomer.isOfficial())])
+            .addRow(["Hat eine Ausbildung abgeschlossen",this.stringForBoolean(theCustomer.completedInitialTraining())])
+            .addRow(["Kunde ist Selbstständig", this.stringForBoolean(theCustomer.isIndependent())])
+            .addRow(["Kunde ist Beamter", this.stringForBoolean(theCustomer.isOfficial())])
             .addRow(["Kunde hat führende Position", this.stringForBoolean(theCustomer.hasLeadingPosition())])
             .addRow(["Kunde ist vermögend", this.stringForBoolean(theCustomer.earnsMoreThanAverage())])
             .addRow(["Besitzt privat genutztes Gebäude", this.stringForBoolean(theCustomer.ownsPrivateBuilding())])
             .addRow(["Besitzt gewerblich genutztes Gebäude", this.stringForBoolean(theCustomer.ownsCommercialBuilding())])
             .addRow(["Führt privaten Haushalt",this.stringForBoolean(theCustomer.hasPrivateHousehold())])
             .addRow(["Ist am Kapitalmarkt interessiert", this.stringForBoolean(theCustomer.isInterestInCapitalMarked())])
-            .addRow(["Hat Vorerkrankung",this.stringForBoolean(theCustomer.hadIllness())])
-            .addRow(["Der Partner ist angestellte/r", this.stringForBoolean(theCustomer.partnerIsEmployee())])
+            .addRow(["Kunde hat eine Vorerkrankung",this.stringForBoolean(theCustomer.hadIllness())])
+            .addRow(["Der Ehepartner ist angestellte/r", this.stringForBoolean(theCustomer.partnerIsEmployee())])
             .addRow(["Der Kunde ist Grenzgänger", this.stringForBoolean(theCustomer.isCrossBorderCommuter())]);
         document.getElementById("customerInformation").innerHTML = theTable.getHtml();
 
