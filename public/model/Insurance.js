@@ -42,7 +42,7 @@ class Insurance extends BaseDatabaseObject {
     }
 
     type() {
-        return this.getValueOfChild("type");
+        return this.key();
     }
 
     link() {

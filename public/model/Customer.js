@@ -308,12 +308,16 @@ class CustomerBuilder extends BaseBuilder {
         return "customers";
     }
 
+    birthdayString() {
+        return moment(this.birthday).format("MM/DD/YYYY")
+    }
+
     getJson() {
         let theJsonObject = {
             lastname: this.lastname,
             firstname: this.firstname,
             mail: this.mail,
-            birthday: this.birthday.getMonth() + 1 + "/" + this.birthday.getDate() + "/" + this.birthday.getFullYear(),
+            birthday: this.birthdayString(),
             sex: this.sex,
             phone: this.phone,
             notes: this.notes,
