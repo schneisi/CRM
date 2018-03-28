@@ -45,7 +45,7 @@ class Appointment extends BaseDatabaseObject {
         anArry.forEach(eachAppointment => {
             if (!eachAppointment.reminded()) {
                 let theDifferenceInSeconds = eachAppointment.date().getTime() - theCurrentDate.getTime();
-                let theDuration = moment.duration(theDifferenceInSeconds, "seconds");
+                let theDuration = moment.duration(theDifferenceInSeconds, "milliseconds");
                 if (theDuration.asMinutes() < 10) {
                     showNotification("Bevorstehender Termin", eachAppointment.title(), "appointment", eachAppointment.key());
                     let theBuilder = new AppointmentBuilder(eachAppointment);
