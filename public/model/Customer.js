@@ -236,6 +236,10 @@ class Customer extends BaseDatabaseObject {
         return this.hasInsuranceOfType(InsuranceTypes.RUERUP_PENSION);
     }
 
+    hasUnableToWorkInsurance() {
+        return this.hasInsuranceOfType(InsuranceTypes.UNABLE_TO_WORK_INSURANCE);
+    }
+
 
 
     static createTask() {

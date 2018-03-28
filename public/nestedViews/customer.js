@@ -115,7 +115,7 @@ class CustomerView extends BaseView {
         Basic Ability Insurance
         Dread Disease Insurance
         */
-        if (theCustomer.ageInFullYears() > 67) {
+        if (theCustomer.ageInFullYears() < 67) {
             if (!theCustomer.isInterestInCapitalMarked() && !theCustomer.hasPensionInsurance()) {
                 theListGrid.addObject(new ListGridHelper(InsuranceTypes.PENSION_INSURANCE, "Rentenversicherung"));
             } else if (theCustomer.isInterestInCapitalMarked() && !theCustomer.hasUnitLinkedPensionInsurance()) {
@@ -133,14 +133,14 @@ class CustomerView extends BaseView {
                 if (!theCustomer.hasDreadDiseaseInsurance()) {
                     theListGrid.addObject(new ListGridHelper(InsuranceTypes.DREAD_DISEASE_INSURANCE, "Dread-Disease Versicherung"));
                 }
-                
-            } else {
-                theListGrid.addObject(new ListGridHelper(InsuranceTypes.UNABLE_TO_WORK_INSURANCE, "Berufsunfähigkeitsversicherung"));
+
+            } else if (!theCustomer.hasUnableToWorkInsurance()) {
+                theListGrid.addObject(new ListGridHelper(InsuranceTypes.UNABLE_TO_WORK_INSURANCE, "Arbeitsunfähigkeitsversicherung"));
             }
         } else {
-            if (!theCustomer.isIndependent() || theCustomer.partnerIsEmployee()) {
+            if (!theCustomer.isIndependent() || theCustomer.partnerIsEmployee() && !theCustomer.hasRiesterPension()) {
                 theListGrid.addObject(new ListGridHelper(InsuranceTypes.RIESTER_PENSION, "Riester Rente"));
-            } else {
+            } else if (!theCustomer.hasRuerupPension()) {
                 theListGrid.addObject(new ListGridHelper(InsuranceTypes.RUERUP_PENSION, "Rürup Rente"));
             }
             
