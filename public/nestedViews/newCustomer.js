@@ -39,6 +39,7 @@ class NewCustomerView extends BaseView {
                 if (theCustomer.isInterestInCapitalMarked()) currentView.isInterestInCapitalMarkedHelper.check();
                 if (theCustomer.completedInitialTraining()) currentView.completedInitialTrainingHelper.check();
                 if (theCustomer.hasLeadingPosition()) currentView.hasLeadingPositionHelper.check();
+                if (theCustomer.partnerIsEmployee()) currentView.partnerIsEmployee.check();
 
                 currentView.customer = theCustomer;
             });
@@ -89,6 +90,7 @@ class NewCustomerView extends BaseView {
         this.earnsMoreThanAverageHelper = new CheckBoxHelper("earnsMoreThanAverageCheckbox");
         this.isInterestInCapitalMarkedHelper = new CheckBoxHelper("isInterestInCapitalMarkedCheckbox");
         this.hasLeadingPositionHelper = new CheckBoxHelper("hasLeadingPositionCheckbox");
+        this.partnerIsEmployee = new CheckBoxHelper("partnerIsEmployeeCheckbox");
     }
 
     saveNewCustomer() {
@@ -116,6 +118,7 @@ class NewCustomerView extends BaseView {
         theBuilder.earnsMoreThanAverage = this.earnsMoreThanAverageHelper.isChecked();
         theBuilder.isInterestInCapitalMarked = this.isInterestInCapitalMarkedHelper.isChecked();
         theBuilder.hasLeadingPosition = this.hasLeadingPositionHelper.isChecked();
+        theBuilder.partnerIsEmployee = this.partnerIsEmployee.isChecked();
 
         theBuilder.save();
         let theViewId = "customers";
