@@ -178,6 +178,7 @@ function serviceWorkerNotification(aTitleString, aBodyString, aViewId, anActionI
         body: aBodyString,
         data: {
             viewId: aViewId,
+            url: window.location.href,
             actionId: anActionId
         }
     });

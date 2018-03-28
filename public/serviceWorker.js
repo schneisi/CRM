@@ -12,7 +12,6 @@ const staticAssets = [
     './Frameworks/hammer.min.js',
     './Frameworks/moment.js',
     './database/authentification.js',
-    './database/database.js',
     './database/fsDatabase.js',
     './js/ajax.js',
     './js/app.js',
@@ -28,22 +27,6 @@ const staticAssets = [
     './model/Contract.js',
     './model/Customer.js',
     './model/Insurance.js',
-    './nestedViews/appointment.js',
-    './nestedViews/appointment.html',
-    './nestedViews/appointments.js',
-    './nestedViews/appointments.html',
-    './nestedViews/dashboard.js',
-    './nestedViews/dashboard.html',
-    './nestedViews/customers.html',
-    './nestedViews/customers.js',
-    './nestedViews/customer.html',
-    './nestedViews/customer.js',
-    './nestedViews/insurance.js',
-    './nestedViews/insurance.html',
-    './nestedViews/insurances.js',
-    './nestedViews/insurances.html',
-    './nestedViews/newAppointment.js',
-    './nestedViews/newAppointment.html',
 ];
 
 
@@ -56,7 +39,7 @@ self.addEventListener('install', async anEvent => {
     }
 });
 
-addEventListener('fetch', anEvent => {
+self.addEventListener('fetch', anEvent => {
     let theReponse = caches.match(anEvent.request).then(aResponse => {
         if (aResponse) {
             //Return cached reponse
@@ -84,12 +67,20 @@ addEventListener('fetch', anEvent => {
 
 
 self.addEventListener('notificationclick', function(anEvent) {
-    /*setActionId(anEvent.notification.data.actionId);
-    navigateToViewWithId(anEvent.notification.data.viewId);*/
+    anEvent.notification.close();
+    anEvent.waitUntil(
+        clients.matchAll({
+            type: "window"  
+        })
+        .then(aClientList => {  
+            for (var i = 0; i < aClientList.length; i++) {  
+                var client = aClientList[i];  
+                if (client.url == anEvent.notification.data.url) {
+                    client.focus();
+                    client.postMessage(anEvent.notification.data);
+                    break;
+                }   
+            }
+        })
+    );
 });
-
-
-async function cachedFirst (aRequest) {
-    const theCachedResponse = await caches.match(aRequest);
-    return theCachedResponse || fetch(aRequest);
-}
