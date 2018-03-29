@@ -57,12 +57,13 @@ self.addEventListener('fetch', anEvent => {
             })
             .catch(anError => {
                 return caches.open('static-assets').then(aCache => {
+                    logError(anError);
                     return aCache.match('./404.html');
                 });
             });
         };
     });
-    anEvent.respondWith(theReponse);
+    anEvent.respondWith(theReponse).catch(anError => logError(anError));;
 });
 
 
