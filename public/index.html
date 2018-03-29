@@ -46,7 +46,7 @@
                         <h2 class="mdl-card__title-text">easyRelations</h2>
                     </div>
                     <div class="mdl-card__supporting-text">
-                        <form action="#">
+                        <div>
                             <div class="mdl-textfield mdl-js-textfield">
                                 <input class="mdl-textfield__input" type="text" id="mail" />
                                 <label class="mdl-textfield__label" for="mail">E-Mail</label>
@@ -55,7 +55,7 @@
                                 <input class="mdl-textfield__input" type="password" id="password" />
                                 <label class="mdl-textfield__label" for="userpass" onkeydown = "if (event.keyCode == 13) {login();};">Password</label>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="mdl-card__actions mdl-card--border">
                         <button id="signInButton" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Einloggen</button>
@@ -71,32 +71,38 @@
 
             signInButton.addEventListener("click", login);
             function login() {
-                const email = mailField.value;
-                const password = passwordField.value;
-                const auth = firebase.auth();
-
-                const promise = auth.signInWithEmailAndPassword(email, password);
-                promise.catch(anError => {
-                    let theMessage;
-                    switch(anError.code){
-                        case "auth/invalid-email":
-                            theMessage = "Ungültige Email Adresse";
-                            break;
-                        case "auth/wrong-password":
-                            theMessage = "Ungültiges Passwort";
-                            break;
-                        case "auth/user-disabled":
-                            theMessage = "Der User wurde deaktiviert, wenden Sie sich an Ihre Administratoren";
-                            break;
-                        case "auth/user-not-found":
-                            theMessage = "Der User ist leider nicht vorhanden";
-                            break;
-                        default: 
-                            theMessage = "Unbekannter Fehler";
-                            
-                    }       
-                    showModal("Login fehlgeschlagen", theMessage);          
-                });
+                firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+                    .then(function() {
+                        const email = mailField.value;
+                        const password = passwordField.value;
+                        const auth = firebase.auth();
+                        let thePromise = auth.signInWithEmailAndPassword(email, password);
+                        thePromise.catch(anError => {
+                            let theMessage;
+                            switch(anError.code){
+                                case "auth/invalid-email":
+                                    theMessage = "Ungültige Email Adresse";
+                                    break;
+                                case "auth/wrong-password":
+                                    theMessage = "Ungültiges Passwort";
+                                    break;
+                                case "auth/user-disabled":
+                                    theMessage = "Der User wurde deaktiviert, wenden Sie sich an Ihre Administratoren";
+                                    break;
+                                case "auth/user-not-found":
+                                    theMessage = "Der User ist leider nicht vorhanden";
+                                    break;
+                                default: 
+                                    theMessage = "Unbekannter Fehler";        
+                            }       
+                            showModal("Login fehlgeschlagen", theMessage);   
+                        })
+                    })
+                    .catch(anError => {
+                        var theErrorCode = anError.code;
+                        var theErrorMessage = anError.message;
+                        logError(errorMessage);
+                    })
             }
         </script>
     </body>

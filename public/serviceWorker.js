@@ -63,7 +63,7 @@ self.addEventListener('fetch', anEvent => {
             });
         };
     });
-    anEvent.respondWith(theReponse).catch(anError => logError(anError));;
+    anEvent.respondWith(theReponse);
 });
 
 
