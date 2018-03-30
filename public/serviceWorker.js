@@ -29,6 +29,13 @@ const staticAssets = [
     './model/Insurance.js',
 ];
 
+const domainWhiteList = [
+    location.origin,
+    'fonts.googleapis.com', //Icons + Design
+    'code.getmdl.io', //MDL
+    'gstatic.com' //Firebase
+];
+
 
 const useCaching = true;
 
@@ -46,18 +53,20 @@ self.addEventListener('fetch', anEvent => {
             return aResponse;
         } else {
             return fetch(anEvent.request)
-            .then(aReponse => {
-                return caches.open("dynamic-asssets").then(aCache => {
-                    //Save and return the fetched response
-                    if (useCaching) {
-                        aCache.put(anEvent.request.url, aReponse.clone());
-                    }
-                    return aReponse;
-                });
+            .then(aResponse => {
+                if(useCaching) {
+                    let theRequestUrl = anEvent.request.url;
+                    caches.open("dynamic-assets").then(aCache => {
+                        if (domainWhiteList.some(eachString => theRequestUrl.includes(eachString))) {
+                            aCache.put(theRequestUrl, aResponse);
+                        }
+                    });
+                }
+                return aResponse.clone();
             })
             .catch(anError => {
                 return caches.open('static-assets').then(aCache => {
-                    logError(anError);
+                    console.log("Fetch Failed: " + anError);
                     return aCache.match('./404.html');
                 });
             });
@@ -67,7 +76,7 @@ self.addEventListener('fetch', anEvent => {
 });
 
 
-self.addEventListener('notificationclick', function(anEvent) {
+self.addEventListener('notificationclick', anEvent => {
     anEvent.notification.close();
     anEvent.waitUntil(
         clients.matchAll({
