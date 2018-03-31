@@ -1,8 +1,14 @@
+let tagsToReplace = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+};
+
 class FSDatabase {
     static writeInDatabaseCollection(aPath, aJsonObject, aKeyString){
         let theReference = fsDatabase.collection(aPath);
         if (aKeyString) {
-            theReference.doc(aKeyString).set(aJsonObject);
+            theReference.doc(aKeyString).set(this.safe_tags_replace(aJsonObject));
         } else {
             theReference.add(aJsonObject);
         }
@@ -13,6 +19,13 @@ class FSDatabase {
     }
     static getDatabaseSnapshotForCollection(aPath, aCallback, aContextObject, aJsonObject) {
         this.getDatabaseSnapshotForReference(fsDatabase.collection(aPath), aCallback, aContextObject, aJsonObject);
+    }
+    static replaceTag(tag) {
+        return tagsToReplace[tag] || tag;
+    }
+
+    static safe_tags_replace(aJSONObject) {
+        return JSON.parse(JSON.stringify(aJSONObject).replace(/[&<>]/g, this.replaceTag));
     }
 
     static getDatabaseSnapshotForReference(aReference, aCallback, aContextObject = null, anOptionsJson = {}) {
