@@ -33,7 +33,8 @@ const domainWhiteList = [
     location.origin,
     'fonts.googleapis.com', //Icons + Design
     'code.getmdl.io', //MDL
-    'gstatic.com' //Firebase
+    'gstatic.com', //Firebase
+    'google.com'
 ];
 
 
@@ -47,15 +48,15 @@ self.addEventListener('install', async anEvent => {
 });
 
 self.addEventListener('fetch', anEvent => {
-    let theReponse = caches.match(anEvent.request).then(aResponse => {
+    let theReponse = caches.match(anEvent.request.clone().url).then(aResponse => {
         if (aResponse) {
             //Return cached reponse
             return aResponse;
         } else {
-            return fetch(anEvent.request)
+            let theRequestUrl = anEvent.request.url;
+            return fetch(anEvent.request.clone())
             .then(aResponse => {
                 if(useCaching) {
-                    let theRequestUrl = anEvent.request.url;
                     caches.open("dynamic-assets").then(aCache => {
                         if (domainWhiteList.some(eachString => theRequestUrl.includes(eachString))) {
                             aCache.put(theRequestUrl, aResponse);
@@ -66,13 +67,12 @@ self.addEventListener('fetch', anEvent => {
             })
             .catch(anError => {
                 return caches.open('static-assets').then(aCache => {
-                    console.log("Fetch Failed: " + anError);
-                    return aCache.match('./404.html');
+                    console.log("Fetch Failed (" + theRequestUrl + "): " + anError);
                 });
             });
         };
     });
-    anEvent.respondWith(theReponse);
+    if (theReponse) anEvent.respondWith(theReponse);
 });
 
 
