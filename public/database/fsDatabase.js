@@ -1,34 +1,41 @@
-let tagsToReplace = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;'
-};
+
 
 class FSDatabase {
-    static writeInDatabaseCollection(aPath, aJsonObject, aKeyString){
-        let theReference = fsDatabase.collection(aPath);
-        if (aKeyString) {
-            theReference.doc(aKeyString).set(this.safe_tags_replace(aJsonObject));
+    static setOnlineStatus() {
+        if (isOnline()) {
+            fsDatabase.enableNetwork();
         } else {
-            theReference.add(aJsonObject);
+            fsDatabase.disableNetwork();
         }
     }
-
     static getDatabaseSnapshotForDoc(aPath, aCallback, aContextObject, aJsonObject) {
         this.getDatabaseSnapshotForReference(fsDatabase.doc(aPath), aCallback, aContextObject, aJsonObject);
     }
     static getDatabaseSnapshotForCollection(aPath, aCallback, aContextObject, aJsonObject) {
         this.getDatabaseSnapshotForReference(fsDatabase.collection(aPath), aCallback, aContextObject, aJsonObject);
     }
-    static replaceTag(tag) {
-        return tagsToReplace[tag] || tag;
-    }
 
-    static safe_tags_replace(aJSONObject) {
-        return JSON.parse(JSON.stringify(aJSONObject).replace(/[&<>]/g, this.replaceTag));
+    static writeInDatabaseCollection(aPath, aJsonObject, aKeyString){
+        this.setOnlineStatus();
+        let theReference = fsDatabase.collection(aPath);
+        let theJson = this.makeJsonSecure(aJsonObject);
+        if (aKeyString) {
+            theReference.doc(aKeyString).set(theJson);
+        } else {
+            theReference.add(theJson);
+        }
+    }
+    static makeJsonSecure(aJsonObject) {
+        let theTagsToReplace = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;'
+        };
+        return JSON.parse(JSON.stringify(aJsonObject).replace(/[&<>]/g, aTagString => {return theTagsToReplace[aTagString] || aTagString}));
     }
 
     static getDatabaseSnapshotForReference(aReference, aCallback, aContextObject = null, anOptionsJson = {}) {
+        this.setOnlineStatus();
         let theCallback;
         if (aContextObject) {
             theCallback = aCallback.bind(aContextObject);
