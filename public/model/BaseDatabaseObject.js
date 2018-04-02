@@ -28,7 +28,13 @@ class BaseDatabaseObject {
     }
 
     getValueOfChild(aString) {
-        return this.snapshot.get(aString);
+        let theValue = this.snapshot.get(aString);
+        if (theValue) {
+            return theValue;
+        } else {
+            return "";
+        }
+
     }
 
     hasChild(aString) {
