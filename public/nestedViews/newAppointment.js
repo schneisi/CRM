@@ -5,20 +5,20 @@ class NewAppointmentView extends BaseView {
         if (hasActionId()){
             FSDatabase.getDatabaseSnapshotForDoc("users/" + this.getUserId() + "/appointments/" + getActionId(), aSnapshot =>  {
                 let theAppointment = new Appointment(aSnapshot);
-                currentView.appointment = theAppointment;
-                currentView.titleField.value = theAppointment.title();
-                currentView.titleField.parentElement.classList.add("is-dirty");
-                currentView.zipField.value = theAppointment.zip();
-                currentView.zipField.parentElement.classList.add("is-dirty");
-                currentView.placeField.value = theAppointment.place();
-                currentView.placeField.parentElement.classList.add("is-dirty");
-                currentView.streetField.value = theAppointment.street();
-                currentView.streetField.parentElement.classList.add("is-dirty");
-                currentView.noteField.value = theAppointment.notes();
-                currentView.noteField.parentElement.classList.add("is-dirty");
-                currentView.dateField.value = theAppointment.isoDateOnlyString();
-                currentView.timeField.value = theAppointment.timeOnlyString();
-            });
+                this.appointment = theAppointment;
+                this.titleField.value = theAppointment.title();
+                this.titleField.parentElement.classList.add("is-dirty");
+                this.zipField.value = theAppointment.zip();
+                this.zipField.parentElement.classList.add("is-dirty");
+                this.placeField.value = theAppointment.place();
+                this.placeField.parentElement.classList.add("is-dirty");
+                this.streetField.value = theAppointment.street();
+                this.streetField.parentElement.classList.add("is-dirty");
+                this.noteField.value = theAppointment.notes();
+                this.noteField.parentElement.classList.add("is-dirty");
+                this.dateField.value = theAppointment.isoDateOnlyString();
+                this.timeField.value = theAppointment.timeOnlyString();
+            }, this);
         }
     }
 

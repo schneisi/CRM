@@ -9,7 +9,7 @@ class BaseDatabaseObject {
 
     static createObjectsFromSnapshot(aSnapshotOrJson, aClass) {
         let theObjectList = [];
-        aSnapshotOrJson.forEach(function (aChildSnapshot) {
+        aSnapshotOrJson.forEach(aChildSnapshot => {
             theObjectList.push(new aClass(aChildSnapshot));
         });
         return theObjectList;
@@ -39,23 +39,9 @@ class BaseDatabaseObject {
             return false;
         }
     }
-
-    startListening(aCallback) {
-        //TODO => Migrate to new database or remove
-        this.listeningCallback = aCallback;
-        let theReceiver = this;
-        this.reference().on('value', function (aSnapshot) {
-            theReceiver.snapshot = aSnapshot;
-            aCallback();
-        }, function () {}, this);
-    }
-
-    stopListening() {
-        //TODO => Migrate to new database or remove
-        this.reference().off('value', this.listeningCallback);
-    }
-
+    
     stringForDate(aDate) {
+        //Uses moment.js
         return moment(aDate).format("DD.MM.YYYY");
     }
 
@@ -81,10 +67,6 @@ class BaseBuilder {
         throw "Needs to be defined in subclass";
     }
 
-    getReference() {
-        throw "Needs to be defined in subclass";
-    }
-
     hasValidString(aString) {
         return aString && aString.length > 0;
     }
@@ -106,7 +88,9 @@ class BaseBuilder {
     }
 
     //Errors
-    check() {}
+    check() {
+        //Empty implementation => subclass may override
+    }
     hasError() {
         return this.errors.length > 0;
     }

@@ -1,5 +1,5 @@
+let scheduler; //Singleton instance
 
-let scheduler;
 class Scheduler {    
     constructor() {
         if (scheduler) {
@@ -45,12 +45,11 @@ class Scheduler {
         if (this.isActive) {
             this.tasks.forEach(eachTask => {
                 if (eachTask.isActive && (eachTask.counterOffset + this.seconds) % eachTask.interval == 0) {
-                    if ('requestIdleCallback' in window && !eachTask.isHighPriority) {
+                    if (this.isIdleCallbackAvailable && !eachTask.isHighPriority) {
                         requestIdleCallback(eachTask.execute.bind(eachTask), {timeout: eachTask.deadline});
+                    } else {
+                        eachTask.execute();
                     }
-                    eachTask.execute();
-                    logString(eachTask.name + " scheduled");
-                    eachTask.counter++;
                 }
             });
         }
@@ -58,6 +57,7 @@ class Scheduler {
     }
 
     isIdleCallbackAvailable() {
+        //Answer whether the browser supports idle callbacks. Seel https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback for details
         return 'requestIdleCallback' in window;
     }
 }
@@ -78,6 +78,8 @@ class ScheduledTask {
 
     execute() {
         this.callback();
+        logString("Task " + this.name + " done");
+        this.counter++;
     }
 
     totalSeconds() {

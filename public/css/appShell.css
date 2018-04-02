@@ -51,6 +51,8 @@ body {
     white-space: normal !important;
 } 
 
+
+/* Accordion */
 .accordion {
     background-color: #eee;
     color: #444;
@@ -64,26 +66,23 @@ body {
     font-size: 15px;
     transition: 0.4s;
 }
-
 .accordion-selected, .accordion:active {
     background-color: #ccc; 
 }
-
-
-
 .panel {
     padding: 5px;
     display: none;
     background-color: white;
     overflow: hidden;
 }
-
 .panel-visible {
     display: block;
     background-color: #FCFcFc;
     box-shadow: #444
 }
 
+
+/* SelectItem for insurance selection in contract*/
 .crm-mdl-select-list{
     max-height: 200px;
     overflow: scroll;

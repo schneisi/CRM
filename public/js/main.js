@@ -1,12 +1,12 @@
-let isDebugging = false;
+const isDebugging = false;
+const showErrorMessage = false;
+
 let jsFiles = [];
-const applicationServerPublicKey = "BPoW8cpPvtjGUYTU2kBj0OY91inszdxTDAcfrtXn0YoeR7lFSFFH7v45q96X067HwmaaRmvGeNNnIp272mSZGKw";
 let serviceWorkerRegistration;
-let isSubscribed;
 let hasServiceWorker = false;
 
 window.onerror = function (message, url, lineNo){
-    if(!isDebugging){
+    if(!isDebugging && showErrorMessage){
         showModal('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
     }
     return false;
@@ -44,6 +44,7 @@ function redirectToUrl(aString) {
 }
 
 function showModal(aTitleString, aMessageString) {
+    //Does only work in Chrome
     let theDialog = document.createElement("dialog");
     theDialog.classList.add("mdl-dialog");
     let theHeading = document.createElement("h4");
@@ -97,7 +98,7 @@ function hideSpinner() {
 function hideMenu() {
     document.getElementById("menuDiv").style.display = "none";
     let theMenuList = document.getElementById("menuList");
-    Array.from(theMenuList.children).forEach(function (eachElement) {
+    Array.from(theMenuList.children).forEach(eachElement => {
         eachElement.style.display = "none";
     });
 }
@@ -117,8 +118,7 @@ function showDeleteMenuButton() {
 
 
 function callGoogleMaps(destination) {
-    var theDestUrl = encodeURI(destination);
-    var theMapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + theDestUrl;
+    var theMapsUrl = "http://www.google.com/maps/dir/?api=1&destination=" + encodeURI(destination);
     var theMapsWindow = window.open(theMapsUrl, "_blank");
     theMapsWindow.focus();
 }
@@ -128,6 +128,7 @@ function isOnline(){
 }
 
 function include(aString, aCallback) {
+    //Function to include additional js-files
     if (!jsFiles.includes(aString)) {
         var theScriptElement = document.createElement('script');
         theScriptElement.src = aString;
@@ -152,11 +153,20 @@ function showNotification(aTitle, aMessage, aViewId, anActionId) {
     if (Notification) {
         if (Notification.permission == "granted") {
             if (hasServiceWorker) {
-                serviceWorkerNotification(aTitle, aMessage, aViewId, anActionId);
+                //Show notification via service worker
+                serviceWorkerRegistration.showNotification(aTitle, {
+                    body: aMessage,
+                    data: {
+                        viewId: aViewId,
+                        url: window.location.href,
+                        actionId: anActionId
+                    }
+                });
             } else {
+                //Show classic Browser notification
                 let theNotification = new Notification(aTitle, {
                     body: aMessage  
-                  });
+                });
                 theNotification.onclick = function () {
                     setActionId(anActionId);
                     navigateToViewWithId(aViewId);
@@ -165,26 +175,10 @@ function showNotification(aTitle, aMessage, aViewId, anActionId) {
         } else {
             Notification.requestPermission(aValue => {
                 if (aValue == "granted") {
+                    //Recursive call if permission now granted
                     showNotification(aTitle, aMessage, aView, anActionId);
                 }
             });
         }
     }
-}
-
-function serviceWorkerNotification(aTitleString, aBodyString, aViewId, anActionId) {
-    serviceWorkerRegistration.showNotification(aTitleString, {
-        body: aBodyString,
-        data: {
-            viewId: aViewId,
-            url: window.location.href,
-            actionId: anActionId
-        }
-    });
-}
-
-function trimByChar(aString, aCharacter) {
-    const theFirstIndex = [...aString].findIndex(eachChar => eachChar !== aCharacter);
-    const theLastIndex = [...aString].reverse().findIndex(char => char !== aCharacter);
-    return aString.substring(theFirstIndex, aString.length - theLastIndex);
 }

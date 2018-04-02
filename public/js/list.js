@@ -1,7 +1,6 @@
 let ListGridGroupingModes = {
     NONE: "none",
     ALPHABETICAL: "alphabetical",
-    NESTED_ARRAYS: "nested_arrays"
 };
 
 
@@ -13,7 +12,6 @@ class ListGrid {
         this.showTitle = true;
         this.noElementsString = "Keine Elemente";
         this.enableDeletion = false;
-        this.view = currentView;
         this.deleteSelector = null;
         this.tableRows = [];
         this.isDeleteButtonVisible = false;

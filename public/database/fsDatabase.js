@@ -1,5 +1,3 @@
-
-
 class FSDatabase {
     static setOnlineStatus() {
         if (isOnline()) {
@@ -58,10 +56,12 @@ class FSDatabase {
         }
 
         thePromise.get().then(aSnapshot => {
-            theCallback(aSnapshot);
+            if (!aContextObject || aContextObject == currentView) {
+                theCallback(aSnapshot);
+            }
         }).catch(anError => logString(anError));
-
     }
+
 
     static valueForDate(aDate) {
         return aDate.getTime();

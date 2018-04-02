@@ -2,7 +2,7 @@ class NewContractView extends BaseView {
     initializeView(){
         showSaveButton(this.saveNewContract);
         this.setComponents();
-        if (getActionString() == "contract" ){
+        if (getActionString() == "contract"){
             FSDatabase.getDatabaseSnapshotForDoc(getActionId(), aSnapshot =>  {
                 let theContract = new Contract(aSnapshot);
                 this.dateField.value = theContract.isoDateString();
@@ -25,7 +25,7 @@ class NewContractView extends BaseView {
                 }
                 document.getElementById("insuranceList").appendChild(theLi);
             });
-            getmdlSelect.init(".getmdl-select");
+            getmdlSelect.init(".getmdl-select"); //Initialize the MDL-selectbox
         }, this);
     }
 

@@ -148,6 +148,32 @@ class Customer extends BaseDatabaseObject {
         });
     }
 
+    //Task for updating the birthdays on dashboard
+    static createTask() {
+        //BirthdayTask
+        let theBirthdayTaskName = "BirthdayTask";
+        if (Scheduler.instance.hasTaskWithName(theBirthdayTaskName)) {
+            this.showUpcomingBirthdays();
+        } else {
+            let theBirthdayTask = new ScheduledTask(theBirthdayTaskName, function () {
+                let theBirthdayCallback = aSnapshot => {
+                    Customer.upcomingBirthdays = Customer.createObjectsFromSnapshot(aSnapshot, Customer);
+                    if (currentView instanceof DashboardView) {
+                        currentView.showUpcomingBirthdays();
+                    }
+                };
+                let theOptions = {
+                    orderChild: "birthday",
+                    startObject: moment().format("MM/DD"),
+                    limit: 3
+                };
+                FSDatabase.getDatabaseSnapshotForCollection("customers", theBirthdayCallback, null, theOptions);
+            }, 60);
+            Scheduler.instance.addTask(theBirthdayTask);
+        }
+    }
+
+    //Insurance-stuff
     hasCarInsurance() {
         return this.hasInsuranceOfType(InsuranceTypes.CAR_INSURANCE);
     }
@@ -239,34 +265,6 @@ class Customer extends BaseDatabaseObject {
     hasUnableToWorkInsurance() {
         return this.hasInsuranceOfType(InsuranceTypes.UNABLE_TO_WORK_INSURANCE);
     }
-
-
-
-    static createTask() {
-        //BirthdayTask
-        let theBirthdayTaskName = "BirthdayTask";
-        if (Scheduler.instance.hasTaskWithName(theBirthdayTaskName)) {
-            this.showUpcomingBirthdays();
-        } else {
-            let theBirthdayTask = new ScheduledTask(theBirthdayTaskName, function () {
-                let theBirthdayCallback = aSnapshot => {
-                    Customer.upcomingBirthdays = Customer.createObjectsFromSnapshot(aSnapshot, Customer);
-                    if (currentView instanceof DashboardView) {
-                        currentView.showUpcomingBirthdays();
-                    }
-                };
-                let theOptions = {
-                    orderChild: "birthday",
-                    startObject: moment().format("MM/DD"),
-                    limit: 3
-                };
-                FSDatabase.getDatabaseSnapshotForCollection("customers", theBirthdayCallback, null, theOptions);
-            }, 60);
-            Scheduler.instance.addTask(theBirthdayTask);
-        }
-    }
-
-    //Internal
     hasInsuranceOfType(aString) {
         return this.contracts.some(eachContract => {
             return eachContract.type() == aString;

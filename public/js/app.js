@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     initializeApp();
 });
 
+//Caused by a click on a notification. See serviceWorker.js
 navigator.serviceWorker.addEventListener('message', anEvent => {
     setActionId(anEvent.data.actionId);
     navigateToViewWithId(anEvent.data.viewId);
@@ -20,24 +21,24 @@ function initializeApp() {
         initializeFirebase().then(intialize);
     } 
 
+    //Initialize only if firebase is initialized
     function intialize() {
         initializeNavigation();
         firebase.auth().onAuthStateChanged(aFirebaseUser => {
-            if (aFirebaseUser) {
-            } else {
+            if (!aFirebaseUser) {
                 logout();
             }
         });
+        var theNavigationHammer = new Hammer(document.getElementById("main"));
+        theNavigationHammer.on("swiperight",showDrawer);
     }
-    
-    var theNavigationHammer = new Hammer(document.getElementById("main"));
-    theNavigationHammer.on("swiperight", function () {showDrawer()});
 }
 
 function logoutClicked() {
     firebase.auth().signOut();
     logout();
 }
+
 function logout() {
     sessionStorage.clear();
     redirectToUrl('/index.html');

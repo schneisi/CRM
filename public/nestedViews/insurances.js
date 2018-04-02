@@ -8,10 +8,10 @@ class InsurancesView extends BaseView {
         this.insuranceList.clickEventSelector = this.insuranceClicked;
         this.insuranceList.groupingMode = ListGridGroupingModes.ALPHABETICAL;
 
-        FSDatabase.getDatabaseSnapshotForCollection("products", function (aSnapshot) {
+        FSDatabase.getDatabaseSnapshotForCollection("products", aSnapshot => {
             aSnapshot.forEach(aChildSnapshot => {
                 let theInsurance = new Insurance(aChildSnapshot);
-                currentView.insuranceList.objects.push(theInsurance);
+                this.insuranceList.objects.push(theInsurance);
             });
             contentDiv.appendChild(this.insuranceList.getTableElement());
         }, this, {orderChild: "name"});

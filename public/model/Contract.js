@@ -27,6 +27,7 @@ class Contract extends BaseDatabaseObject{
 
     //API
     loadInsurance() {
+        //Answers a promises that resolves when the insurances are loaded from firebase
         let theReceiver = this;
         return new Promise(function (resolve, reject) {
             FSDatabase.getDatabaseSnapshotForDoc("products/" + theReceiver.productId(), aSnapshot => {

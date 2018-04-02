@@ -21,9 +21,10 @@ class DashboardView extends BaseView{
         let theListGrid = new ListGrid();
         currentView.appointmentListGrid = theListGrid; 
         theListGrid.showTitle = false;
-        theListGrid.clickEventSelector = currentView.appointmentClicked;
-        theListGrid.addListGridField(new ListGridField("", anAppointment => anAppointment.dateString()));
-        theListGrid.addListGridField(new ListGridField("", anAppointment => anAppointment.title()));
+        theListGrid.clickEventSelector = this.appointmentClicked;
+        theListGrid.noElementsString = "Keine anstehenden Termine";
+        theListGrid.addListGridField(new ListGridField("Datum", anAppointment => anAppointment.dateString()));
+        theListGrid.addListGridField(new ListGridField("Titel", anAppointment => anAppointment.title()));
 
         theListGrid.objects = Appointment.upcomingAppointments;
         theListGrid.setAsChildOf(document.getElementById("appointmentsDiv"));
@@ -31,18 +32,16 @@ class DashboardView extends BaseView{
 
     showUpcomingBirthdays() {
         let theDiv = document.getElementById("birthdayDiv");
-        if (Customer.upcomingBirthdays.length > 0) {
-            let theBirthdayGrid = new ListGrid();
-            this.birthdayListGrid = theBirthdayGrid;
-            theBirthdayGrid.showTitle = false;
-            theBirthdayGrid.clickEventSelector = this.birthdayClicked;
-            theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.birthdayString()));
-            theBirthdayGrid.addListGridField(new ListGridField("", aCustomer => aCustomer.fullName()))
-            theBirthdayGrid.objects = Customer.upcomingBirthdays;
-            theBirthdayGrid.setAsChildOf(theDiv);
-        } else {
-            theDiv.innerHTML = "Keine Anstehende Geburtstage";
-        }
+        
+        let theBirthdayGrid = new ListGrid();
+        this.birthdayListGrid = theBirthdayGrid;
+        theBirthdayGrid.showTitle = false;
+        theBirthdayGrid.noElementsString = "Keine anstehenden Geburtstage";
+        theBirthdayGrid.clickEventSelector = this.birthdayClicked;
+        theBirthdayGrid.addListGridField(new ListGridField("Geburtstag", aCustomer => aCustomer.birthdayString()));
+        theBirthdayGrid.addListGridField(new ListGridField("Name", aCustomer => aCustomer.fullName()))
+        theBirthdayGrid.objects = Customer.upcomingBirthdays;
+        theBirthdayGrid.setAsChildOf(theDiv);
        
     }
 

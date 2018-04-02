@@ -1,21 +1,29 @@
 <div id="content">
    
+    <!-- Accordion: Stammdaten -->
     <button class="accordion accordion-active">Stammdaten</button>
     <div id="customerDataDiv" class="panel"></div>
 
+    <!-- Accordion: Spezifische Informationen-->
     <button class="accordion">Spezifische Informationen</button>
     <div id="customerInformation" class="panel"></div>
     
+    <!-- Accordion: Verträge -->
     <button class="accordion">Verträge</button>
     <div id="contractListDiv" class="panel"></div>
 
+    <!-- Accordion: Vorschläge -->
     <button class="accordion">Vorschläge</button>
     <div id="suggestionsDiv" class="panel"></div>
     
+    <!-- Accordion: Maps -->
     <button class="accordion">Maps</button>
     <div class="panel">
         <iframe id="mapsFrame" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
+
+
+    <!-- Button: Neuer Vetrag -->
     <button onclick="currentView.newContractButtonClicked()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored floatingButton">
         Neuer Vertrag
     </button>

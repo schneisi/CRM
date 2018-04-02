@@ -4,11 +4,11 @@ class BaseView {
     }
 
     initializeView() {
-        
+        //Empty implementation => subclass may override
     }
 
     unload() {
-        
+        //Empty implementation => subclass may override
     }
 
     updateName(aString) {
@@ -37,6 +37,7 @@ class BaseView {
     }
 }
 
+//Helper object used in browser history to save application state
 class HistoryObject {
     constructor(aJsonView, anActionId) {
         this.jsonView = aJsonView;
@@ -44,6 +45,7 @@ class HistoryObject {
     }
 }
 
+//Checkbox-wrapper -> makes it easier to use MDL
 class CheckBoxHelper {
     constructor(anIdString) {
         this.checkboxId = anIdString;

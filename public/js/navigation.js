@@ -4,19 +4,11 @@ var sites;
 var defaultSite;
 var currentView;
 
+//Components
 let contentContainer;
 let titleSpan;
 let theMenu;
 
-//Initialize
-/*document.addEventListener("DOMContentLoaded", function () {
-    //Wait until MDL is initialized
-    setTimeout(function () {
-        if (fsDatabase) {
-            getAjaxContent("js/sites.json", initializeSites);
-        }
-    } , 10);
-});*/
 
 function initializeNavigation() {
     getAjaxContent("js/sites.json", initializeSites);
@@ -28,8 +20,8 @@ function initializeSites(aJsonString) {
     initializeBody();
 }
 
-window.addEventListener('popstate', function (e) {
-    let theHistoryView = e.state;
+window.addEventListener('popstate', anEvent => {
+    let theHistoryView = anEvent.state;
     if (theHistoryView != null) {
         if (theHistoryView.actionId) {
             setActionId(theHistoryView.actionId);
@@ -48,7 +40,7 @@ function initializeBody() {
 }
 
 function createMenu() {
-    sites.pages.forEach( eachSite => {
+    sites.pages.forEach(eachSite => {
         if (eachSite.shownInMenu) {
             let theSpan = document.createElement('span');
 
@@ -66,7 +58,13 @@ function createMenu() {
     });
 }
 
-//Internal
+
+
+async function navigateToViewWithId(anId) {
+    let theView = viewForId(anId);
+    navigateToView(theView);
+}
+
 function viewForId(anIdString) {
     let theSite;
     sites.pages.forEach(eachSite => {
@@ -76,11 +74,6 @@ function viewForId(anIdString) {
         }
     });
     return theSite;
-}
-
-async function navigateToViewWithId(anId) {
-    let theView = viewForId(anId);
-    navigateToView(theView);
 }
 
 async function navigateToView(aJsonView, aPushStateBoolean = true) {
@@ -103,13 +96,11 @@ async function navigateToView(aJsonView, aPushStateBoolean = true) {
 }
 
 function showDrawer() {
-    if (!isDrawerExpanded())
-        toggleDrawer();
+    if (!isDrawerExpanded()) toggleDrawer();
 }
 
 function dismissDrawer() {
-    if (isDrawerExpanded())
-        toggleDrawer();
+    if (isDrawerExpanded()) toggleDrawer();
 }
 
 function toggleDrawer() {
@@ -143,6 +134,7 @@ function showStartPage() {
 }
 
 function isDrawerExpanded() {
+    //Pretty hacky, not other working solution atm
     let theDrawer = document.getElementsByClassName("mdl-layout__drawer-button")[0];
     var eachIndex;
     for (eachIndex = 0; eachIndex < theDrawer.attributes.length; eachIndex++) {

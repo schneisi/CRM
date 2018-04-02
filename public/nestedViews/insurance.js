@@ -1,15 +1,15 @@
 class InsuranceView extends BaseView {
     initializeView() {
-        FSDatabase.getDatabaseSnapshotForDoc("/products/" + getActionId(), function (aSnapshot) {
-            currentView.insurance = new Insurance(aSnapshot);
-            currentView.showInsurance();
-        });
+        FSDatabase.getDatabaseSnapshotForDoc("/products/" + getActionId(), aSnapshot => {
+            this.insurance = new Insurance(aSnapshot);
+            this.showInsurance();
+        }, this);
     }
 
     showInsurance() {
         const theContentDiv = document.getElementById("content");
-        let theTable = new StaticList(["30%", "70%"]);
-        let theInsurance = currentView.insurance;
+        let theTable = new StaticList();
+        let theInsurance = this.insurance;
         theTable
             .addRow(["Versicherung: ", theInsurance.name()])
             .addRow(["Beschreibung: ", theInsurance.description()])

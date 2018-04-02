@@ -38,7 +38,7 @@ class Appointment extends BaseDatabaseObject {
         return this.getValueOfChild("reminded");
     }
 
-    //API
+
     static setUpcomingAppointments (anArry) {
         this.upcomingAppointments = anArry;
         let theCurrentDate = new Date();
@@ -56,6 +56,7 @@ class Appointment extends BaseDatabaseObject {
         });
     }
 
+    //Scheduled task => for notifications
     static createTask() {
         //AppointmentTask
         let theAppointmentTaskName = "AppointmentTask";

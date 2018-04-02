@@ -11,7 +11,7 @@ class AppointmentView extends BaseView {
 
     showAppointment() {
         const theContentDiv = document.getElementById("tableDiv");
-        let theTable = new StaticList(["30%", "70%"]);
+        let theTable = new StaticList();
         let theAppointment = this.appointment;
         theTable
             .addRow(["Titel:", theAppointment.title()])
@@ -33,7 +33,7 @@ class AppointmentView extends BaseView {
         theTableDiv.innerHTML = theTable.getHtml();
         theContentDiv.innerHTML = "";
         theContentDiv.appendChild(theTableDiv);
-        currentView.appointment = theAppointment;
+        this.appointment = theAppointment;
     }
 
     editMenuButtonClicked() {

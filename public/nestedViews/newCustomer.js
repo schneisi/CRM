@@ -7,42 +7,42 @@ class NewCustomerView extends BaseView {
             this.updateName("Kunde bearbeiten");
             FSDatabase.getDatabaseSnapshotForDoc("/customers/" + getActionId(), aSnapshot => {
                 let theCustomer = new Customer(aSnapshot);
-                currentView.lastNameField.value = theCustomer.lastname();
-                currentView.lastNameField.parentElement.classList.add("is-dirty");
-                currentView.firstNameField.value = theCustomer.firstname();
-                currentView.firstNameField.parentElement.classList.add("is-dirty");
-                currentView.streetField.value = theCustomer.street();
-                currentView.streetField.parentElement.classList.add("is-dirty");
-                currentView.zipField.value = theCustomer.zipCode();
-                currentView.zipField.parentElement.classList.add("is-dirty");
-                currentView.phoneField.value = theCustomer.phone();
-                currentView.phoneField.parentElement.classList.add("is-dirty");
-                currentView.placeField.value = theCustomer.place();
-                currentView.placeField.parentElement.classList.add("is-dirty");
-                currentView.mailField.value = theCustomer.mail();
-                currentView.mailField.parentElement.classList.add("is-dirty");
-                currentView.noteField.value = theCustomer.notes();
-                currentView.noteField.parentElement.classList.add("is-dirty");
-                currentView.birthdayField.value = theCustomer.isoBirthdayOnlyString();
-                currentView.birthdayField.parentElement.classList.add("is-dirty");
-                currentView.setRadioButtonByValue(currentView.sexRadio, theCustomer.sex());
+                this.customer = theCustomer;
 
-                if (theCustomer.ownsCar()) currentView.ownsCarHelper.check();
-                if (theCustomer.ownsCommercialBuilding()) currentView.ownsCommercialBuildingHelper.check();
-                if (theCustomer.ownsPrivateBuilding()) currentView.ownsPrivateBuildingHelper.check();
-                if (theCustomer.hasPrivateHousehold()) currentView.hasPrivateHouseholdHelper.check();
-                if (theCustomer.isIndependent()) currentView.isIndependentHelper.check();
-                if (theCustomer.isOfficial()) currentView.isOfficialHelper.check();
-                if (theCustomer.isCrossBorderCommuter()) currentView.isCrossBorderCommuterHelper.check();
-                if (theCustomer.hadIllness()) currentView.hadIllnessHelper.check();
-                if (theCustomer.earnsMoreThanAverage()) currentView.earnsMoreThanAverageHelper.check();
-                if (theCustomer.isInterestInCapitalMarked()) currentView.isInterestInCapitalMarkedHelper.check();
-                if (theCustomer.completedInitialTraining()) currentView.completedInitialTrainingHelper.check();
-                if (theCustomer.hasLeadingPosition()) currentView.hasLeadingPositionHelper.check();
-                if (theCustomer.partnerIsEmployee()) currentView.partnerIsEmployee.check();
+                this.lastNameField.value = theCustomer.lastname();
+                this.lastNameField.parentElement.classList.add("is-dirty");
+                this.firstNameField.value = theCustomer.firstname();
+                this.firstNameField.parentElement.classList.add("is-dirty");
+                this.streetField.value = theCustomer.street();
+                this.streetField.parentElement.classList.add("is-dirty");
+                this.zipField.value = theCustomer.zipCode();
+                this.zipField.parentElement.classList.add("is-dirty");
+                this.phoneField.value = theCustomer.phone();
+                this.phoneField.parentElement.classList.add("is-dirty");
+                this.placeField.value = theCustomer.place();
+                this.placeField.parentElement.classList.add("is-dirty");
+                this.mailField.value = theCustomer.mail();
+                this.mailField.parentElement.classList.add("is-dirty");
+                this.noteField.value = theCustomer.notes();
+                this.noteField.parentElement.classList.add("is-dirty");
+                this.birthdayField.value = theCustomer.isoBirthdayOnlyString();
+                this.birthdayField.parentElement.classList.add("is-dirty");
+                this.setRadioButtonByValue(this.sexRadio, theCustomer.sex());
 
-                currentView.customer = theCustomer;
-            });
+                if (theCustomer.ownsCar()) this.ownsCarHelper.check();
+                if (theCustomer.ownsCommercialBuilding()) this.ownsCommercialBuildingHelper.check();
+                if (theCustomer.ownsPrivateBuilding()) this.ownsPrivateBuildingHelper.check();
+                if (theCustomer.hasPrivateHousehold()) this.hasPrivateHouseholdHelper.check();
+                if (theCustomer.isIndependent()) this.isIndependentHelper.check();
+                if (theCustomer.isOfficial()) this.isOfficialHelper.check();
+                if (theCustomer.isCrossBorderCommuter()) this.isCrossBorderCommuterHelper.check();
+                if (theCustomer.hadIllness()) this.hadIllnessHelper.check();
+                if (theCustomer.earnsMoreThanAverage()) this.earnsMoreThanAverageHelper.check();
+                if (theCustomer.isInterestInCapitalMarked()) this.isInterestInCapitalMarkedHelper.check();
+                if (theCustomer.completedInitialTraining()) this.completedInitialTrainingHelper.check();
+                if (theCustomer.hasLeadingPosition()) this.hasLeadingPositionHelper.check();
+                if (theCustomer.partnerIsEmployee()) this.partnerIsEmployee.check();
+            }, this);
         }
     }
 

@@ -55,7 +55,7 @@ class CustomerView extends BaseView {
     }
 
     contractClicked(aContract) {
-        setActionId("customers/" + currentView.customer.key() + "/contracts/" + aContract.key());
+        setActionId("customers/" + aContract.customerId() + "/contracts/" + aContract.key());
         navigateToViewWithId("contract");
     }
 
@@ -70,6 +70,7 @@ class CustomerView extends BaseView {
         return true;
     }
 
+    
     //Suggestions
     showSuggestions() {
         let theListGrid = new ListGrid();
