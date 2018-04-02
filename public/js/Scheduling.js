@@ -45,7 +45,7 @@ class Scheduler {
         if (this.isActive) {
             this.tasks.forEach(eachTask => {
                 if (eachTask.isActive && (eachTask.counterOffset + this.seconds) % eachTask.interval == 0) {
-                    if (this.isIdleCallbackAvailable && !eachTask.isHighPriority) {
+                    if (this.isIdleCallbackAvailable() && !eachTask.isHighPriority) {
                         requestIdleCallback(eachTask.execute.bind(eachTask), {timeout: eachTask.deadline});
                     } else {
                         eachTask.execute();

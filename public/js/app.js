@@ -8,11 +8,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     initializeApp();
 });
 
-//Caused by a click on a notification. See serviceWorker.js
-navigator.serviceWorker.addEventListener('message', anEvent => {
-    setActionId(anEvent.data.actionId);
-    navigateToViewWithId(anEvent.data.viewId);
-});
+
 
 function initializeApp() {
     if (fsDatabase) {
@@ -23,6 +19,13 @@ function initializeApp() {
 
     //Initialize only if firebase is initialized
     function intialize() {
+        if (hasServiceWorker) {
+            //Caused by a click on a notification. See serviceWorker.js
+            navigator.serviceWorker.addEventListener('message', anEvent => {
+                setActionId(anEvent.data.actionId);
+                navigateToViewWithId(anEvent.data.viewId);
+            });
+        }
         initializeNavigation();
         firebase.auth().onAuthStateChanged(aFirebaseUser => {
             if (!aFirebaseUser) {
