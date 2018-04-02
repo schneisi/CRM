@@ -226,9 +226,8 @@ class ListGridHelper {
 
 
 class StaticList {
-    constructor(anArray) {
+    constructor() {
         this.rows = [];
-        this.rowWidths = anArray;
     }
 
     addRow(anArray) {
